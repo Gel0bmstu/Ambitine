@@ -43,15 +43,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void login(LoginResponse loginResponse) {
         ApiService apiService = Api.getApiService();
-        Call<ResponseBody> call = apiService.loginRequest(loginResponse.getUsername(),
-                loginResponse.getPassword());
+        Call<ResponseBody> call = apiService.loginRequest(loginResponse);
         Log.d("WHAT", loginResponse.getPassword());
         Log.d("WHAT", loginResponse.getUsername());
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                String cookie1 = response.headers().get("Set-Cookie");
-                Log.d("WHAT", cookie1);
                 if (response.code() == 201) {
                     String cookie = response.headers().get("Set-Cookie");
                     Log.d("WHAT", cookie);
