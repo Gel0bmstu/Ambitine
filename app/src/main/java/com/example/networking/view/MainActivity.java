@@ -10,6 +10,7 @@ import com.example.networking.R;
 import com.example.networking.model.network.Response.LoginResponse;
 import com.example.networking.model.network.Api;
 import com.example.networking.model.network.ApiService;
+import com.example.networking.model.network.Response.RegistrationResponse;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -35,13 +36,37 @@ public class MainActivity extends AppCompatActivity {
 
         LoginResponse loginResponse = new LoginResponse("hello", "pidor");
         login(loginResponse);
+
+        RegistrationResponse registrationResponse = new RegistrationResponse(
+                "hello", "pidor",
+                "hello", "pidor");
+        register(registrationResponse);
     }
 
     private void login(LoginResponse loginResponse) {
         ApiService apiService = Api.getApiService();
         Call<ResponseBody> call = apiService.loginRequest(loginResponse);
-        Log.d("WHAT", loginResponse.getPassword());
-        Log.d("WHAT", loginResponse.getUsername());
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.code() == 201) {
+                    String cookie = response.headers().get("Set-Cookie");
+                    Log.d("WHAT", cookie);
+                } else {
+                    Log.d("WHAT", "smth get wrong!");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.d("WHAT ", t.getMessage());
+            }
+        });
+    }
+
+    private void register(RegistrationResponse registrationResponse) {
+        ApiService apiService = Api.getApiService();
+        Call<ResponseBody> call = apiService.signupRequest(registrationResponse);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
