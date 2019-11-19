@@ -1,6 +1,6 @@
 package com.example.networking.model.network;
 
-import com.example.networking.model.LoginResponse;
+import com.example.networking.model.network.Response.LoginResponse;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;

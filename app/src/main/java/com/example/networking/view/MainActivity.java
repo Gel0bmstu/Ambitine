@@ -7,13 +7,9 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.example.networking.R;
-import com.example.networking.model.LoginResponse;
+import com.example.networking.model.network.Response.LoginResponse;
 import com.example.networking.model.network.Api;
 import com.example.networking.model.network.ApiService;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
