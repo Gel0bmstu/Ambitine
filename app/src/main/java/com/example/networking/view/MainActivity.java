@@ -5,12 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.example.networking.R;
 import com.example.networking.model.LoginResponse;
 import com.example.networking.model.network.Api;
 import com.example.networking.model.network.ApiService;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -41,12 +44,14 @@ public class MainActivity extends AppCompatActivity {
     private void login(LoginResponse loginResponse) {
         ApiService apiService = Api.getApiService();
         Call<ResponseBody> call = apiService.loginRequest(loginResponse.getUsername(),
-                                loginResponse.getPassword());
+                loginResponse.getPassword());
         Log.d("WHAT", loginResponse.getPassword());
         Log.d("WHAT", loginResponse.getUsername());
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                String cookie1 = response.headers().get("Set-Cookie");
+                Log.d("WHAT", cookie1);
                 if (response.code() == 201) {
                     String cookie = response.headers().get("Set-Cookie");
                     Log.d("WHAT", cookie);
