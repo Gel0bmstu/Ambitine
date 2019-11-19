@@ -1,31 +1,25 @@
 package com.example.networking.model.network;
 
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient {
-    /********
-     * URLS
-     *******/
-    private static final String
-            ROOT_URL = "http://10.0.2.2:3000/";
+    private static Retrofit retrofit = null;
 
-    /**
-     * Get Retrofit Instance
-     */
-    private static Retrofit getRetrofitInstance() {
-        return new Retrofit.Builder()
-                .baseUrl(ROOT_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-    }
+    public static Retrofit getClient(String baseUrl){
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.level(HttpLoggingInterceptor.Level.BODY);
+        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
 
-    /**
-     * Get API Service
-     *
-     * @return API Service
-     */
-    public static ApiService getApiService() {
-        return getRetrofitInstance().create(ApiService.class);
+        if (retrofit == null){
+            retrofit = new Retrofit.Builder()
+                    .baseUrl(baseUrl)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .client(client)
+                    .build();
+        }
+        return retrofit;
     }
 }
