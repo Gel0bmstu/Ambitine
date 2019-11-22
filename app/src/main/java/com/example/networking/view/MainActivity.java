@@ -2,86 +2,23 @@ package com.example.networking.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.example.networking.R;
-import com.example.networking.model.network.Response.LoginResponse;
-import com.example.networking.model.network.Api;
-import com.example.networking.model.network.ApiService;
-import com.example.networking.model.network.Response.RegistrationResponse;
-
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
-    private static MainActivity instance;
-
-    public static MainActivity getInstance() {
-        return instance;
-    }
-
-    public static Context getContext() {
-        return instance;
-    }
-
+    boolean authorized = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        instance = this;
 
-        LoginResponse loginResponse = new LoginResponse("hello", "pidor");
-        login(loginResponse);
+        if (!authorized) {
+            Intent LoginIntent = new Intent(this, LoginActivity.class);
+            startActivity(LoginIntent);
+        } else {
 
-        RegistrationResponse registrationResponse = new RegistrationResponse(
-                "hello", "pidor",
-                "hello", "pidor");
-        register(registrationResponse);
-    }
-
-    private void login(LoginResponse loginResponse) {
-        ApiService apiService = Api.getApiService();
-        Call<ResponseBody> call = apiService.loginRequest(loginResponse);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if (response.code() == 201) {
-                    String cookie = response.headers().get("Set-Cookie");
-                    Log.d("WHAT", cookie);
-                } else {
-                    Log.d("WHAT", "smth get wrong!");
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Log.d("WHAT ", t.getMessage());
-            }
-        });
-    }
-
-    private void register(RegistrationResponse registrationResponse) {
-        ApiService apiService = Api.getApiService();
-        Call<ResponseBody> call = apiService.signupRequest(registrationResponse);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if (response.code() == 201) {
-                    String cookie = response.headers().get("Set-Cookie");
-                    Log.d("WHAT", cookie);
-                } else {
-                    Log.d("WHAT", "smth get wrong!");
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Log.d("WHAT ", t.getMessage());
-            }
-        });
+        }
     }
 }
