@@ -2,11 +2,13 @@ package com.example.networking.view;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.networking.R;
 import com.example.networking.conroller.LoginController;
+import com.google.android.material.textfield.TextInputEditText;
 
 public class LoginActivity extends AppCompatActivity {
     LoginController loginController;
@@ -18,24 +20,24 @@ public class LoginActivity extends AppCompatActivity {
         if (loginController == null) {
             loginController = new LoginController(this);
         }
-    }
 
-    private class ClickListener implements View.OnClickListener {
-        @Override
-        public void onClick(View view) {
-            switch (view.getId()) {
-                case R.string.loginButton:
-                    loginController.onLoginButtonClick();
+        Button loginButton = findViewById(R.id.login_button);
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loginController.onLoginButtonClick();
             }
-        }
+        });
     }
 
     public String getUsername() {
-        return "hello";
+        TextInputEditText usernameInput = findViewById(R.id.login_input);
+        return usernameInput.getText().toString();
     }
 
     public String getPassword() {
-        return "myFriend";
+        TextInputEditText passwordInput = findViewById(R.id.password_input);
+        return passwordInput.getText().toString();
     }
 
 }
