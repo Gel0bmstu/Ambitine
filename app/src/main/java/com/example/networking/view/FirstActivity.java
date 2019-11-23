@@ -7,13 +7,16 @@ import android.os.Bundle;
 
 import com.example.networking.R;
 
-public class MainActivity extends AppCompatActivity {
+import io.realm.Realm;
+
+public class FirstActivity extends AppCompatActivity {
     boolean authorized = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Realm.init(getApplicationContext());
         if (!authorized) {
             Intent LoginIntent = new Intent(this, LoginActivity.class);
             startActivity(LoginIntent);
