@@ -40,4 +40,12 @@ public class UserDB {
 
         return token;
     }
+
+    public static void deleteToken() {
+        Realm realm = Realm.getDefaultInstance();
+        realm.beginTransaction();
+
+        realm.where(UserToken.class).findAll().deleteAllFromRealm();
+        realm.commitTransaction();
+    }
 }
