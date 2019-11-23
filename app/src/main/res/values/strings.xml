@@ -2,4 +2,15 @@
     <string name="app_name">networking</string>
     <string name="logTag">DEBUG</string>
     <string name="loginButton">loginButton</string>
+
+<!--    Login activity -->
+    <string name="login_input">Username</string>
+    <string name="password_activity">Password</string>
+    <string name="login_button_text">SIGN IN</string>
+    <string name="app_name_login">Ambitine</string>
+    <string name="underline_question">Not yet been with us? Lost?</string>
+    <string name="registration_txt_link">Sign up.</string>
+    <string name="password_forgot_link">Forgot password?</string>
+    <string name="divider_for_page_annotations">divider for page</string>
+    <!--    Login activity -->
 </resources>
