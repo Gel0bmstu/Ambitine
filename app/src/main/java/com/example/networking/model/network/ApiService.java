@@ -1,5 +1,6 @@
 package com.example.networking.model.network;
 
+import com.example.networking.model.models.User;
 import com.example.networking.model.network.Response.LoginResponse;
 import com.example.networking.model.network.Response.RegistrationResponse;
 
@@ -14,4 +15,8 @@ public interface ApiService {
 
     @POST("api/signup")
     Call<ResponseBody> signupRequest(@Body RegistrationResponse registrationResponse);
+
+//    Нужно тестить
+    @POST("api/user/{id}")
+    Call<User> userResponse();
 }
