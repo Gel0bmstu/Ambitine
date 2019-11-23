@@ -2,6 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     android:gravity="center"
     android:orientation="vertical">
 
@@ -75,6 +76,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="10dp"
         android:background="@color/ambitine_primary_color"
+        android:backgroundTint="@color/ambitine_primary_color"
         android:text="@string/login_button_text"
         android:textSize="14sp" />
 
@@ -84,13 +86,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:background="#149B85"
+        android:contentDescription="@string/divider_for_page_annotations"
         android:paddingLeft="5dp"
         android:paddingTop="2dp"
         android:paddingRight="5dp"
         android:paddingBottom="2dp"
         android:scaleType="fitXY"
-        android:src="@android:drawable/divider_horizontal_dark"
-        android:contentDescription="@string/divider_for_page_annotations" />
+        android:src="@android:drawable/divider_horizontal_dark" />
 
     <TextView
         android:id="@+id/underscore_question"
