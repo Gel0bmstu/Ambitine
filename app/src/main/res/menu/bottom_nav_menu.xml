@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/bottom_nav_promises"
+        android:title="@string/promises_nav_title"
+        android:icon="@drawable/ic_botnav_promises"/>
+    <item android:title="@string/new_promise"
+        android:id="@+id/botton_nav_new_promise"
+        android:icon="@drawable/ic_botnav_plus"/>
+    <item android:title="@string/bottom_nav_feed_title"
+        android:id="@+id/bottom_nav_notification"
+        android:icon="@drawable/ic_botnav_notifications"/>
+    <item android:title="@string/bottom_nav_profile_title"
+        android:id="@+id/bottom_nav_profile"
+        android:icon="@drawable/ic_botnav_profile"/>
+</menu>

@@ -11,5 +11,9 @@
     <string name="registration_txt_link">Sign up.</string>
     <string name="password_forgot_link">Forgot password?</string>
     <string name="divider_for_page_annotations">divider for page</string>
+    <string name="promises_nav_title">Promises</string>
+    <string name="bottom_nav_profile_title">Profile</string>
+    <string name="bottom_nav_feed_title">Feed</string>
+    <string name="new_promise">New promise</string>
     <!--    Login activity -->
 </resources>
