@@ -15,5 +15,6 @@
     <string name="bottom_nav_profile_title">Profile</string>
     <string name="bottom_nav_feed_title">Feed</string>
     <string name="new_promise">New promise</string>
+    <string name="feed_item_description">Feed item</string>
     <!--    Login activity -->
 </resources>
