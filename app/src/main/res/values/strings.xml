@@ -16,5 +16,7 @@
     <string name="bottom_nav_feed_title">Feed</string>
     <string name="new_promise">New promise</string>
     <string name="feed_item_description">Feed item</string>
+    <string name="username_feed_mock">Username</string>
+    <string name="desc_mock">This is short description of your promise</string>
     <!--    Login activity -->
 </resources>
