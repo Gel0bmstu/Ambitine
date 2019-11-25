@@ -45,7 +45,14 @@ public class UserDB {
         Realm realm = Realm.getDefaultInstance();
         realm.beginTransaction();
 
-        realm.where(UserToken.class).findAll().deleteAllFromRealm();
+        realm.where(UserToken.class).findAll().deleteFirstFromRealm();
         realm.commitTransaction();
+    }
+
+    public static boolean isAuthorized() {
+        if (getToken() == TOKEN_NOT_FOUND) {
+            return false;
+        }
+        return true;
     }
 }

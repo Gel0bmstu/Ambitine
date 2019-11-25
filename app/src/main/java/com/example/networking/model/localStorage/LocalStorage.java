@@ -8,7 +8,6 @@ import android.os.Environment;
 import android.util.Log;
 
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Picasso.LoadedFrom;
 import com.squareup.picasso.Target;
 
 import java.io.File;
@@ -20,8 +19,8 @@ import static android.content.ContentValues.TAG;
 import static android.graphics.BitmapFactory.decodeStream;
 
 public class LocalStorage {
-    public static String IMAGES = "/images";
-    public static String AVATARS = "/.avatars";
+    private static final String IMAGES = "/images";
+    private static final String AVATARS = "/.avatars";
 
     public static Bitmap GetImage(Context context, int userId) {
         BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();

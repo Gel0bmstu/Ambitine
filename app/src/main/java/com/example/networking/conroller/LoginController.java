@@ -54,6 +54,8 @@ public class LoginController {
 
                     UserRepository.setToken(authToken);
 
+                    loginActivity.SwitchActivityAfterLoginSuccess();
+
                     Log.d(logTag, UserRepository.getToken());
                     Log.d(logTag, authToken);
                 } else {

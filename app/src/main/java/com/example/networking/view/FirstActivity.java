@@ -6,23 +6,25 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.networking.R;
+import com.example.networking.model.database.UserDB;
 
 import io.realm.Realm;
 
 public class FirstActivity extends AppCompatActivity {
-    boolean authorized = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first);
-
         Realm.init(getApplicationContext());
-        if (!authorized) {
+
+        UserDB.deleteToken();
+
+        if (!UserDB.isAuthorized()) {
             Intent LoginIntent = new Intent(this, LoginActivity.class);
             startActivity(LoginIntent);
         } else {
-            Intent MainIntent = new Intent(this, HomeActivity.class);
-            startActivity(MainIntent);
+            Intent HomeIntent = new Intent(this, HomeActivity.class);
+            startActivity(HomeIntent);
         }
     }
 }

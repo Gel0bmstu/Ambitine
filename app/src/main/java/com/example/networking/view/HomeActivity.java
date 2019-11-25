@@ -6,7 +6,6 @@ import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.networking.R;
-import com.example.networking.model.localStorage.LocalStorage;
 import com.example.networking.model.network.Picasso.ImageDownloader;
 
 public class HomeActivity extends AppCompatActivity {
@@ -15,7 +14,10 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         ImageView imageView = findViewById(R.id.imageView);
-        ImageDownloader.LoadImage(getApplicationContext(), 1);
-        imageView.setImageBitmap(LocalStorage.GetImage(getApplicationContext(), 1));
+
+        ImageDownloader.LoadImage(getApplicationContext(), 1, imageView);
+
+//        ImageDownloader.LoadImage(getApplicationContext(), 1);
+//        imageView.setImageBitmap(LocalStorage.GetImage(getApplicationContext(), 1));
     }
 }
