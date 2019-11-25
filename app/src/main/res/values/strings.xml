@@ -18,5 +18,8 @@
     <string name="feed_item_description">Feed item</string>
     <string name="username_feed_mock">Username</string>
     <string name="desc_mock">This is short description of your promise</string>
+    <string name="sum_promise_desc">Sum of your promises</string>
+    <string name="timer_feed_mock">Time left</string>
+    <string name="feed_default_total">1000</string>
     <!--    Login activity -->
 </resources>
