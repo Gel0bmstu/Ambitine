@@ -22,18 +22,6 @@ public class LoginController {
     public LoginController(LoginActivity loginActivity) {
         this.loginActivity = loginActivity;
         logTag = loginActivity.getApplicationContext().getResources().getString(R.string.logTag);
-
-        UserRepository.setToken("hello1");
-        Log.d("pigory", UserRepository.getToken());
-        Log.d("pigory", UserRepository.getToken());
-
-        UserRepository.setToken("hello2");
-        Log.d("pigory", UserRepository.getToken());
-        Log.d("pigory", UserRepository.getToken());
-
-        UserRepository.setToken("hello3");
-        Log.d("pigory", UserRepository.getToken());
-        Log.d("pigory", UserRepository.getToken());
     }
 
     public void onLoginButtonClick() {
