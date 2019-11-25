@@ -10,18 +10,19 @@ import com.example.networking.R;
 import io.realm.Realm;
 
 public class FirstActivity extends AppCompatActivity {
-    boolean authorized = false;
+    boolean authorized = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_first);
 
         Realm.init(getApplicationContext());
         if (!authorized) {
             Intent LoginIntent = new Intent(this, LoginActivity.class);
             startActivity(LoginIntent);
         } else {
-
+            Intent MainIntent = new Intent(this, HomeActivity.class);
+            startActivity(MainIntent);
         }
     }
 }
