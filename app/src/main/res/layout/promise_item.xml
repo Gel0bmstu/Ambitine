@@ -1,0 +1,45 @@
+<com.google.android.material.card.MaterialCardView
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    card_view:cardCornerRadius="4dp"
+    android:layout_margin="5dp"
+    android:layout_centerVertical="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_image"
+            android:layout_width="108dp"
+            android:layout_height="108dp"
+            android:src="@drawable/conference"
+            card_view:civ_border_color="#FF000000"
+            card_view:civ_border_width="2dp" />
+
+        <TextView
+            android:id="@+id/promise_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/username_feed_mock"
+            android:textSize="24sp"
+            android:layout_marginTop="24dp"/>
+
+        <TextView
+            android:id="@+id/text_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/desc_mock"
+            android:textSize="12sp"
+            android:layout_marginTop="24dp"
+            android:textAlignment="center"/>
+
+
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>
