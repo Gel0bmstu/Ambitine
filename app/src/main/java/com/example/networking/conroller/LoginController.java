@@ -4,9 +4,9 @@ import android.util.Log;
 
 import com.example.networking.R;
 import com.example.networking.model.UserRepository;
-import com.example.networking.model.network.Api;
-import com.example.networking.model.network.ApiService;
-import com.example.networking.model.network.Response.LoginResponse;
+import com.example.networking.model.network.Retrofit.Api;
+import com.example.networking.model.network.Retrofit.ApiService;
+import com.example.networking.model.network.Retrofit.Response.LoginResponse;
 import com.example.networking.view.LoginActivity;
 
 import okhttp3.ResponseBody;

@@ -12,4 +12,10 @@
         app:itemIconSize="36dp"
         app:labelVisibilityMode="unlabeled"
         app:menu="@menu/bottom_nav_menu" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:srcCompat="@tools:sample/avatars" />
 </FrameLayout>

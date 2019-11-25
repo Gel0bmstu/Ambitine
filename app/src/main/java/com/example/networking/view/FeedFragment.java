@@ -1,13 +1,6 @@
 package com.example.networking.view;
 
-import android.os.Bundle;
+import androidx.fragment.app.Fragment;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-public class FeedFragment extends AppCompatActivity {
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-    }
+public class FeedFragment extends Fragment {
 }

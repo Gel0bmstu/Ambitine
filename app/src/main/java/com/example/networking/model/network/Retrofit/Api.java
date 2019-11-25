@@ -1,4 +1,4 @@
-package com.example.networking.model.network;
+package com.example.networking.model.network.Retrofit;
 
 public class Api {
     public static final String BASE_URL = "http://10.0.2.2:3000/";

@@ -1,4 +1,4 @@
-package com.example.networking.model.network;
+package com.example.networking.model.network.Retrofit;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
