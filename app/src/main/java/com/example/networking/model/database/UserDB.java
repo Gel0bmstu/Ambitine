@@ -2,26 +2,31 @@ package com.example.networking.model.database;
 
 import com.example.networking.model.models.UserToken;
 
+import org.jetbrains.annotations.NotNull;
+
 import io.realm.Realm;
 import io.realm.RealmResults;
 
 public class UserDB {
     public static final String TOKEN_NOT_FOUND = "token not found";
 
-    public static void setToken(String token) {
+    public static void setToken(final String token) {
         Realm realm = Realm.getDefaultInstance();
-        realm.beginTransaction();
 
-        RealmResults<UserToken> realmResults = realm.where(UserToken.class).findAll();
-        if (realmResults.size() == 0) {
-            UserToken userToken = realm.createObject(UserToken.class);
-            userToken.setToken(token);
-        } else {
-            UserToken userToken = realmResults.first();
-            userToken.setToken(token);
-        }
+        realm.executeTransactionAsync(new Realm.Transaction() {
+            @Override
+            public void execute(@NotNull Realm bgRealm) {
+                RealmResults<UserToken> realmResults = bgRealm.where(UserToken.class).findAll();
 
-        realm.commitTransaction();
+                if (realmResults.size() == 0) {
+                    UserToken userToken =   bgRealm.createObject(UserToken.class);
+                    userToken.setToken(token);
+                } else {
+                    UserToken userToken = realmResults.first();
+                    userToken.setToken(token);
+                }
+            }
+        });
     }
 
     public static String getToken() {
