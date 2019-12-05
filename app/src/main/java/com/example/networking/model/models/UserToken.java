@@ -5,12 +5,12 @@ import io.realm.annotations.Required;
 
 public class UserToken extends RealmObject {
     @Required
-    private String username;
+    private String token;
 
-    public void setToken(final String username) {
-        this.username = username;
+    public void setToken(final String token) {
+        this.token = token;
     }
     public String getToken() {
-        return username;
+        return token;
     }
 }

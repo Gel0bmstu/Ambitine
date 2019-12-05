@@ -26,18 +26,15 @@ public class UserDB {
 
     public static String getToken() {
         String token;
-
         Realm realm = Realm.getDefaultInstance();
-        realm.beginTransaction();
 
-        RealmResults<UserToken> realmResults = realm.where(UserToken.class).findAll();
+        RealmResults<UserToken> realmResults = realm.where(UserToken.class).findAllAsync();
+
         if (realmResults.size() == 0) {
             token = TOKEN_NOT_FOUND;
         } else {
             token = realmResults.first().getToken();
         }
-        realm.commitTransaction();
-
         return token;
     }
 
@@ -50,9 +47,6 @@ public class UserDB {
     }
 
     public static boolean isAuthorized() {
-        if (getToken() == TOKEN_NOT_FOUND) {
-            return false;
-        }
-        return true;
+        return !getToken().equals(TOKEN_NOT_FOUND);
     }
 }
