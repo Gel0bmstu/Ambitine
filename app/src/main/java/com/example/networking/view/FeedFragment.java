@@ -17,14 +17,15 @@ public class FeedFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        feedController = new FeedController(this);
-        feedController.setFeedData();
+        if (feedController == null) {
+            feedController = new FeedController(this);
+        }
         return super.onCreateView(inflater, container, savedInstanceState);
-
     }
 
-    public void TestFeedData() {
-        feedController = new FeedController(this);
+    @Override
+    public void onResume() {
+        super.onResume();
         feedController.setFeedData();
     }
 }

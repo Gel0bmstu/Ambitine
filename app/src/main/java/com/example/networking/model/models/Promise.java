@@ -20,4 +20,14 @@ public class Promise {
     @Expose
     @Required
     private Long endTime;
+
+    @SerializedName("isPaid")
+    @Expose
+    @Required
+    private boolean isPaid;
+
+    @SerializedName("count")
+    @Expose
+    @Required
+    private int count;
 }
