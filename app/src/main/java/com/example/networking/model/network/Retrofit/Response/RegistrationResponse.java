@@ -13,7 +13,16 @@ public class RegistrationResponse {
     private String password;
 
     public RegistrationResponse(String nickname, String password) {
-        this.nickname = nickname;
+        setNickname(nickname);
+        setPassword(password);
+    }
+
+
+    public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 }

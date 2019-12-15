@@ -27,7 +27,7 @@ public class FirstActivity extends AppCompatActivity {
 
         UserDB.deleteToken();
 
-        if (!UserDB.isAuthorized()) {
+        if (UserDB.isAuthorized()) {
             Intent LoginIntent = new Intent(this, LoginActivity.class);
             startActivity(LoginIntent);
         } else {
