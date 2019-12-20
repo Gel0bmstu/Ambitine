@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.networking.R;
-import com.example.networking.conroller.RegistrationController;
 import com.example.networking.model.database.UserDB;
 
 import io.realm.Realm;
@@ -27,7 +26,7 @@ public class FirstActivity extends AppCompatActivity {
 
         UserDB.deleteToken();
 
-        if (UserDB.isAuthorized()) {
+        if (!UserDB.isAuthorized()) {
             Intent LoginIntent = new Intent(this, LoginActivity.class);
             startActivity(LoginIntent);
         } else {

@@ -17,7 +17,7 @@ public interface ApiService {
     Call<ResponseBody> loginRequest(@Body LoginResponse loginResponse);
 
     @POST("api/signup")
-    Call<ResponseBody> signupRequest(@Body RegistrationResponse registrationResponse);
+    Call<ResponseBody> signUpRequest(@Body RegistrationResponse registrationResponse);
 
 //    Нужно тестить
     @POST("api/user/{id}")

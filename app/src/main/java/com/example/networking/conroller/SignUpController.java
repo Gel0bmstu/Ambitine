@@ -1,30 +1,28 @@
 package com.example.networking.conroller;
 
+import android.util.Log;
+
+import com.example.networking.model.UserRepository;
 import com.example.networking.model.network.Retrofit.Api;
 import com.example.networking.model.network.Retrofit.ApiService;
 import com.example.networking.model.network.Retrofit.Response.RegistrationResponse;
-import com.example.networking.view.RegistrationActivity;
+import com.example.networking.view.SignUpActivity;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class RegistrationController {
-    private RegistrationActivity registrationActivity;
+public class SignUpController {
+    private SignUpActivity signUpActivity;
 
-    public RegistrationController(RegistrationActivity registrationActivity) {
-        this.registrationActivity = registrationActivity;
-    }
-
-    public RegistrationController() {
+    public SignUpController(SignUpActivity signUpActivity) {
+        this.signUpActivity = signUpActivity;
     }
 
     public void onSignUpClick() {
-//        String username = RegistrationActivity.getUsername();
-//        String passowrd = RegistrationActivity.getPassword();
-        String username = "test";
-        String password = "test";
+        String username = signUpActivity.getUsername();
+        String password = signUpActivity.getPassword();
 
         RegistrationResponse registrationResponse = new RegistrationResponse(username, password);
         signUp(registrationResponse);
@@ -32,17 +30,18 @@ public class RegistrationController {
 
     private void signUp(final RegistrationResponse registrationResponse) {
         ApiService apiService = Api.getApiService();
-        Call<ResponseBody> call = apiService.signupRequest(registrationResponse);
+        Call<ResponseBody> call = apiService.signUpRequest(registrationResponse);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.code() == 201) {
-//                    String authToken = response.headers().get("Set-Cookie");
-//
-//                    UserRepository.setToken(authToken);
-//
-//                    loginActivity.SwitchActivityAfterLoginSuccess();
-//
+                    String authToken = response.headers().get("Set-Cookie");
+
+                    UserRepository.setToken(authToken);
+                    Log.d("hellomelloy", authToken);
+
+                    signUpActivity.SwitchActivityAfterSignUpSuccess();
+
 //                    Log.d(logTag, UserRepository.getToken());
 //                    Log.d(logTag, authToken);
                 } else {

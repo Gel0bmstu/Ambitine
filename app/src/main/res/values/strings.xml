@@ -2,7 +2,7 @@
     <string name="app_name">networking</string>
     <string name="logTag">GuysDEBUG</string>
 
-<!--    Login activity -->
+    <!--    Login activity -->
     <string name="login_input">Username</string>
     <string name="password_activity">Password</string>
     <string name="login_button_text">SIGN IN</string>
@@ -22,4 +22,9 @@
     <string name="timer_feed_mock">Time left</string>
     <string name="feed_default_total">1000</string>
     <!--    Login activity -->
+
+    <!--    SignUp activity -->
+    <string name="sign_up_button_text">SIGN UP</string>
+    <!--    SignUp activity -->
+
 </resources>
