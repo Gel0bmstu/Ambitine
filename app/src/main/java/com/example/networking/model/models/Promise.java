@@ -1,33 +1,31 @@
 package com.example.networking.model.models;
 
+import androidx.annotation.NonNull;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import io.realm.annotations.Required;
 
 public class Promise {
-    @SerializedName("userId")
-    @Expose
-    @Required
-    private int userId;
+    private String username;
+    private String img_url;
+    private String promise_description;
+    private Long pastdue;
+    private Integer deposit;
+    private Boolean accepted;
 
-    @SerializedName("content")
-    @Expose
-    @Required
-    private String content;
+    public String getUsername() {
+        return this.username;
+    }
 
-    @SerializedName("endTime")
-    @Expose
-    @Required
-    private Long endTime;
 
-    @SerializedName("isPaid")
-    @Expose
-    @Required
-    private boolean isPaid;
+    public String getImg_url() {
+        return img_url;
+    }
 
-    @SerializedName("count")
-    @Expose
-    @Required
-    private int count;
+
+    public Integer getDeposit() {
+        return deposit;
+    }
 }

@@ -26,25 +26,4 @@ public class FeedController {
         this.feedFragment = feedFragment;
     }
     // ToDo: add offset to args
-    public void setFeedData() {
-        ApiService apiService = Api.getApiService();
-        Call<List<FeedPromiseResponse>> call = apiService.feedResponse();
-        call.enqueue(new Callback<List<FeedPromiseResponse>>() {
-            @Override
-            public void onResponse(Call<List<FeedPromiseResponse>> call, Response<List<FeedPromiseResponse>> response) {
-                if (response.code() == 200) {
-                    assert response.body() != null;
-                    for(FeedPromiseResponse feedItem: response.body()) {
-                        System.out.println(feedItem.toString());
-                    }
-                } else {
-                    System.out.println("Another handle way");
-                }
-            }
-            @Override
-            public void onFailure(Call<List<FeedPromiseResponse>> call, Throwable t) {
-               System.out.println("OUT OF DANCE FLOOR");
-            }
-        });
-    }
 }

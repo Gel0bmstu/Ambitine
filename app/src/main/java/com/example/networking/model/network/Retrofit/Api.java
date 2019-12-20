@@ -8,3 +8,4 @@ public class Api {
         return RetrofitClient.getClient(BASE_URL).create(ApiService.class);
     }
 }
+
