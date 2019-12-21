@@ -59,7 +59,8 @@ public class FeedFragment extends Fragment {
 
     // use retrofit to create an instance of BookService
     FeedService service = new Retrofit.Builder()
-            .baseUrl("http://www.mocky.io/")
+//            .baseUrl("http://www.mocky.io/")
+            .baseUrl("http://35.228.98.103:9090/")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(FeedService.class);
