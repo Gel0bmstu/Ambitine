@@ -1,22 +1,22 @@
-<com.google.android.material.card.MaterialCardView
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/card_view"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    card_view:cardCornerRadius="4dp"
+    android:layout_height="250dp"
+    android:layout_centerVertical="true"
     android:layout_margin="5dp"
-    android:layout_centerVertical="true">
+    card_view:cardCornerRadius="10dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:gravity="center|top"
         android:orientation="vertical">
 
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profile_image"
+            android:id="@+id/feed_avatar"
             android:layout_width="108dp"
             android:layout_height="108dp"
             android:src="@drawable/conference"
@@ -27,56 +27,57 @@
             android:id="@+id/promise_username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
             android:text="@string/username_feed_mock"
-            android:textSize="24sp"
-            android:layout_marginTop="24dp"/>
+            android:textSize="24sp" />
 
         <TextView
-            android:id="@+id/text_username"
+            android:id="@+id/promise_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:text="@string/desc_mock"
-            android:textSize="12sp"
-            android:layout_marginTop="24dp"
-            android:textAlignment="center"/>
+            android:textAlignment="center"
+            android:textSize="12sp" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
         android:gravity="center"
-        android:orientation="horizontal"
-        android:layout_marginTop="256dp">
+        android:orientation="horizontal">
 
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_ruble"
-            android:contentDescription="@string/sum_promise_desc" />
+            android:contentDescription="@string/sum_promise_desc"
+            android:src="@drawable/ic_ruble" />
 
         <TextView
+            android:id="@+id/deposit_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/timer_feed_mock"
             android:layout_marginStart="10dp"
-            android:layout_marginEnd="20dp"/>
-
-
+            android:layout_marginEnd="20dp"
+            android:text="@string/feed_default_total" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_time"
-            android:contentDescription="@string/sum_promise_desc"/>
+            android:contentDescription="@string/sum_promise_desc"
+            android:src="@drawable/ic_time" />
 
         <TextView
+            android:id="@+id/time_lefted"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/feed_default_total"
             android:layout_marginStart="10dp"
-            android:layout_marginEnd="20dp"/>
+            android:layout_marginEnd="20dp"
+            android:text="@string/timer_feed_mock" />
+
 
     </LinearLayout>
 
