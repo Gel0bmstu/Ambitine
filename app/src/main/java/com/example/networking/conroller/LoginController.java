@@ -38,14 +38,7 @@ public class LoginController {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.code() == 201) {
-                    String authToken = response.headers().get("Set-Cookie");
-
-                    UserRepository.setToken(authToken);
-
                     loginActivity.SwitchActivityAfterLoginSuccess();
-
-                    Log.d(logTag, UserRepository.getToken());
-                    Log.d(logTag, authToken);
                 } else {
                     Log.d(logTag, "smth get wrong!");
                 }

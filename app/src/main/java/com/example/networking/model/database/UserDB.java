@@ -13,13 +13,13 @@ public class UserDB {
     public static void setToken(final String token) {
         Realm realm = Realm.getDefaultInstance();
 
-        realm.executeTransactionAsync(new Realm.Transaction() {
+        realm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(@NotNull Realm bgRealm) {
                 RealmResults<UserToken> realmResults = bgRealm.where(UserToken.class).findAll();
 
                 if (realmResults.size() == 0) {
-                    UserToken userToken =   bgRealm.createObject(UserToken.class);
+                    UserToken userToken = bgRealm.createObject(UserToken.class);
                     userToken.setToken(token);
                 } else {
                     UserToken userToken = realmResults.first();
@@ -33,7 +33,7 @@ public class UserDB {
         String token;
         Realm realm = Realm.getDefaultInstance();
 
-        RealmResults<UserToken> realmResults = realm.where(UserToken.class).findAllAsync();
+        RealmResults<UserToken> realmResults = realm.where(UserToken.class).findAll();
 
         if (realmResults.size() == 0) {
             token = TOKEN_NOT_FOUND;
