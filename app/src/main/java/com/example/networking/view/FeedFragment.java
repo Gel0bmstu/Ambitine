@@ -19,6 +19,8 @@ import com.example.networking.model.models.Promise;
 import com.example.networking.model.network.Retrofit.Api;
 import com.example.networking.model.network.Retrofit.ApiService;
 import com.example.networking.model.network.Retrofit.FeedService;
+import com.example.networking.model.network.Retrofit.Interceptors.AddCookiesInterceptor;
+import com.example.networking.model.network.Retrofit.Interceptors.ReceivedCookiesInterceptor;
 import com.example.networking.model.network.Retrofit.Response.FeedPromiseResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -26,6 +28,8 @@ import com.google.gson.GsonBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -56,12 +60,18 @@ public class FeedFragment extends Fragment {
 
 
     Gson gson = new GsonBuilder().create();
+    OkHttpClient client = new OkHttpClient.Builder().
+            addInterceptor(new AddCookiesInterceptor()).
+            addInterceptor(new ReceivedCookiesInterceptor()).
+            build();
 
     // use retrofit to create an instance of BookService
     FeedService service = new Retrofit.Builder()
 //            .baseUrl("http://www.mocky.io/")
-            .baseUrl("http://35.228.98.103:9090/")
+            .baseUrl("http://192.168.100.32:9090")
+//            .baseUrl("http://35.228.98.103:9090/")
             .addConverterFactory(GsonConverterFactory.create(gson))
+            .client(client)
             .build()
             .create(FeedService.class);
 
@@ -94,6 +104,8 @@ public class FeedFragment extends Fragment {
                     // 5. set item animator to DefaultAnimator
                     recyclerView.setItemAnimator(new DefaultItemAnimator());
 
+                } else if (response.code() == 404) {
+                    System.out.println("4040404400400440");
                 } else {
                     System.out.println("Another handle way");
                 }
