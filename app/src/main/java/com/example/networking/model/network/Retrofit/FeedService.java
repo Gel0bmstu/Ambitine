@@ -8,6 +8,7 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 
 public interface FeedService {
-    @GET("v2/5dfce103310000efc8d2c221/")
+//    http://35.228.98.103:9090/api/get_promises
+    @GET("api/get_promises/")
     Call<List<Promise>> getAllFeedItems();
 }
