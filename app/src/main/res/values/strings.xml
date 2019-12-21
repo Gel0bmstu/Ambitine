@@ -25,6 +25,7 @@
 
     <!--    SignUp activity -->
     <string name="sign_up_button_text">SIGN UP</string>
+    <string name="make_a_promise">Make a promise</string>
     <!--    SignUp activity -->
 
 </resources>
