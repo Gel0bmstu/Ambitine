@@ -23,10 +23,13 @@ public class SignUpController {
     public void onSignUpClick() {
         String username = signUpActivity.getUsername();
         String password = signUpActivity.getPassword();
+        String token = signUpActivity.getToken();
 
-        RegistrationResponse registrationResponse = new RegistrationResponse(username, password);
+        RegistrationResponse registrationResponse = new RegistrationResponse(username, password, token);
         signUp(registrationResponse);
     }
+
+
 
     private void signUp(final RegistrationResponse registrationResponse) {
         ApiService apiService = Api.getApiService();

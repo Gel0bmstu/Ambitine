@@ -2,12 +2,17 @@ package com.example.networking.conroller;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 import com.example.networking.R;
 import com.example.networking.model.UserRepository;
 import com.example.networking.model.network.Retrofit.Api;
 import com.example.networking.model.network.Retrofit.ApiService;
 import com.example.networking.model.network.Retrofit.Response.LoginResponse;
 import com.example.networking.view.LoginActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -24,10 +29,12 @@ public class LoginController {
         logTag = loginActivity.getApplicationContext().getResources().getString(R.string.logTag);
     }
 
+
     public void onLoginButtonClick() {
         String username = loginActivity.getUsername();
         String password = loginActivity.getPassword();
-        LoginResponse loginResponse = new LoginResponse(username, password);
+        String token = loginActivity.getToken();
+        LoginResponse loginResponse = new LoginResponse(username, password, token);
         login(loginResponse);
     }
 
