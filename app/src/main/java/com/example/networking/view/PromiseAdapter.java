@@ -50,23 +50,30 @@ public class PromiseAdapter extends RecyclerView.Adapter<PromiseAdapter.PromiseH
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(PromiseHolder holder, int position) {
-        // - get element from your dataset at this position
-        // - replace the contents of the view with that element
-        holder.matView.setRadius(1);
+        // get promises object
+        Promise promise = promises.get(position);
         // Feed username setter
         TextView promiseUsername = holder.matView.findViewById(R.id.promise_username);
-        promiseUsername.setText(promises.get(position).getUsername());
+        promiseUsername.setText(promise.getUsername());
 
         // Avatar for user in feed
         ImageView promiseUsernameFeed =  holder.matView.findViewById(R.id.feed_avatar);
-        Picasso.get().load(promises.get(position).getImg_url())
+        Picasso.get().load(promise.getImg_url())
                 .resize(500, 700)
                 .noFade()
                 .into(promiseUsernameFeed);
         // Deposit set
-        Integer depositValue = promises.get(position).getDeposit();
-
-
+        Integer depositValue = promise.getDeposit();
+        TextView depositValueTxt = holder.matView.findViewById(R.id.deposit_value);
+        depositValueTxt.setText(Integer.toString(depositValue));
+        // String time
+        String pastdueTime = promise.getPastDue();
+        TextView timeLeftedTxt = holder.matView.findViewById(R.id.time_lefted);
+        timeLeftedTxt.setText(pastdueTime);
+        // Promise descriptioon
+        String promiseDescription = promise.getPromiseDescription();
+        TextView promiseDescriptinView = holder.matView.findViewById(R.id.promise_text);
+        promiseDescriptinView.setText(promiseDescription);
     }
 
     // Return the size of your dataset (invoked by the layout manager)
