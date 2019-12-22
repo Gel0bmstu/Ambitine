@@ -27,4 +27,10 @@
     <string name="sign_up_button_text">SIGN UP</string>
     <string name="make_a_promise">Make a promise</string>
     <!--    SignUp activity -->
+
+    <!--    Profile activity -->
+    <string name="upload_button">Photo upload button</string>
+    <!--    Profile activity -->
+
+
 </resources>

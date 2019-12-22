@@ -1,11 +1,14 @@
 package com.example.networking.view;
 
+import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,7 +19,14 @@ import com.example.networking.conroller.ProfileController;
 import com.example.networking.model.models.Profile;
 import com.squareup.picasso.Picasso;
 
+import net.gotev.uploadservice.data.UploadNotificationConfig;
+import net.gotev.uploadservice.protocols.multipart.MultipartUploadRequest;
+
+import java.util.UUID;
+
 public class ProfileFragment extends Fragment {
+    private int PICK_IMAGE_REQUEST = 1;
+
     View rootView;
     ProfileController profileController;
 
@@ -31,7 +41,47 @@ public class ProfileFragment extends Fragment {
             profileController = new ProfileController(this);
         }
         profileController.getProfileData();
+
+        ImageView uploadPhotoBtn = rootView.findViewById(R.id.upload_button);
+        uploadPhotoBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println("govnyaka");
+                showFileChooser();
+            }
+        });
         return rootView;
+    }
+
+    private void showFileChooser() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
+    }
+
+    public void uploadMultipart() {
+        //getting name for the image
+//        String name = editText.getText().toString().trim();
+
+        //getting the actual path of the image
+//        String path = getPath(filePath);
+
+        //Uploading code
+        try {
+            String uploadId = UUID.randomUUID().toString();
+
+            //Creating a multi part request
+//                new MultipartUploadRequest(this, uploadId, Constants.UPLOAD_URL)
+//                    .addFileToUpload(path, "image") //Adding file
+//                    .addParameter("name", name) //Adding text parameter to the request
+//                    .setNotificationConfig(new UploadNotificationConfig())
+//                    .setMaxRetries(2)
+//                    .startUpload(); //Starting the upload
+
+        } catch (Exception exc) {
+//            Toast.makeText(this, exc.getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void setProfileData(Profile profile) {

@@ -61,4 +61,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-core:16.0.1'
     implementation 'com.google.firebase:firebase-messaging:20.1.0'
 
+    // For upload to server
+    def uploadServiceVersion = "4.0.0-rc2"
+    implementation "net.gotev:uploadservice:$uploadServiceVersion"
 }
