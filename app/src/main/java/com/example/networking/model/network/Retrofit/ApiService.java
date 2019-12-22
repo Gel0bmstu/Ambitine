@@ -2,6 +2,7 @@ package com.example.networking.model.network.Retrofit;
 
 import com.example.networking.model.models.User;
 import com.example.networking.model.network.Retrofit.Response.LoginResponse;
+import com.example.networking.model.network.Retrofit.Response.NewPromiseResponce;
 import com.example.networking.model.network.Retrofit.Response.RegistrationResponse;
 
 import okhttp3.ResponseBody;
@@ -15,6 +16,10 @@ public interface ApiService {
 
     @POST("api/signup")
     Call<ResponseBody> signUpRequest(@Body RegistrationResponse registrationResponse);
+
+    @POST("api/set_new_promiss")
+    Call<ResponseBody> sendNewPromise(@Body NewPromiseResponce newPromise);
+
 
 //    Нужно тестить
     @POST("api/user/{id}")
