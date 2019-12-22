@@ -73,6 +73,13 @@ public class PromiseAdapter extends RecyclerView.Adapter<PromiseAdapter.PromiseH
         String promiseDescription = promise.getPromiseDescription();
         TextView promiseDescriptinView = holder.matView.findViewById(R.id.promise_text);
         promiseDescriptinView.setText(promiseDescription);
+        // Accepted handle
+        Integer accepted = promise.getAccepted();
+        if (accepted == -1) {
+            holder.matView.setCardBackgroundColor(holder.matView.getResources().getColor(R.color.declined_promises));
+        } else if (accepted == 1) {
+            holder.matView.setCardBackgroundColor(holder.matView.getResources().getColor(R.color.ambitine_primary_color));
+        }
     }
 
     // Return the size of your dataset (invoked by the layout manager)
