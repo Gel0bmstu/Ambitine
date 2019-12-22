@@ -58,10 +58,12 @@ public class PromiseAdapter extends RecyclerView.Adapter<PromiseAdapter.PromiseH
 
         // Avatar for user in feed
         ImageView promiseUsernameFeed =  holder.matView.findViewById(R.id.feed_avatar);
-        Picasso.get().load(promise.getImg_url())
-                .resize(500, 700)
-                .noFade()
-                .into(promiseUsernameFeed);
+        if (!promise.getImg_url().isEmpty()) {
+            Picasso.get().load(promise.getImg_url())
+                    .resize(500, 700)
+                    .noFade()
+                    .into(promiseUsernameFeed);
+        }
         // Deposit set
         Integer depositValue = promise.getDeposit();
         TextView depositValueTxt = holder.matView.findViewById(R.id.deposit_value);
