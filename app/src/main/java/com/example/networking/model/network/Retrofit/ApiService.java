@@ -1,6 +1,7 @@
 package com.example.networking.model.network.Retrofit;
 
 import com.example.networking.model.models.User;
+import com.example.networking.model.network.Retrofit.Response.AcceptResponse;
 import com.example.networking.model.network.Retrofit.Response.LoginResponse;
 import com.example.networking.model.network.Retrofit.Response.NewPromiseResponce;
 import com.example.networking.model.network.Retrofit.Response.RegistrationResponse;
@@ -19,6 +20,9 @@ public interface ApiService {
 
     @POST("api/set_new_promise")
     Call<ResponseBody> sendNewPromise(@Body NewPromiseResponce newPromise);
+
+    @POST("api/solution")
+    Call<ResponseBody> sendAcceptPromise(@Body AcceptResponse newAcceptResponse);
 
 
 //    Нужно тестить
