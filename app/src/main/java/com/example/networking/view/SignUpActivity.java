@@ -11,6 +11,7 @@ import com.example.networking.R;
 
 import com.example.networking.conroller.SignUpController;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 public class SignUpActivity extends AppCompatActivity {
     SignUpController signUpController;
@@ -35,6 +36,13 @@ public class SignUpActivity extends AppCompatActivity {
     public String getUsername() {
         TextInputEditText usernameInput = findViewById(R.id.login_input);
         return usernameInput.getText().toString();
+    }
+
+    public String getToken(){
+        String token = FirebaseInstanceId.getInstance().getToken();
+        System.out.println("TOKEN OUT");
+        System.out.println(token);
+        return token;
     }
 
     public String getPassword() {
