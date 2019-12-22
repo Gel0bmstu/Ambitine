@@ -9,11 +9,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.networking.R;
 import com.example.networking.model.models.Promise;
-import com.example.networking.model.network.Retrofit.Response.FeedPromiseResponse;
 import com.google.android.material.card.MaterialCardView;
 import com.squareup.picasso.Picasso;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -40,7 +37,7 @@ public class PromiseAdapter extends RecyclerView.Adapter<PromiseAdapter.PromiseH
                                                           int viewType) {
         // create a new view
         MaterialCardView v = (MaterialCardView) LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.promise_item, parent, false);
+                .inflate(R.layout.promise_export_item, parent, false);
 //        ...
         PromiseHolder vh = new PromiseHolder(v);
 
