@@ -12,7 +12,7 @@ public class Promise {
     private String author_img_url;
     private String promise_description;
     private Long pastdue;
-    private Integer deposit;
+    private Float deposit;
     private Integer accepted;
 
     public String getUsername() {
@@ -23,7 +23,7 @@ public class Promise {
         return receiver_img_url;
     }
 
-    public Integer getDeposit() {
+    public Float getDeposit() {
         return deposit;
     }
 
@@ -39,4 +39,20 @@ public class Promise {
     }
 
 
+    public Integer getAccepted() {
+        return accepted;
+    }
+
+
+    public void setAccepted(Integer accepted) {
+        this.accepted = accepted;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 }

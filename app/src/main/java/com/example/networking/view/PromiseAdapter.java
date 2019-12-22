@@ -79,7 +79,11 @@ public class PromiseAdapter extends RecyclerView.Adapter<PromiseAdapter.PromiseH
             holder.matView.setCardBackgroundColor(holder.matView.getResources().getColor(R.color.declined_promises));
         } else if (accepted == 1) {
             holder.matView.setCardBackgroundColor(holder.matView.getResources().getColor(R.color.ambitine_primary_color));
+        } else {
+            Integer promiseId = promise.getId();
         }
+        // Get ID
+
     }
 
     // Return the size of your dataset (invoked by the layout manager)
