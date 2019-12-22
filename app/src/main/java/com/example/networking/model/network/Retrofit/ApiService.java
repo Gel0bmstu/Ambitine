@@ -17,7 +17,7 @@ public interface ApiService {
     @POST("api/signup")
     Call<ResponseBody> signUpRequest(@Body RegistrationResponse registrationResponse);
 
-    @POST("api/set_new_promiss")
+    @POST("api/set_new_promise")
     Call<ResponseBody> sendNewPromise(@Body NewPromiseResponce newPromise);
 
 
