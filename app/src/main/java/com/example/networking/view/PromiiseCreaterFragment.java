@@ -70,6 +70,10 @@ public class PromiiseCreaterFragment extends Fragment {
             }
         });
 
+//        EditText depositValue = rootView.findViewById(R.id.deposit_new_promise);
+//        depositValue
+
+
         return rootView;
 //        return super.onCreateView(inflater, containeer, savedInstanceState);
     }
