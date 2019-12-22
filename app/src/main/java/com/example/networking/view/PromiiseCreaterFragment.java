@@ -99,6 +99,23 @@ public class PromiiseCreaterFragment extends Fragment {
         });
     }
 
+    public String getRecieverUsername() {
+        AutoCompleteTextView recieverUsername = rootView.findViewById(R.id.users_autocomplete);
+        String recieverUsernameString = recieverUsername.getText().toString();
+        System.out.println("Reciever username from autocomplete");
+        System.out.println();
+        return recieverUsernameString;
+    }
+
+//    public String getRecieverUsername() {
+//        AutoCompleteTextView recieverUsername = rootView.findViewById(R.id.users_autocomplete);
+//        String recieverUsernameString = recieverUsername.getText().toString();
+//        System.out.println("Reciever username from autocomplete");
+//        System.out.println();
+//        return recieverUsernameString;
+//    }
+
+
     @Override
     public void onResume() {
         super.onResume();
