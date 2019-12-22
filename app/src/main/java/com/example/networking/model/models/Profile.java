@@ -1,12 +1,15 @@
 package com.example.networking.model.models;
 
 public class Profile {
+    private Float accepted_amount;
+    private Float declined_amount;
+    private Float processing_amount;
     private String username;
     private String img_url;
     private Integer accepted_count;
     private Integer declined_count;
     private Integer processing_count;
-    private Integer balance;
+    private Float balance;
     private String wallet;
 
     public String getUsername() {
@@ -29,7 +32,7 @@ public class Profile {
         return  processing_count;
     }
 
-    public Integer getBalance() {
+    public Float getBalance() {
         return balance;
     }
 
