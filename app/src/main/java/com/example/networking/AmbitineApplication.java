@@ -5,6 +5,8 @@ import android.app.Application;
 import com.squareup.picasso.OkHttp3Downloader;
 import com.squareup.picasso.Picasso;
 
+import net.gotev.uploadservice.UploadService;
+
 public class AmbitineApplication extends Application {
     @Override
     public void onCreate() {
@@ -16,5 +18,7 @@ public class AmbitineApplication extends Application {
         built.setIndicatorsEnabled(true);
         built.setLoggingEnabled(true);
         Picasso.setSingletonInstance(built);
+
+        UploadService.NAMESPACE = BuildConfig.APPLICATION_ID;
     }
 }
