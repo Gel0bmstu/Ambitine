@@ -62,9 +62,9 @@ public class PromiseAdapter extends RecyclerView.Adapter<PromiseAdapter.PromiseH
                     .into(promiseUsernameFeed);
         }
         // Deposit set
-        Integer depositValue = promise.getDeposit();
+        Float depositValue = promise.getDeposit();
         TextView depositValueTxt = holder.matView.findViewById(R.id.deposit_value);
-        depositValueTxt.setText(Integer.toString(depositValue));
+        depositValueTxt.setText(Float.toString(depositValue));
         // String time
         String pastdueTime = promise.getPastDue();
         TextView timeLeftedTxt = holder.matView.findViewById(R.id.time_lefted);
