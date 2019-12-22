@@ -1,0 +1,40 @@
+{
+    "project_info": {
+      "project_number": "302644425514",
+      "firebase_url": "https://ambitinepushtest.firebaseio.com",
+      "project_id": "ambitinepushtest",
+      "storage_bucket": "ambitinepushtest.appspot.com"
+    },
+    "client": [
+      {
+        "client_info": {
+          "mobilesdk_app_id": "1:302644425514:android:0c62c9395672ff8038e453",
+          "android_client_info": {
+            "package_name": "com.ambitine.push"
+          }
+        },
+        "oauth_client": [
+          {
+            "client_id": "302644425514-llirnbg9d3545ch8bm1nkvfpijg23etc.apps.googleusercontent.com",
+            "client_type": 3
+          }
+        ],
+        "api_key": [
+          {
+            "current_key": "AIzaSyBgZ_X7qlnnHW7PvIUVvR693CP_phtqmV8"
+          }
+        ],
+        "services": {
+          "appinvite_service": {
+            "other_platform_oauth_client": [
+              {
+                "client_id": "302644425514-llirnbg9d3545ch8bm1nkvfpijg23etc.apps.googleusercontent.com",
+                "client_type": 3
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "configuration_version": "1"
+  }

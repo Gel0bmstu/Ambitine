@@ -17,6 +17,7 @@ public class HomeActivity extends AppCompatActivity {
 
     final Fragment feedFragment  = new FeedFragment();
     final Fragment newPromiseFragment  = new PromiiseCreaterFragment();
+    final Fragment profileFragment= new ProfileFragment();
     final FragmentManager fm = getSupportFragmentManager();
     Fragment active = feedFragment;
 
@@ -35,6 +36,11 @@ public class HomeActivity extends AppCompatActivity {
                     fm.beginTransaction().hide(active).show(newPromiseFragment).commit();
                     active = newPromiseFragment;
                     return true;
+
+                case R.id.bottom_nav_profile:
+                    fm.beginTransaction().hide(active).show(profileFragment).commit();
+                    active = profileFragment;
+                    return true;
             }
             return false;
         }
@@ -51,6 +57,7 @@ public class HomeActivity extends AppCompatActivity {
 
 
 //        fm.beginTransaction().add(R.id.content_fragment, fragment3, "3").hide(fragment3).commit();
+        fm.beginTransaction().add(R.id.content_fragment, profileFragment, "profile_fragment").hide(profileFragment).commit();
         fm.beginTransaction().add(R.id.content_fragment, newPromiseFragment, "new_promise_fragment").hide(newPromiseFragment).commit();
         fm.beginTransaction().add(R.id.content_fragment, feedFragment, "feed_fragment").commit();
 //        getSupportFragmentManager().beginTransaction().replace(R.id.content_fragment, feedFragment).commit();
