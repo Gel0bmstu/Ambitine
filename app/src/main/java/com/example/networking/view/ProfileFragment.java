@@ -58,7 +58,6 @@ public class ProfileFragment extends Fragment {
             public void onClick(View v) {
                 System.out.println("govnyaka");
                 showFileChooser();
-                uploadMultipart();
             }
         });
         return rootView;
@@ -117,6 +116,7 @@ public class ProfileFragment extends Fragment {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), filePath);
                 ImageView avatar = rootView.findViewById(R.id.profile_avatar);
                 avatar.setImageBitmap(bitmap);
+                uploadMultipart();
             } catch (IOException e) {
                 e.printStackTrace();
             }
