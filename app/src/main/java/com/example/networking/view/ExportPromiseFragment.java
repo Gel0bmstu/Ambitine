@@ -1,9 +1,14 @@
 package com.example.networking.view;
 
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -95,6 +100,11 @@ public class ExportPromiseFragment extends Fragment {
             public void onResponse(Call<List<Promise>> call, Response<List<Promise>> response) {
                 System.out.println("WATA SHAKA LAKA");
                 if (response.code() == 200) {
+                    RelativeLayout feedLayout = rootView.findViewById(R.id.export_feed_layout);
+                    TextView promisesNotFound = rootView.findViewById(R.id.not_promises);
+                    if (promisesNotFound != null) {
+                        feedLayout.removeView(promisesNotFound);
+                    }
                     assert response.body() != null;
                     System.out.println("WATA SHAKA LAKA");
                     // Tmp method to get data
@@ -116,7 +126,21 @@ public class ExportPromiseFragment extends Fragment {
                     recyclerView.setItemAnimator(new DefaultItemAnimator());
 
                 } else if (response.code() == 404) {
-                    System.out.println("4040404400400440");
+                    TextView promisesNotFound = new TextView(rootView.getContext());
+                    promisesNotFound.setText("You have no promises so far.");
+                    promisesNotFound.setId(R.id.not_promises);
+                    // Dont work (
+                    promisesNotFound.setGravity(Gravity.CENTER_HORIZONTAL);
+                    promisesNotFound.setTextSize(25);
+                    promisesNotFound.setTextColor(getResources().getColor(R.color.ambitine_primary_color));
+                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+                    params.setMargins(0,350,0,0);
+                    promisesNotFound.setLayoutParams(params);
+                    RelativeLayout feedLayout = rootView.findViewById(R.id.export_feed_layout);
+                    // ToDo: Maybe add image
+                    if (rootView.findViewById(R.id.not_promises) == null) {
+                        feedLayout.addView(promisesNotFound);
+                    }
                 } else {
                     System.out.println("Another handle way");
                 }
