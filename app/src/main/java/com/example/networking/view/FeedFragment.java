@@ -57,6 +57,18 @@ public class FeedFragment extends Fragment {
         super.onCreate(savedInstanceState);
         rootView = inflater.inflate(R.layout.fragment_promise_feed, container, false);
         getFeedData();
+//        rootView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
+//            @Override
+//            public void onScrollChanged() {
+//                if (rootView != null) {
+//                    if (rootView.getScrollY() == 0) {
+//                        Toast.makeText(getContext(), "top", Toast.LENGTH_SHORT).show();
+//                    } else {
+//
+//                    }
+//                }
+//            }
+//        });
         return rootView;
 //        return super.onCreateView(inflater, containeer, savedInstanceState);
     }
@@ -122,10 +134,16 @@ public class FeedFragment extends Fragment {
         });
     }
 
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        if (!hidden) {
+            getFeedData();
+        }
+        super.onHiddenChanged(hidden);
+    }
 
     @Override
     public void onResume() {
-
         super.onResume();
     }
 }
