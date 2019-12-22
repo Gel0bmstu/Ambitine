@@ -6,8 +6,8 @@ import java.util.Locale;
 
 public class Promise {
     private String author_username;
-    private String reciever_username;
-    private String reciever_img_url;
+    private String receiver_username;
+    private String receiver_img_url;
     private String author_img_url;
     private String promise_description;
     private Long pastdue;
@@ -15,11 +15,11 @@ public class Promise {
     private Integer accepted;
 
     public String getUsername() {
-        return this.reciever_username;
+        return this.receiver_username;
     }
 
     public String getImg_url() {
-        return reciever_img_url;
+        return receiver_img_url;
     }
 
     public Integer getDeposit() {

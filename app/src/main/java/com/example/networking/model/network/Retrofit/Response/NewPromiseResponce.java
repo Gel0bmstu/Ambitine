@@ -12,9 +12,9 @@ public class NewPromiseResponce {
 //            "accepted": 1,
 //    }
 
-    @SerializedName("reciever_username")
+    @SerializedName("receiver_username")
     @Expose
-    private String reciever_username;
+    private String receiver_username;
 
     @SerializedName("promise_description")
     @Expose
@@ -60,10 +60,10 @@ public class NewPromiseResponce {
     }
 
     public String getReciever_username() {
-        return reciever_username;
+        return receiver_username;
     }
 
     public void setReciever_username(String reciever_username) {
-        this.reciever_username = reciever_username;
+        this.receiver_username = reciever_username;
     }
 }
