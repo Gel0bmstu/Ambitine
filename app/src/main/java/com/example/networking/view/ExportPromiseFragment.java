@@ -109,7 +109,7 @@ public class ExportPromiseFragment extends Fragment {
 //                    exportPromiseController.setFeedData();
                     String[] myStringArray;
                     List<Promise> promises = response.body();
-                    PromiseAdapter mAdapter = new PromiseAdapter(promises);
+                    ExportPromiseAdapter mAdapter = new ExportPromiseAdapter(promises);
                     // 4. set adapter
                     recyclerView.setAdapter(mAdapter);
                     // 5. set item animator to DefaultAnimator

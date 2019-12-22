@@ -1,20 +1,31 @@
 package com.example.networking.view;
 
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.networking.R;
 import com.example.networking.model.models.Promise;
+import com.example.networking.model.network.Retrofit.Api;
+import com.example.networking.model.network.Retrofit.ApiService;
+import com.example.networking.model.network.Retrofit.Response.AcceptResponse;
 import com.google.android.material.card.MaterialCardView;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class PromiseAdapter extends RecyclerView.Adapter<PromiseAdapter.PromiseHolder> {
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class PromiseImportAdapter extends RecyclerView.Adapter<PromiseImportAdapter.PromiseHolder> {
 
     private List<Promise> promises;
 
@@ -27,31 +38,34 @@ public class PromiseAdapter extends RecyclerView.Adapter<PromiseAdapter.PromiseH
         }
     }
 
-    public PromiseAdapter(List<Promise> myPromises) {
+    public PromiseImportAdapter(List<Promise> myPromises) {
         promises = myPromises;
     }
 
     // Create new views (invoked by the layout manager)
     @Override
-    public PromiseAdapter.PromiseHolder onCreateViewHolder(ViewGroup parent,
-                                                          int viewType) {
+    public PromiseImportAdapter.PromiseHolder onCreateViewHolder(ViewGroup parent,
+                                                                 int viewType) {
         // create a new view
         MaterialCardView v = (MaterialCardView) LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.promise_export_item, parent, false);
+                .inflate(R.layout.promise_import_item, parent, false);
 //        ...
         PromiseHolder vh = new PromiseHolder(v);
 
         return vh;
     }
 
+
+
+
     // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(PromiseHolder holder, int position) {
+    public void onBindViewHolder(final PromiseHolder holder, int position) {
         // get promises object
         Promise promise = promises.get(position);
         // Feed username setter
         TextView promiseUsername = holder.matView.findViewById(R.id.promise_username);
-        promiseUsername.setText(promise.getUsername());
+        promiseUsername.setText(promise.getAuthor_username());
 
         // Avatar for user in feed
         ImageView promiseUsernameFeed =  holder.matView.findViewById(R.id.feed_avatar);
@@ -80,12 +94,40 @@ public class PromiseAdapter extends RecyclerView.Adapter<PromiseAdapter.PromiseH
         } else if (accepted == 1) {
             holder.matView.setCardBackgroundColor(holder.matView.getResources().getColor(R.color.ambitine_primary_color));
         } else {
-            Integer promiseId = promise.getId();
+            final Integer promiseId = promise.getId();
+            Button acceptedButton = holder.matView.findViewById(R.id.accepted_butthon);
+            acceptedButton.setVisibility(View.VISIBLE);
+            acceptedButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Integer newAcceptedValue = 1;
+                    AcceptResponse newAcceptPromise = new AcceptResponse(promiseId, newAcceptedValue);
+                    ApiService apiService = Api.getApiService();
+                    Call<ResponseBody> call = apiService.sendAcceptPromise(newAcceptPromise);
+                    call.enqueue(new Callback<ResponseBody>() {
+                        @Override
+                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                            if (response.code() == 200) {
+                                holder.matView.setCardBackgroundColor(holder.matView.getResources().getColor(R.color.ambitine_primary_color));
+                                holder.matView.findViewById(R.id.accepted_butthon).setVisibility(View.INVISIBLE);
+                            } else {
+                                Toast.makeText(holder.matView.getContext(), "Something gonna wronh", Toast.LENGTH_LONG).show();
+                            }
+                        }
+                        @Override
+                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+                            System.out.println("Send new promise failure");
+                            System.out.println(t.toString());
+                        }
+                    });
+                }
+            });
         }
+
+
         // Get ID
 
     }
-
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {

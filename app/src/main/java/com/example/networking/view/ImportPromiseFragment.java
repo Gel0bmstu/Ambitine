@@ -109,7 +109,7 @@ public class ImportPromiseFragment extends Fragment {
 //                    feedController.setFeedData();
                     String[] myStringArray;
                     List<Promise> promises = response.body();
-                    PromiseAdapter mAdapter = new PromiseAdapter(promises);
+                    PromiseImportAdapter mAdapter = new PromiseImportAdapter(promises);
                     // 4. set adapter
                     recyclerView.setAdapter(mAdapter);
                     // 5. set item animator to DefaultAnimator
