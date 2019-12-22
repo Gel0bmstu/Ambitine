@@ -37,6 +37,8 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static com.example.networking.model.network.Retrofit.Api.BASE_URL;
+
 public class FeedFragment extends Fragment {
     private FeedController feedController;
     private RecyclerView.Adapter promiseAdapter;
@@ -70,7 +72,7 @@ public class FeedFragment extends Fragment {
     FeedService service = new Retrofit.Builder()
 //            .baseUrl("http://www.mocky.io/")
 //            .baseUrl("http://192.168.100.32:9090")
-            .baseUrl("http://35.228.98.103:9090/")
+            .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .client(client)
             .build()
