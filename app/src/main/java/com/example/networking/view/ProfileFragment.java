@@ -75,6 +75,14 @@ public class ProfileFragment extends Fragment {
         return rootView;
     }
 
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        if (!hidden) {
+            profileController.getProfileData();
+        }
+        super.onHiddenChanged(hidden);
+    }
+
     private void showFileChooser() {
         Intent intent = new Intent();
         intent.setType("image/*");
