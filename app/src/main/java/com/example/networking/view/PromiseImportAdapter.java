@@ -16,6 +16,7 @@ import com.example.networking.model.network.Retrofit.Api;
 import com.example.networking.model.network.Retrofit.ApiService;
 import com.example.networking.model.network.Retrofit.Response.AcceptResponse;
 import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -70,7 +71,7 @@ public class PromiseImportAdapter extends RecyclerView.Adapter<PromiseImportAdap
         // Avatar for user in feed
         ImageView promiseUsernameFeed =  holder.matView.findViewById(R.id.feed_avatar);
         if (!promise.getImg_url().isEmpty()) {
-            Picasso.get().load(promise.getImg_url())
+            Picasso.get().load(promise.getAuthor_img_url())
                     .resize(500, 700)
                     .noFade()
                     .into(promiseUsernameFeed);
@@ -89,14 +90,21 @@ public class PromiseImportAdapter extends RecyclerView.Adapter<PromiseImportAdap
         promiseDescriptinView.setText(promiseDescription);
         // Accepted handle
         Integer accepted = promise.getAccepted();
+        FloatingActionButton acceptedButton = holder.matView.findViewById(R.id.accepted_fab_button);
+        FloatingActionButton declinedButton = holder.matView.findViewById(R.id.declined_fab_button);
         if (accepted == -1) {
+            acceptedButton.hide();
+            declinedButton.hide();
             holder.matView.setCardBackgroundColor(holder.matView.getResources().getColor(R.color.declined_promises));
         } else if (accepted == 1) {
+            acceptedButton.hide();
+            declinedButton.hide();
             holder.matView.setCardBackgroundColor(holder.matView.getResources().getColor(R.color.ambitine_primary_color));
-        } else {
+        } else if (accepted == 0) {
+            holder.matView.setCardBackgroundColor(holder.matView.getResources().getColor(R.color.empty_promise));
             final Integer promiseId = promise.getId();
-            Button acceptedButton = holder.matView.findViewById(R.id.accepted_butthon);
-            acceptedButton.setVisibility(View.VISIBLE);
+            acceptedButton.show();
+            declinedButton.show();
             acceptedButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -109,7 +117,33 @@ public class PromiseImportAdapter extends RecyclerView.Adapter<PromiseImportAdap
                         public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                             if (response.code() == 200) {
                                 holder.matView.setCardBackgroundColor(holder.matView.getResources().getColor(R.color.ambitine_primary_color));
-                                holder.matView.findViewById(R.id.accepted_butthon).setVisibility(View.INVISIBLE);
+                                holder.matView.findViewById(R.id.accepted_fab_button).setVisibility(View.INVISIBLE);
+                            } else {
+                                Toast.makeText(holder.matView.getContext(), "Something gonna wronh", Toast.LENGTH_LONG).show();
+                            }
+                        }
+                        @Override
+                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+                            System.out.println("Send new promise failure");
+                            System.out.println(t.toString());
+                        }
+                    });
+                }
+            });
+
+            declinedButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Integer newDeclineddValue = -1;
+                    AcceptResponse newAcceptPromise = new AcceptResponse(promiseId, newDeclineddValue);
+                    ApiService apiService = Api.getApiService();
+                    Call<ResponseBody> call = apiService.sendAcceptPromise(newAcceptPromise);
+                    call.enqueue(new Callback<ResponseBody>() {
+                        @Override
+                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                            if (response.code() == 200) {
+                                holder.matView.setCardBackgroundColor(holder.matView.getResources().getColor(R.color.declined_promises));
+                                holder.matView.findViewById(R.id.declined_fab_button).setVisibility(View.INVISIBLE);
                             } else {
                                 Toast.makeText(holder.matView.getContext(), "Something gonna wronh", Toast.LENGTH_LONG).show();
                             }
