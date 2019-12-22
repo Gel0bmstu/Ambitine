@@ -3,7 +3,6 @@ package com.example.networking.view;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -21,6 +20,7 @@ import androidx.fragment.app.Fragment;
 import com.example.networking.R;
 import com.example.networking.conroller.ProfileController;
 import com.example.networking.model.models.Profile;
+import com.example.networking.model.network.Retrofit.Api;
 import com.squareup.picasso.Picasso;
 
 import net.gotev.uploadservice.MultipartUploadRequest;
@@ -33,7 +33,7 @@ import static android.app.Activity.RESULT_OK;
 
 public class ProfileFragment extends Fragment {
     private int PICK_IMAGE_REQUEST = 1;
-    private String UPLOAD_URL = "";
+    private String UPLOAD_URL = Api.BASE_URL + "api/img_upload";
 
     private Uri filePath;
 
@@ -58,6 +58,7 @@ public class ProfileFragment extends Fragment {
             public void onClick(View v) {
                 System.out.println("govnyaka");
                 showFileChooser();
+                uploadMultipart();
             }
         });
         return rootView;
