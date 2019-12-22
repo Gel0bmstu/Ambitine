@@ -1,20 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:layout_marginBottom="?attr/actionBarSize">
+
+<LinearLayout
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:layout_marginBottom="?attr/actionBarSize">
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/promise_person"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:textSize="15sp"/>
 
     <AutoCompleteTextView
         android:id="@+id/users_autocomplete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:hint="@string/type_username"
+        android:drawableStart="@drawable/ic_botnav_profile" />
+
+    <TextView
+        android:id="@+id/select_date_textview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAlignment="center" />
+        android:text="@string/promise_date_fullfill"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:textSize="15sp"/>
 
     <DatePicker
         android:id="@+id/newp_date_picker"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:calendarViewShown="false"
-        android:datePickerMode="spinner"/>
+        android:datePickerMode="spinner" />
 
     <TimePicker
         android:id="@+id/newp_time_picker"
@@ -22,26 +51,85 @@
         android:layout_height="wrap_content"
         android:timePickerMode = "spinner"/>
 
-    <EditText
-        android:id="@+id/deposit_new_promise"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="number" />
 
-    <EditText
-        android:id="@+id/new_promise_description"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name" />
+        android:layout_gravity="center_horizontal"
+        android:foregroundGravity="center_horizontal"
+        android:gravity="center">
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:gravity="center"
+            android:hint="@string/deposit_for_you_promise"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/remember_the_more_money_the_more_motivation"
+                android:drawableStart="@drawable/ic_money_deposit"/>
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/deposit_new_promise"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:gravity="center"
+        android:hint="@string/promise_description">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tell_us_what_you_promised_to_the_other_person"
+            android:drawableStart="@drawable/ic_botnav_promises"/>
+
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/new_promise_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textLongMessage" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+<!--    <EditText-->
+<!--        android:id="@+id/new_promise_description"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:ems="10"-->
+<!--        android:inputType="number" />-->
+
+<!--    <EditText-->
+<!--        android:id="@+id/new_promise_description"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:ems="10"-->
+<!--        android:inputType="textPersonName"-->
+<!--        android:text="Name" />-->
 
     <Button
         android:id="@+id/new_promise_send"
-        android:layout_width="wrap_content"
+        android:layout_width="399dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="@string/make_a_promise"/>
+        android:text="@string/make_a_promise" />
 
 </LinearLayout>
+</ScrollView>

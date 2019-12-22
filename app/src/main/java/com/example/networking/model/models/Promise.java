@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.Locale;
 
 public class Promise {
+    private Integer id;
     private String author_username;
     private String receiver_username;
     private String receiver_img_url;

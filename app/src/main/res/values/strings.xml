@@ -26,6 +26,13 @@
     <!--    SignUp activity -->
     <string name="sign_up_button_text">SIGN UP</string>
     <string name="make_a_promise">Make a promise</string>
+    <string name="deposit_for_you_promise">Deposit for you promise ( in $ )</string>
+    <string name="promise_description">Promise description</string>
+    <string name="remember_the_more_money_the_more_motivation">Remember, the more money the more motivation</string>
+    <string name="tell_us_what_you_promised_to_the_other_person">Tell us what you promised to the other person.</string>
+    <string name="promise_person">Choose the person you want to promise something</string>
+    <string name="type_username">Type username</string>
+    <string name="promise_date_fullfill">Choose a date and time to fulfill your promise.</string>
     <!--    SignUp activity -->
 
     <!--    Profile activity -->
