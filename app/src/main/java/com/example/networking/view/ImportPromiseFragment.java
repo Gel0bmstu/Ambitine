@@ -51,7 +51,7 @@ public class ImportPromiseFragment extends Fragment {
         }
 
         super.onCreate(savedInstanceState);
-        rootView = inflater.inflate(R.layout.fragment_promise_feed, container, false);
+        rootView = inflater.inflate(R.layout.fragment_import_promise_feed, container, false);
         getFeedData();
 //        rootView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
 //            @Override
@@ -98,7 +98,7 @@ public class ImportPromiseFragment extends Fragment {
                     assert response.body() != null;
                     System.out.println("WATA SHAKA LAKA");
                     // Tmp method to get data
-                    RecyclerView recyclerView = rootView.findViewById(R.id.promise_feed);
+                    RecyclerView recyclerView = rootView.findViewById(R.id.import_promise_feed);
 
 
                     recyclerView.setHasFixedSize(true);
