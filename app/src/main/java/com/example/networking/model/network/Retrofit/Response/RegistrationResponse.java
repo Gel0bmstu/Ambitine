@@ -12,9 +12,14 @@ public class RegistrationResponse {
     @Expose
     private String password;
 
-    public RegistrationResponse(String nickname, String password) {
+    @SerializedName("token")
+    @Expose
+    private String token;
+
+    public RegistrationResponse(String nickname, String password, String token) {
         setNickname(nickname);
         setPassword(password);
+        setToken(token);
     }
 
 
@@ -24,5 +29,9 @@ public class RegistrationResponse {
 
     public void setNickname(String nickname) {
         this.nickname = nickname;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }
