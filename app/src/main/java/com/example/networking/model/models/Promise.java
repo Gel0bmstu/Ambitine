@@ -19,6 +19,10 @@ public class Promise {
         return this.receiver_username;
     }
 
+    public String getAuthor_username() {
+        return this.author_username;
+    }
+
     public String getImg_url() {
         return receiver_img_url;
     }
