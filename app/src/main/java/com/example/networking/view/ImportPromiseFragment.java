@@ -88,7 +88,7 @@ public class ImportPromiseFragment extends Fragment {
 
     public void getFeedData() {
         ApiService apiService = Api.getApiService();
-        Call<List<Promise>> call = service.getAllExportPromises();
+        Call<List<Promise>> call = service.getAllImportPromises();
         System.out.println("WE INB");
         call.enqueue(new Callback<List<Promise>>() {
             @Override
