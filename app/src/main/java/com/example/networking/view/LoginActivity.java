@@ -6,11 +6,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.networking.R;
 import com.example.networking.conroller.LoginController;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 
 public class LoginActivity extends AppCompatActivity {
     LoginController loginController;
@@ -48,6 +53,13 @@ public class LoginActivity extends AppCompatActivity {
     public String getUsername() {
         TextInputEditText usernameInput = findViewById(R.id.login_input);
         return usernameInput.getText().toString();
+    }
+
+    public String getToken(){
+        String token = FirebaseInstanceId.getInstance().getToken();
+        System.out.println("TOKEN OUT");
+        System.out.println(token);
+        return token;
     }
 
     public String getPassword() {
