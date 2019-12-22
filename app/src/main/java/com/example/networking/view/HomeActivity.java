@@ -27,12 +27,12 @@ public class HomeActivity extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
             switch (menuItem.getItemId()) {
-                case R.id.export_promise_feed:
+                case R.id.bottom_nav_export_promises:
                     fm.beginTransaction().hide(active).show(exportPromiseFragment).commit();
                     active = exportPromiseFragment;
                     return true;
 
-                case R.id.import_promise_feed:
+                case R.id.bottom_nav_import_promises:
                     fm.beginTransaction().hide(active).show(importPromiseFragment).commit();
                     active = importPromiseFragment;
                     return true;
@@ -65,8 +65,9 @@ public class HomeActivity extends AppCompatActivity {
 
         fm.beginTransaction().add(R.id.content_fragment, profileFragment, "profile_fragment").hide(profileFragment).commit();
         fm.beginTransaction().add(R.id.content_fragment, newPromiseFragment, "new_promise_fragment").hide(newPromiseFragment).commit();
+        fm.beginTransaction().add(R.id.content_fragment, importPromiseFragment, "import_promise_feed").hide(importPromiseFragment).commit();
         fm.beginTransaction().add(R.id.content_fragment, exportPromiseFragment, "export_promise_feed").commit();
-        fm.beginTransaction().add(R.id.content_fragment, importPromiseFragment, "import_promise_feed").commit();
+
 //        getSupportFragmentManager().beginTransaction().replace(R.id.content_fragment, feedFragment).commit();
 
 
