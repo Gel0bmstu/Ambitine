@@ -32,5 +32,6 @@
     <string name="tell_us_what_you_promised_to_the_other_person">Tell us what you promised to the other person.</string>
     <string name="promise_person">Choose the person you want to promise something</string>
     <string name="type_username">Type username</string>
+    <string name="promise_date_fullfill">Choose a date and time to fulfill your promise.</string>
     <!--    SignUp activity -->
 </resources>
