@@ -5,6 +5,7 @@
     <color name="colorAccent">#202020</color>
 <!--    Ambitine colors-->
     <color name="ambitine_primary_color">#00A997</color>
+    <color name="declined_promises">#D64141</color>
 
 <!--    Ambitine colors-->
 </resources>
