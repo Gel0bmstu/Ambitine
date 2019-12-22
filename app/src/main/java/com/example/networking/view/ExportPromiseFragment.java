@@ -4,8 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AutoCompleteTextView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,14 +13,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.networking.R;
-import com.example.networking.conroller.FeedController;
+import com.example.networking.conroller.ExportPromiseController;
 import com.example.networking.model.models.Promise;
 import com.example.networking.model.network.Retrofit.Api;
 import com.example.networking.model.network.Retrofit.ApiService;
-import com.example.networking.model.network.Retrofit.FeedService;
+import com.example.networking.model.network.Retrofit.ExportPromiseService;
 import com.example.networking.model.network.Retrofit.Interceptors.AddCookiesInterceptor;
 import com.example.networking.model.network.Retrofit.Interceptors.ReceivedCookiesInterceptor;
-import com.example.networking.model.network.Retrofit.Response.FeedPromiseResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -30,7 +27,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -39,8 +35,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.example.networking.model.network.Retrofit.Api.BASE_URL;
 
-public class FeedFragment extends Fragment {
-    private FeedController feedController;
+public class ExportPromiseFragment extends Fragment {
+    private ExportPromiseController exportPromiseController;
     private RecyclerView.Adapter promiseAdapter;
     private RecyclerView.LayoutManager promeseLayoutManager;
     View rootView;
@@ -50,8 +46,8 @@ public class FeedFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        if (feedController == null) {
-            feedController = new FeedController(this);
+        if (exportPromiseController == null) {
+            exportPromiseController = new ExportPromiseController(this);
         }
 
         super.onCreate(savedInstanceState);
@@ -81,18 +77,18 @@ public class FeedFragment extends Fragment {
             build();
 
     // use retrofit to create an instance of BookService
-    FeedService service = new Retrofit.Builder()
+    ExportPromiseService service = new Retrofit.Builder()
 //            .baseUrl("http://www.mocky.io/")
 //            .baseUrl("http://192.168.100.32:9090")
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .client(client)
             .build()
-            .create(FeedService.class);
+            .create(ExportPromiseService.class);
 
     public void getFeedData() {
         ApiService apiService = Api.getApiService();
-        Call<List<Promise>> call = service.getAllFeedItems();
+        Call<List<Promise>> call = service.getAllExportPromises();
         System.out.println("WE INB");
         call.enqueue(new Callback<List<Promise>>() {
             @Override
@@ -109,8 +105,8 @@ public class FeedFragment extends Fragment {
                     recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
 
-                    // feedController.setFeedData();
-//                    feedController.setFeedData();
+                    // exportPromiseController.setFeedData();
+//                    exportPromiseController.setFeedData();
                     String[] myStringArray;
                     List<Promise> promises = response.body();
                     PromiseAdapter mAdapter = new PromiseAdapter(promises);

@@ -9,24 +9,15 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ListAdapter;
 import android.widget.TimePicker;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.networking.R;
-import com.example.networking.conroller.FeedController;
 import com.example.networking.conroller.NewPromiseController;
-import com.example.networking.model.models.Promise;
-import com.example.networking.model.network.Retrofit.Api;
-import com.example.networking.model.network.Retrofit.ApiService;
 import com.example.networking.model.network.Retrofit.AutocompleteService;
-import com.example.networking.model.network.Retrofit.FeedService;
 import com.example.networking.model.network.Retrofit.Interceptors.AddCookiesInterceptor;
 import com.example.networking.model.network.Retrofit.Interceptors.ReceivedCookiesInterceptor;
 import com.google.gson.Gson;

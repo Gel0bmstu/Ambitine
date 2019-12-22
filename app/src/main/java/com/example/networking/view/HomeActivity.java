@@ -9,17 +9,16 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.networking.R;
-import com.google.android.material.bottomnavigation.BottomNavigationMenu;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
 public class HomeActivity extends AppCompatActivity {
 
-    final Fragment feedFragment  = new FeedFragment();
+    final Fragment exportPromiseFragment  = new ExportPromiseFragment();
     final Fragment newPromiseFragment  = new PromiiseCreaterFragment();
     final Fragment profileFragment= new ProfileFragment();
     final FragmentManager fm = getSupportFragmentManager();
-    Fragment active = feedFragment;
+    Fragment active = exportPromiseFragment;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -28,8 +27,8 @@ public class HomeActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
             switch (menuItem.getItemId()) {
                 case R.id.bottom_nav_promises:
-                    fm.beginTransaction().hide(active).show(feedFragment).commit();
-                    active = feedFragment;
+                    fm.beginTransaction().hide(active).show(exportPromiseFragment).commit();
+                    active = exportPromiseFragment;
                     return true;
 
                 case R.id.botton_nav_new_promise:
@@ -59,7 +58,7 @@ public class HomeActivity extends AppCompatActivity {
 //        fm.beginTransaction().add(R.id.content_fragment, fragment3, "3").hide(fragment3).commit();
         fm.beginTransaction().add(R.id.content_fragment, profileFragment, "profile_fragment").hide(profileFragment).commit();
         fm.beginTransaction().add(R.id.content_fragment, newPromiseFragment, "new_promise_fragment").hide(newPromiseFragment).commit();
-        fm.beginTransaction().add(R.id.content_fragment, feedFragment, "feed_fragment").commit();
+        fm.beginTransaction().add(R.id.content_fragment, exportPromiseFragment, "feed_fragment").commit();
 //        getSupportFragmentManager().beginTransaction().replace(R.id.content_fragment, feedFragment).commit();
 
 
