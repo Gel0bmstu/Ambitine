@@ -37,6 +37,8 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static com.example.networking.model.network.Retrofit.Api.BASE_URL;
+
 public class FeedFragment extends Fragment {
     private FeedController feedController;
     private RecyclerView.Adapter promiseAdapter;
@@ -55,6 +57,18 @@ public class FeedFragment extends Fragment {
         super.onCreate(savedInstanceState);
         rootView = inflater.inflate(R.layout.fragment_promise_feed, container, false);
         getFeedData();
+//        rootView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
+//            @Override
+//            public void onScrollChanged() {
+//                if (rootView != null) {
+//                    if (rootView.getScrollY() == 0) {
+//                        Toast.makeText(getContext(), "top", Toast.LENGTH_SHORT).show();
+//                    } else {
+//
+//                    }
+//                }
+//            }
+//        });
         return rootView;
 //        return super.onCreateView(inflater, containeer, savedInstanceState);
     }
@@ -70,7 +84,7 @@ public class FeedFragment extends Fragment {
     FeedService service = new Retrofit.Builder()
 //            .baseUrl("http://www.mocky.io/")
 //            .baseUrl("http://192.168.100.32:9090")
-            .baseUrl("http://35.228.98.103:9090/")
+            .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .client(client)
             .build()
@@ -120,10 +134,16 @@ public class FeedFragment extends Fragment {
         });
     }
 
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        if (!hidden) {
+            getFeedData();
+        }
+        super.onHiddenChanged(hidden);
+    }
 
     @Override
     public void onResume() {
-
         super.onResume();
     }
 }
