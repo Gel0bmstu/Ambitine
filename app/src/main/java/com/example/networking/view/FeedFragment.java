@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AutoCompleteTextView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -68,8 +69,8 @@ public class FeedFragment extends Fragment {
     // use retrofit to create an instance of BookService
     FeedService service = new Retrofit.Builder()
 //            .baseUrl("http://www.mocky.io/")
-            .baseUrl("http://192.168.100.32:9090")
-//            .baseUrl("http://35.228.98.103:9090/")
+//            .baseUrl("http://192.168.100.32:9090")
+            .baseUrl("http://35.228.98.103:9090/")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .client(client)
             .build()
@@ -118,6 +119,7 @@ public class FeedFragment extends Fragment {
             }
         });
     }
+
 
     @Override
     public void onResume() {
