@@ -144,7 +144,10 @@ public class PromiiseCreaterFragment extends Fragment {
                 datePicker.getDayOfMonth(),
                 timePicker.getCurrentHour(),
                 timePicker.getCurrentMinute());
-
+        System.out.println("Calendar time");
+        System.out.println(calendar.getTime());
+        System.out.println("Calendar time im milis");
+        System.out.println(calendar.getTimeInMillis());
         return calendar.getTimeInMillis();
     }
 

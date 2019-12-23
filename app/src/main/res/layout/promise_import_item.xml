@@ -7,41 +7,65 @@
     android:layout_margin="5dp"
     card_view:cardCornerRadius="10dp">
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/accepted_fab_button"
+        android:visibility="invisible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/ambitine_primary_color"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="250dp"
+        />
+
+
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="10dp"
-        android:gravity="center|top"
-        android:orientation="vertical">
-
-
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/feed_avatar"
-            android:layout_width="108dp"
-            android:layout_height="108dp"
-            android:src="@drawable/conference"
-            card_view:civ_border_color="#FF000000"
-            card_view:civ_border_width="2dp" />
-
-        <TextView
-            android:id="@+id/promise_username"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="@string/username_feed_mock"
-            android:textSize="24sp" />
-
-        <TextView
-            android:id="@+id/promise_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_marginTop="10dp"
-            android:text="@string/desc_mock"
-            android:textAlignment="center"
-            android:textSize="12sp" />
+            android:gravity="center|top"
+            android:orientation="vertical">
 
-    </LinearLayout>
+
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/feed_avatar"
+                android:layout_width="108dp"
+                android:layout_height="108dp"
+                android:src="@drawable/conference"
+                card_view:civ_border_color="#FF000000"
+                card_view:civ_border_width="2dp" />
+
+            <TextView
+                android:id="@+id/promise_username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/username_feed_mock"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/promise_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/desc_mock"
+                android:textAlignment="center"
+                android:textSize="12sp" />
+
+
+        </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/declined_fab_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/declined_promises"
+        android:visibility="invisible"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="250dp"
+        android:layout_marginTop="40dp"
+        />
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -79,12 +103,7 @@
             android:layout_marginEnd="20dp"
             android:text="@string/timer_feed_mock" />
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="ACCEPTED"
-            android:id="@+id/accepted_butthon"
-            android:visibility="invisible"/>
+
     </LinearLayout>
 
 </com.google.android.material.card.MaterialCardView>

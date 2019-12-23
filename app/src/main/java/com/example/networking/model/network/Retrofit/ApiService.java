@@ -25,6 +25,7 @@ public interface ApiService {
     Call<ResponseBody> sendAcceptPromise(@Body AcceptResponse newAcceptResponse);
 
 
+
 //    Нужно тестить
     @POST("api/user/{id}")
     Call<User> userRequest();
