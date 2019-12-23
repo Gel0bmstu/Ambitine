@@ -59,7 +59,7 @@ public class PromiiseCreaterFragment extends Fragment {
             public void onClick(View v) {
                 newPromiseController.onNewPromiseButtonClick();
                 ((HomeActivity)getActivity()).clickFeedButton();
-//                getActivity().clickFeedButton();
+                clearAfterCreateNewPromise();
             }
         });
 
@@ -151,6 +151,13 @@ public class PromiiseCreaterFragment extends Fragment {
         System.out.println("Calendar time im milis");
         System.out.println(calendar.getTimeInMillis());
         return calendar.getTimeInMillis();
+    }
+
+    public void clearAfterCreateNewPromise() {
+        ((AutoCompleteTextView)rootView.findViewById(R.id.users_autocomplete)).setText("");
+        ((EditText)rootView.findViewById(R.id.deposit_new_promise)).setText("");
+        ((EditText)rootView.findViewById(R.id.new_promise_description)).setText("");
+        // TODO: set default time and date
     }
 
 
