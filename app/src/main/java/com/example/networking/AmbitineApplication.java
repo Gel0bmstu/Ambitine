@@ -2,6 +2,7 @@ package com.example.networking;
 
 import android.app.Application;
 
+import com.androidnetworking.AndroidNetworking;
 import com.squareup.picasso.OkHttp3Downloader;
 import com.squareup.picasso.Picasso;
 
@@ -20,5 +21,7 @@ public class AmbitineApplication extends Application {
         Picasso.setSingletonInstance(built);
 
         UploadService.NAMESPACE = BuildConfig.APPLICATION_ID;
+
+        AndroidNetworking.initialize(getApplicationContext());
     }
 }

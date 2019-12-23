@@ -69,4 +69,12 @@ dependencies {
     def uploadServiceVersion = "3.5.2"
     implementation "net.gotev:uploadservice:$uploadServiceVersion"
 
+    // Crop Image
+    api 'com.theartofdev.edmodo:android-image-cropper:2.6.0'
+
+    // For Permission
+    implementation 'com.karumi:dexter:6.0.1'
+
+    // For upload photo
+    implementation 'com.amitshekhar.android:android-networking:1.0.2'
 }
