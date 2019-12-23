@@ -58,6 +58,8 @@ public class PromiiseCreaterFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 newPromiseController.onNewPromiseButtonClick();
+                ((HomeActivity)getActivity()).clickFeedButton();
+//                getActivity().clickFeedButton();
             }
         });
 
