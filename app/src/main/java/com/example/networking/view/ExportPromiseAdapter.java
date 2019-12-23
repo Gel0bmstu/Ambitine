@@ -84,6 +84,8 @@ public class ExportPromiseAdapter extends RecyclerView.Adapter<ExportPromiseAdap
             holder.matView.setCardBackgroundColor(holder.matView.getResources().getColor(R.color.declined_promises));
         } else if (accepted == 1) {
             holder.matView.setCardBackgroundColor(holder.matView.getResources().getColor(R.color.ambitine_primary_color));
+        } else if (accepted == 0){
+            holder.matView.setCardBackgroundColor(holder.matView.getResources().getColor(R.color.empty_promise));
         }
 
         // Get ID
