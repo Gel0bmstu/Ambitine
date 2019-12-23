@@ -43,6 +43,10 @@ public class Promise {
         Date date = new java.util.Date(pastdue*1000L);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US);
         sdf.setTimeZone(java.util.TimeZone.getTimeZone("GMT+3"));
+        System.out.println("Time accepted");
+        System.out.println("Time accepted");
+        System.out.println(sdf.format(new java.util.Date(pastdue*1000L)));
+        System.out.println(sdf.format(new java.util.Date(pastdue)));
         return sdf.format(date);
     }
 
