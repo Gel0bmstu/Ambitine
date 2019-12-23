@@ -39,5 +39,7 @@
     <string name="upload_button">Photo upload button</string>
     <!--    Profile activity -->
 
+    <string name="no_promises">You have no promises so far.</string>
+
 
 </resources>

@@ -1,38 +1,28 @@
 package com.example.networking.view;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.networking.R;
 import com.example.networking.model.models.Promise;
-import com.example.networking.model.network.Retrofit.Api;
-import com.example.networking.model.network.Retrofit.ApiService;
-import com.example.networking.model.network.Retrofit.Response.AcceptResponse;
 import com.google.android.material.card.MaterialCardView;
 import com.squareup.picasso.Picasso;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class ExportPromiseAdapter extends RecyclerView.Adapter<ExportPromiseAdapter.PromiseHolder> {
 
     private List<Promise> promises;
 
-    public static class PromiseHolder extends RecyclerView.ViewHolder {
+    static class PromiseHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
-        public MaterialCardView matView;
-        public PromiseHolder(MaterialCardView v) {
+        MaterialCardView matView;
+        PromiseHolder(MaterialCardView v) {
             super(v);
             matView = v;
         }
@@ -43,6 +33,7 @@ public class ExportPromiseAdapter extends RecyclerView.Adapter<ExportPromiseAdap
     }
 
     // Create new views (invoked by the layout manager)
+    @NotNull
     @Override
     public ExportPromiseAdapter.PromiseHolder onCreateViewHolder(ViewGroup parent,
                                                                  int viewType) {

@@ -1,18 +1,15 @@
 package com.example.networking.conroller;
 
 import android.util.Log;
-
-import androidx.annotation.NonNull;
+import android.widget.Toast;
 
 import com.example.networking.R;
-import com.example.networking.model.UserRepository;
 import com.example.networking.model.network.Retrofit.Api;
 import com.example.networking.model.network.Retrofit.ApiService;
 import com.example.networking.model.network.Retrofit.Response.LoginResponse;
 import com.example.networking.view.LoginActivity;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.iid.InstanceIdResult;
+
+import org.jetbrains.annotations.NotNull;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -43,7 +40,7 @@ public class LoginController {
         Call<ResponseBody> call = apiService.loginRequest(loginResponse);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+            public void onResponse(@NotNull Call<ResponseBody> call, @NotNull Response<ResponseBody> response) {
                 if (response.code() == 201) {
                     loginActivity.SwitchActivityAfterLoginSuccess();
                 } else {
@@ -51,8 +48,8 @@ public class LoginController {
                 }
             }
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Log.d(logTag, t.getMessage());
+            public void onFailure(@NotNull Call<ResponseBody> call, @NotNull Throwable t) {
+                Toast.makeText(loginActivity.getApplicationContext(),"Login failure",Toast.LENGTH_SHORT).show();
             }
         });
     }

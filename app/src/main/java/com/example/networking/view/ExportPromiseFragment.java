@@ -21,10 +21,6 @@ import java.util.List;
 
 public class ExportPromiseFragment extends Fragment {
     private ExportPromiseController exportPromiseController;
-    private RecyclerView.Adapter promiseAdapter;
-    private RecyclerView.LayoutManager promeseLayoutManager;
-    View rootView;
-    private List<Promise> gettedPromises = new ArrayList<>();
 
 
     @Nullable
@@ -35,7 +31,7 @@ public class ExportPromiseFragment extends Fragment {
         }
 
         super.onCreate(savedInstanceState);
-        rootView = inflater.inflate(R.layout.fragment_export_promise_feed, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_export_promise_feed, container, false);
         exportPromiseController.getFeedData();
         return rootView;
     }

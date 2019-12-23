@@ -4,6 +4,8 @@ import com.example.networking.model.models.UserToken;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Objects;
+
 import io.realm.Realm;
 import io.realm.RealmResults;
 
@@ -23,6 +25,7 @@ public class UserDB {
                     userToken.setToken(token);
                 } else {
                     UserToken userToken = realmResults.first();
+                    assert userToken != null;
                     userToken.setToken(token);
                 }
             }
@@ -38,7 +41,7 @@ public class UserDB {
         if (realmResults.size() == 0) {
             token = TOKEN_NOT_FOUND;
         } else {
-            token = realmResults.first().getToken();
+            token = Objects.requireNonNull(realmResults.first()).getToken();
         }
         return token;
     }

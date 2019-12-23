@@ -10,6 +10,8 @@ import com.example.networking.model.network.Retrofit.Response.NewPromiseResponce
 import com.example.networking.view.LoginActivity;
 import com.example.networking.view.PromiiseCreaterFragment;
 
+import org.jetbrains.annotations.NotNull;
+
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -38,7 +40,7 @@ public class NewPromiseController {
         Call<ResponseBody> call = apiService.sendNewPromise(newPromiseResponce);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+            public void onResponse(@NotNull Call<ResponseBody> call, @NotNull Response<ResponseBody> response) {
                 if (response.code() == 201) {
                     System.out.println("New promise send");
                 } else {
@@ -47,7 +49,7 @@ public class NewPromiseController {
                 }
             }
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            public void onFailure(@NotNull Call<ResponseBody> call, @NotNull Throwable t) {
                 System.out.println("Send new promise failure");
                 System.out.println(t.toString());
             }

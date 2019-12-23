@@ -11,8 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.networking.R;
 import com.example.networking.model.models.Promise;
-import com.example.networking.model.network.Retrofit.Api;
-import com.example.networking.model.network.Retrofit.ApiService;
 import com.example.networking.model.network.Retrofit.ExportPromiseService;
 import com.example.networking.model.network.Retrofit.Interceptors.AddCookiesInterceptor;
 import com.example.networking.model.network.Retrofit.Interceptors.ReceivedCookiesInterceptor;
@@ -57,7 +55,7 @@ public class ExportPromiseController {
             .create(ExportPromiseService.class);
 
     public void getFeedData() {
-        ApiService apiService = Api.getApiService();
+//        ApiService apiService = Api.getApiService();
         Call<List<Promise>> call = service.getAllExportPromises();
         System.out.println("WE INB");
         call.enqueue(new Callback<List<Promise>>() {
@@ -83,7 +81,7 @@ public class ExportPromiseController {
 
                 } else if (response.code() == 404) {
                     TextView promisesNotFound = new TextView(exportPromiseFragment.getContext());
-                    promisesNotFound.setText("You have no promises so far.");
+                    promisesNotFound.setText(R.string.no_promises);
                     promisesNotFound.setId(R.id.not_promises);
                     // Dont work (
                     promisesNotFound.setGravity(Gravity.CENTER_HORIZONTAL);

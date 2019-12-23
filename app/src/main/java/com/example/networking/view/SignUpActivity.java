@@ -13,6 +13,8 @@ import com.example.networking.conroller.SignUpController;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.iid.FirebaseInstanceId;
 
+import java.util.Objects;
+
 public class SignUpActivity extends AppCompatActivity {
     SignUpController signUpController;
 
@@ -35,7 +37,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     public String getUsername() {
         TextInputEditText usernameInput = findViewById(R.id.login_input);
-        return usernameInput.getText().toString();
+        return Objects.requireNonNull(usernameInput.getText()).toString();
     }
 
     public String getToken(){
@@ -47,7 +49,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     public String getPassword() {
         TextInputEditText passwordInput = findViewById(R.id.password_input);
-        return passwordInput.getText().toString();
+        return Objects.requireNonNull(passwordInput.getText()).toString();
     }
 
     public void SwitchActivityAfterSignUpSuccess() {
