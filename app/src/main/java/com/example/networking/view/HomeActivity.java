@@ -2,6 +2,7 @@ package com.example.networking.view;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.networking.R;
+import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
@@ -51,6 +53,14 @@ public class HomeActivity extends AppCompatActivity {
         }
     };
 
+    public void clickFeedButton() {
+        BottomNavigationItemView feedButton = findViewById(R.id.bottom_nav_export_promises);
+        feedButton.performClick();
+        feedButton.setPressed(true);
+        feedButton.invalidate();
+        feedButton.setPressed(false);
+        feedButton.invalidate();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
