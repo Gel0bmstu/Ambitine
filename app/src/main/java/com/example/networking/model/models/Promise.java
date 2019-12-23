@@ -27,6 +27,10 @@ public class Promise {
         return receiver_img_url;
     }
 
+    public String getAuthor_img_url(){
+        return author_img_url;
+    }
+
     public Float getDeposit() {
         return deposit;
     }
