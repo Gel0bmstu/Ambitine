@@ -32,12 +32,23 @@ import com.example.networking.R;
 import com.example.networking.conroller.ProfileController;
 import com.example.networking.model.models.Profile;
 import com.example.networking.model.network.Retrofit.Api;
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.data.Entry;
+
+
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.utils.ColorTemplate;
 import com.squareup.picasso.Picasso;
 
 import net.gotev.uploadservice.MultipartUploadRequest;
 import net.gotev.uploadservice.UploadNotificationConfig;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import static android.app.Activity.RESULT_OK;
@@ -72,6 +83,27 @@ public class ProfileFragment extends Fragment {
                 showFileChooser();
             }
         });
+
+
+        PieChart pieChart = (PieChart) rootView.findViewById(R.id.chart1);
+
+        List<PieEntry> entries = new ArrayList<>();
+        entries.add(new PieEntry(2, "Accepted"));
+        entries.add(new PieEntry(1, "Declined"));
+        entries.add(new PieEntry(0, "Processed"));
+
+
+        PieDataSet dataset = new PieDataSet(entries, "# of Calls");
+
+        PieData data = new PieData(dataset);
+        dataset.setColors(ColorTemplate.MATERIAL_COLORS); //
+//        pieChart.setDescription("Description");
+        pieChart.setData(data);
+
+        pieChart.animateY(3000);
+
+//        anyChartView.draw();
+
         return rootView;
     }
 
@@ -104,7 +136,7 @@ public class ProfileFragment extends Fragment {
 
             //Creating a multi part request
                 new MultipartUploadRequest(getActivity(), UPLOAD_URL)
-                    .addFileToUpload(path, "image") //Adding file
+                    .addFileToUpload(path, "avatar") //Adding file
                     .setNotificationConfig(new UploadNotificationConfig())
                     .setMaxRetries(2)
                     .startUpload(); //Starting the upload

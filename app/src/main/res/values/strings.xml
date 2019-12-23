@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">networking</string>
+    <string name="app_name">Ambitine</string>
     <string name="logTag">GuysDEBUG</string>
 
     <!--    Login activity -->

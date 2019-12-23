@@ -57,4 +57,9 @@
         android:layout_marginTop="4dp"
         android:textSize="20sp" />
 
+    <com.github.mikephil.charting.charts.PieChart
+        android:id="@+id/chart1"
+        android:layout_width="300dp"
+        android:layout_height="300dp" />
+
 </LinearLayout>

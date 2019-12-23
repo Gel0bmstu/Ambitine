@@ -118,6 +118,7 @@ public class PromiseImportAdapter extends RecyclerView.Adapter<PromiseImportAdap
                             if (response.code() == 200) {
                                 holder.matView.setCardBackgroundColor(holder.matView.getResources().getColor(R.color.ambitine_primary_color));
                                 holder.matView.findViewById(R.id.accepted_fab_button).setVisibility(View.INVISIBLE);
+                                holder.matView.findViewById(R.id.declined_fab_button).setVisibility(View.INVISIBLE);
                             } else {
                                 Toast.makeText(holder.matView.getContext(), "Something gonna wronh", Toast.LENGTH_LONG).show();
                             }
@@ -143,6 +144,7 @@ public class PromiseImportAdapter extends RecyclerView.Adapter<PromiseImportAdap
                         public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                             if (response.code() == 200) {
                                 holder.matView.setCardBackgroundColor(holder.matView.getResources().getColor(R.color.declined_promises));
+                                holder.matView.findViewById(R.id.accepted_fab_button).setVisibility(View.INVISIBLE);
                                 holder.matView.findViewById(R.id.declined_fab_button).setVisibility(View.INVISIBLE);
                             } else {
                                 Toast.makeText(holder.matView.getContext(), "Something gonna wronh", Toast.LENGTH_LONG).show();

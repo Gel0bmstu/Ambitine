@@ -57,21 +57,13 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation_menu);
+        BottomNavigationView navigation = findViewById(R.id.bottom_navigation_menu);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-
-//        fm.beginTransaction().add(R.id.content_fragment, fragment3, "3").hide(fragment3).commit();
 
         fm.beginTransaction().add(R.id.content_fragment, profileFragment, "profile_fragment").hide(profileFragment).commit();
         fm.beginTransaction().add(R.id.content_fragment, newPromiseFragment, "new_promise_fragment").hide(newPromiseFragment).commit();
         fm.beginTransaction().add(R.id.content_fragment, importPromiseFragment, "import_promise_feed").hide(importPromiseFragment).commit();
         fm.beginTransaction().add(R.id.content_fragment, exportPromiseFragment, "export_promise_feed").commit();
-
-//        getSupportFragmentManager().beginTransaction().replace(R.id.content_fragment, feedFragment).commit();
-
-
-//        ImageDownloader.LoadImage(getApplicationContext(), 1);
-//        imageView.setImageBitmap(LocalStorage.GetImage(getApplicationContext(), 1));
     }
 }
