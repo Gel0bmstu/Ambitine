@@ -21,7 +21,10 @@ import com.example.networking.view.ExportPromiseFragment;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
+import java.util.Objects;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
@@ -40,16 +43,13 @@ public class ExportPromiseController {
     }
 
 
-    Gson gson = new GsonBuilder().create();
-    OkHttpClient client = new OkHttpClient.Builder().
+    private Gson gson = new GsonBuilder().create();
+    private OkHttpClient client = new OkHttpClient.Builder().
             addInterceptor(new AddCookiesInterceptor()).
             addInterceptor(new ReceivedCookiesInterceptor()).
             build();
 
-    // use retrofit to create an instance of BookService
-    ExportPromiseService service = new Retrofit.Builder()
-//            .baseUrl("http://www.mocky.io/")
-//            .baseUrl("http://192.168.100.32:9090")
+    private ExportPromiseService service = new Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .client(client)
@@ -62,27 +62,18 @@ public class ExportPromiseController {
         System.out.println("WE INB");
         call.enqueue(new Callback<List<Promise>>() {
             @Override
-            public void onResponse(Call<List<Promise>> call, Response<List<Promise>> response) {
-                System.out.println("WATA SHAKA LAKA");
+            public void onResponse(@NotNull Call<List<Promise>> call, @NotNull Response<List<Promise>> response) {
                 if (response.code() == 200) {
-                    RelativeLayout feedLayout = exportPromiseFragment.getView().findViewById(R.id.export_feed_layout);
+                    RelativeLayout feedLayout = Objects.requireNonNull(exportPromiseFragment.getView()).findViewById(R.id.export_feed_layout);
                     TextView promisesNotFound = exportPromiseFragment.getView().findViewById(R.id.not_promises);
                     if (promisesNotFound != null) {
                         feedLayout.removeView(promisesNotFound);
                     }
                     assert response.body() != null;
-                    System.out.println("WATA SHAKA LAKA");
                     // Tmp method to get data
                     RecyclerView recyclerView = exportPromiseFragment.getView().findViewById(R.id.export_promise_feed);
-
-
                     recyclerView.setHasFixedSize(true);
                     recyclerView.setLayoutManager(new LinearLayoutManager(exportPromiseFragment.getActivity()));
-
-
-                    // exportPromiseController.setFeedData();
-//                    exportPromiseController.setFeedData();
-                    String[] myStringArray;
                     List<Promise> promises = response.body();
                     ExportPromiseAdapter mAdapter = new ExportPromiseAdapter(promises);
                     // 4. set adapter
@@ -101,7 +92,7 @@ public class ExportPromiseController {
                     LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
                     params.setMargins(0,350,0,0);
                     promisesNotFound.setLayoutParams(params);
-                    RelativeLayout feedLayout = exportPromiseFragment.getView().findViewById(R.id.export_feed_layout);
+                    RelativeLayout feedLayout = Objects.requireNonNull(exportPromiseFragment.getView()).findViewById(R.id.export_feed_layout);
                     // ToDo: Maybe add image
                     if (exportPromiseFragment.getView().findViewById(R.id.not_promises) == null) {
                         feedLayout.addView(promisesNotFound);
@@ -112,7 +103,7 @@ public class ExportPromiseController {
             }
 
             @Override
-            public void onFailure(Call<List<Promise>> call, Throwable t) {
+            public void onFailure(@NotNull Call<List<Promise>> call, @NotNull Throwable t) {
                 System.out.println("FOCK");
                 System.out.println(t.toString());
             }
