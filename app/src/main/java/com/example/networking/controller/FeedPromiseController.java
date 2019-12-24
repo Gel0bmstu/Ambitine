@@ -18,8 +18,10 @@ import com.example.networking.model.network.Retrofit.ApiService;
 import com.example.networking.model.network.Retrofit.ExportPromiseService;
 import com.example.networking.model.network.Retrofit.Interceptors.AddCookiesInterceptor;
 import com.example.networking.model.network.Retrofit.Interceptors.ReceivedCookiesInterceptor;
-import com.example.networking.view.ImportPromiseFragment;
-import com.example.networking.view.PromiseImportAdapter;
+import com.example.networking.view.feeds.controllers.ExportPromiseAdapter;
+import com.example.networking.view.feeds.fragments.ExportPromiseFragment;
+import com.example.networking.view.feeds.fragments.ImportPromiseFragment;
+import com.example.networking.view.feeds.controllers.PromiseImportAdapter;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -37,12 +39,19 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.example.networking.model.network.Retrofit.Api.BASE_URL;
 
-public class ImportPromiseController {
+public class FeedPromiseController {
+    private ExportPromiseFragment exportPromiseFragment;
     private ImportPromiseFragment importPromiseFragment;
 
-    public ImportPromiseController(ImportPromiseFragment inImportPromiseFragment) {
-        this.importPromiseFragment = inImportPromiseFragment;
+    public FeedPromiseController(ExportPromiseFragment feedFragment) {
+        this.importPromiseFragment = null;
+        this.exportPromiseFragment = feedFragment;
     }
+    public FeedPromiseController(ImportPromiseFragment feedFragment) {
+        this.exportPromiseFragment = null;
+        this.importPromiseFragment = feedFragment;
+    }
+
 
     private Gson gson = new GsonBuilder().create();
     private OkHttpClient client = new OkHttpClient.Builder().
@@ -50,7 +59,6 @@ public class ImportPromiseController {
             addInterceptor(new ReceivedCookiesInterceptor()).
             build();
 
-    // use retrofit to create an instance of BookService
     private ExportPromiseService service = new Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create(gson))
@@ -58,7 +66,65 @@ public class ImportPromiseController {
             .build()
             .create(ExportPromiseService.class);
 
-    public void getFeedData() {
+    public void setExportFeedData() {
+//        ApiService apiService = Api.getApiService();
+        Call<List<Promise>> call = service.getAllExportPromises();
+        System.out.println("WE INB");
+        call.enqueue(new Callback<List<Promise>>() {
+            @Override
+            public void onResponse(@NotNull Call<List<Promise>> call, @NotNull Response<List<Promise>> response) {
+                if (response.code() == 200) {
+                    RelativeLayout feedLayout = Objects.requireNonNull(exportPromiseFragment.getView()).findViewById(R.id.export_feed_layout);
+                    TextView promisesNotFound = exportPromiseFragment.getView().findViewById(R.id.not_promises);
+                    if (promisesNotFound != null) {
+                        feedLayout.removeView(promisesNotFound);
+                    }
+                    assert response.body() != null;
+
+
+                    // Tmp method to get data
+                    RecyclerView recyclerView = exportPromiseFragment.getView().findViewById(R.id.export_promise_feed);
+                    recyclerView.setHasFixedSize(true);
+
+                    recyclerView.setLayoutManager(new LinearLayoutManager(exportPromiseFragment.getActivity()));
+                    List<Promise> promises = response.body();
+                    ExportPromiseAdapter mAdapter = new ExportPromiseAdapter(promises);
+                    // 4. set adapter
+                    recyclerView.setAdapter(mAdapter);
+                    // 5. set item animator to DefaultAnimator
+                    recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+                } else if (response.code() == 404) {
+                    TextView promisesNotFound = new TextView(exportPromiseFragment.getContext());
+                    promisesNotFound.setText(R.string.no_promises);
+                    promisesNotFound.setId(R.id.not_promises);
+                    // Dont work (
+                    promisesNotFound.setGravity(Gravity.CENTER_HORIZONTAL);
+                    promisesNotFound.setTextSize(25);
+                    promisesNotFound.setTextColor(exportPromiseFragment.getResources().getColor(R.color.ambitine_primary_color));
+                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+                    params.setMargins(0,350,0,0);
+                    promisesNotFound.setLayoutParams(params);
+                    RelativeLayout feedLayout = Objects.requireNonNull(exportPromiseFragment.getView()).findViewById(R.id.export_feed_layout);
+                    // ToDo: Maybe add image
+                    if (exportPromiseFragment.getView().findViewById(R.id.not_promises) == null) {
+                        feedLayout.addView(promisesNotFound);
+                    }
+                } else {
+                    System.out.println("Another handle way");
+                }
+            }
+
+            @Override
+            public void onFailure(@NotNull Call<List<Promise>> call, @NotNull Throwable t) {
+                System.out.println("FOCK");
+                System.out.println(t.toString());
+            }
+        });
+    }
+
+
+    public void setImportFeedData() {
         ApiService apiService = Api.getApiService();
         Call<List<Promise>> call = service.getAllImportPromises();
         System.out.println("WE INB");

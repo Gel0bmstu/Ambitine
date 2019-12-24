@@ -2,7 +2,6 @@ package com.example.networking.view;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,6 +9,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.networking.R;
+import com.example.networking.view.feeds.fragments.ExportPromiseFragment;
+import com.example.networking.view.feeds.fragments.ImportPromiseFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 

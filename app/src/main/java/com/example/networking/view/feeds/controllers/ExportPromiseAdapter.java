@@ -1,4 +1,4 @@
-package com.example.networking.view;
+package com.example.networking.view.feeds.controllers;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;

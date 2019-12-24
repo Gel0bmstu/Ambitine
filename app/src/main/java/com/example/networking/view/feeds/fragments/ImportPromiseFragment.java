@@ -1,4 +1,4 @@
-package com.example.networking.view;
+package com.example.networking.view.feeds.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,23 +8,23 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import com.example.networking.R;
-import com.example.networking.controller.ImportPromiseController;
+import com.example.networking.controller.FeedPromiseController;
 
 public class ImportPromiseFragment extends Fragment {
-    private ImportPromiseController importPromiseController;
+    private FeedPromiseController exportPromiseController;
     private View rootView;
 
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        if (importPromiseController == null) {
-            importPromiseController = new ImportPromiseController(this);
+        if (exportPromiseController == null) {
+            exportPromiseController = new FeedPromiseController(this);
         }
 
         super.onCreate(savedInstanceState);
         rootView = inflater.inflate(R.layout.fragment_import_promise_feed, container, false);
-        importPromiseController.getFeedData();
+        exportPromiseController.setImportFeedData();
         return rootView;
     }
 
@@ -32,7 +32,7 @@ public class ImportPromiseFragment extends Fragment {
     @Override
     public void onHiddenChanged(boolean hidden) {
         if (!hidden) {
-            importPromiseController.getFeedData();
+            exportPromiseController.setImportFeedData();
         }
         super.onHiddenChanged(hidden);
     }
