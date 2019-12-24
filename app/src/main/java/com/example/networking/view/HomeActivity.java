@@ -19,7 +19,7 @@ public class HomeActivity extends AppCompatActivity {
 
     final Fragment exportPromiseFragment  = new ExportPromiseFragment();
     final Fragment importPromiseFragment  = new ImportPromiseFragment();
-    final Fragment newPromiseFragment  = new PromiiseCreaterFragment();
+    final Fragment newPromiseFragment  = new PromiseCreaterFragment();
     final Fragment profileFragment= new ProfileFragment();
     final FragmentManager fm = getSupportFragmentManager();
     Fragment active = exportPromiseFragment;

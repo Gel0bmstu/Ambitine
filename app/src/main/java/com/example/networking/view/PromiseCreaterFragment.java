@@ -35,7 +35,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class PromiiseCreaterFragment extends Fragment {
+public class PromiseCreaterFragment extends Fragment {
     View rootView;
     // ToDo: Tmp solution for test, self implemented adapter for users ( with image ) coming soon, i PROMISE
     private List<String> usersAutocomplete = new ArrayList<>();
