@@ -1,6 +1,4 @@
-package com.example.networking.conroller;
-
-import android.util.Log;
+package com.example.networking.controller;
 
 import com.example.networking.model.models.Profile;
 import com.example.networking.model.network.Retrofit.ProfileService;

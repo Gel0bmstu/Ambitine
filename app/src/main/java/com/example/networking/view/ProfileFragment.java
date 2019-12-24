@@ -25,10 +25,9 @@ import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.StringRequestListener;
 import com.androidnetworking.interfaces.UploadProgressListener;
 import com.example.networking.R;
-import com.example.networking.conroller.ProfileController;
+import com.example.networking.controller.ProfileController;
 import com.example.networking.model.UserRepository;
 import com.example.networking.model.models.Profile;
-import com.example.networking.model.network.Retrofit.Api;
 import com.github.mikephil.charting.charts.PieChart;
 
 import com.github.mikephil.charting.data.PieData;
@@ -43,10 +42,6 @@ import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
 import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
-import com.theartofdev.edmodo.cropper.CropImageView;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.File;
 import java.util.ArrayList;

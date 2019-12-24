@@ -1,4 +1,4 @@
-package com.example.networking.conroller;
+package com.example.networking.controller;
 
 import android.view.Gravity;
 import android.widget.LinearLayout;
@@ -68,9 +68,12 @@ public class ExportPromiseController {
                         feedLayout.removeView(promisesNotFound);
                     }
                     assert response.body() != null;
+
+
                     // Tmp method to get data
                     RecyclerView recyclerView = exportPromiseFragment.getView().findViewById(R.id.export_promise_feed);
                     recyclerView.setHasFixedSize(true);
+
                     recyclerView.setLayoutManager(new LinearLayoutManager(exportPromiseFragment.getActivity()));
                     List<Promise> promises = response.body();
                     ExportPromiseAdapter mAdapter = new ExportPromiseAdapter(promises);

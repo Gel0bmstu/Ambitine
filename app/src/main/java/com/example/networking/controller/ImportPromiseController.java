@@ -1,4 +1,4 @@
-package com.example.networking.conroller;
+package com.example.networking.controller;
 
 import android.view.Gravity;
 import android.widget.LinearLayout;
@@ -6,10 +6,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.networking.R;
+import com.example.networking.controller.swiper.PromiseSwipeController;
 import com.example.networking.model.models.Promise;
 import com.example.networking.model.network.Retrofit.Api;
 import com.example.networking.model.network.Retrofit.ApiService;
@@ -74,11 +76,19 @@ public class ImportPromiseController {
                     }
                     // Tmp method to get data
                     RecyclerView recyclerView = importPromiseFragment.getView().findViewById(R.id.import_promise_feed);
-
+//                    recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
+//                        @Override
+//                        public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
+//                            PromiseSwipeController.onDraw(c);
+//                        }
+//                    });
 
                     recyclerView.setHasFixedSize(true);
                     recyclerView.setLayoutManager(new LinearLayoutManager(importPromiseFragment.getActivity()));
-
+                    // Add swiper
+                    PromiseSwipeController swipeController = new PromiseSwipeController();
+                    ItemTouchHelper itemTouchhelper = new ItemTouchHelper(swipeController);
+                    itemTouchhelper.attachToRecyclerView(recyclerView);
 
                     // feedController.setFeedData();
 //                    feedController.setFeedData();

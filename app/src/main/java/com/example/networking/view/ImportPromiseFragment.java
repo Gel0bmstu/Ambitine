@@ -8,7 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import com.example.networking.R;
-import com.example.networking.conroller.ImportPromiseController;
+import com.example.networking.controller.ImportPromiseController;
 
 public class ImportPromiseFragment extends Fragment {
     private ImportPromiseController importPromiseController;

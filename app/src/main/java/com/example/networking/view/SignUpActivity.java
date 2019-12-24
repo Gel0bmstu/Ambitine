@@ -22,7 +22,7 @@ import com.androidnetworking.interfaces.StringRequestListener;
 import com.androidnetworking.interfaces.UploadProgressListener;
 import com.example.networking.R;
 
-import com.example.networking.conroller.SignUpController;
+import com.example.networking.controller.SignUpController;
 import com.example.networking.model.UserRepository;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.iid.FirebaseInstanceId;

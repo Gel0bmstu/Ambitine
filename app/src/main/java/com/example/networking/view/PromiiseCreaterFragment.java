@@ -16,7 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.networking.R;
-import com.example.networking.conroller.NewPromiseController;
+import com.example.networking.controller.NewPromiseController;
 import com.example.networking.model.network.Retrofit.AutocompleteService;
 import com.example.networking.model.network.Retrofit.Interceptors.AddCookiesInterceptor;
 import com.example.networking.model.network.Retrofit.Interceptors.ReceivedCookiesInterceptor;

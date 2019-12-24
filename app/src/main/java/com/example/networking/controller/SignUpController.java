@@ -1,8 +1,7 @@
-package com.example.networking.conroller;
+package com.example.networking.controller;
 
 import android.util.Log;
 
-import com.example.networking.model.UserRepository;
 import com.example.networking.model.network.Retrofit.Api;
 import com.example.networking.model.network.Retrofit.ApiService;
 import com.example.networking.model.network.Retrofit.Response.RegistrationResponse;
