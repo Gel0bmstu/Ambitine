@@ -19,14 +19,16 @@
         android:theme="@style/AppTheme"
         android:screenOrientation="portrait"
         android:usesCleartextTraffic="true">
-        <activity android:name="com.example.networking.view.FirstActivity">
+        <activity android:name="com.example.networking.view.FirstActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.networking.view.LoginActivity" >
+        <activity android:name="com.example.networking.view.LoginActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
@@ -34,12 +36,14 @@
                 android:name="preloaded_fonts"
                 android:resource="@array/preloaded_fonts" />
         </activity>
-        <activity android:name="com.example.networking.view.HomeActivity">
+        <activity android:name="com.example.networking.view.HomeActivity"
+                  android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.networking.view.SignUpActivity">
+        <activity android:name="com.example.networking.view.SignUpActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
