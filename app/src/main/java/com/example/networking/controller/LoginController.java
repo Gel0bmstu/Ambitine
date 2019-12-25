@@ -1,9 +1,6 @@
 package com.example.networking.controller;
 
-import android.util.Log;
 import android.widget.Toast;
-
-import com.example.networking.R;
 import com.example.networking.model.network.Retrofit.Api;
 import com.example.networking.model.network.Retrofit.ApiService;
 import com.example.networking.model.network.Retrofit.Response.LoginResponse;
@@ -17,13 +14,10 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginController {
-    private static String logTag;
-
     private LoginActivity loginActivity;
 
     public LoginController(LoginActivity loginActivity) {
         this.loginActivity = loginActivity;
-        logTag = loginActivity.getApplicationContext().getResources().getString(R.string.logTag);
     }
 
 
@@ -41,10 +35,11 @@ public class LoginController {
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(@NotNull Call<ResponseBody> call, @NotNull Response<ResponseBody> response) {
+                int responseCode = response.code();
                 if (response.code() == 201) {
                     loginActivity.SwitchActivityAfterLoginSuccess();
-                } else {
-                    Log.d(logTag, "smth get wrong!");
+                } else if (responseCode == 409){
+                    Toast.makeText(loginActivity.getApplicationContext(),"Username already exists",Toast.LENGTH_SHORT).show();
                 }
             }
             @Override
