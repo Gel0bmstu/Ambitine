@@ -9,7 +9,6 @@ import com.example.networking.view.PromiseCreaterFragment;
 
 import org.jetbrains.annotations.NotNull;
 import java.util.Date;
-import java.sql.Timestamp;
 import java.util.Objects;
 
 import okhttp3.ResponseBody;
@@ -25,7 +24,7 @@ public class NewPromiseController {
         this.newPromiseFragment = promiseFragment;
     }
 
-    public Long getNowTimestamp() {
+    private Long getNowTimestamp() {
         Date date= new Date();
         return date.getTime();
     }
