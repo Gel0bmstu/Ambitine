@@ -3,7 +3,7 @@ package com.example.networking.controller;
 import com.example.networking.model.network.Retrofit.Api;
 import com.example.networking.model.network.Retrofit.ApiService;
 import com.example.networking.model.network.Retrofit.Response.NewPromiseResponce;
-import com.example.networking.view.PromiiseCreaterFragment;
+import com.example.networking.view.PromiseCreaterFragment;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -14,9 +14,9 @@ import retrofit2.Response;
 
 public class NewPromiseController {
 
-    private PromiiseCreaterFragment newPromiseFragment;
+    private PromiseCreaterFragment newPromiseFragment;
 
-    public NewPromiseController(PromiiseCreaterFragment promiseFragment) {
+    public NewPromiseController(PromiseCreaterFragment promiseFragment) {
         this.newPromiseFragment = promiseFragment;
     }
 

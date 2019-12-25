@@ -4,40 +4,25 @@ import android.view.Gravity;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.networking.R;
 import com.example.networking.controller.swiper.PromiseSwipeController;
 import com.example.networking.model.models.Promise;
 import com.example.networking.model.network.Retrofit.Api;
 import com.example.networking.model.network.Retrofit.ApiService;
-import com.example.networking.model.network.Retrofit.ExportPromiseService;
-import com.example.networking.model.network.Retrofit.Interceptors.AddCookiesInterceptor;
-import com.example.networking.model.network.Retrofit.Interceptors.ReceivedCookiesInterceptor;
 import com.example.networking.view.feeds.controllers.ExportPromiseAdapter;
 import com.example.networking.view.feeds.fragments.ExportPromiseFragment;
 import com.example.networking.view.feeds.fragments.ImportPromiseFragment;
 import com.example.networking.view.feeds.controllers.PromiseImportAdapter;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
 import org.jetbrains.annotations.NotNull;
-
 import java.util.List;
 import java.util.Objects;
-
-import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-
-import static com.example.networking.model.network.Retrofit.Api.BASE_URL;
 
 public class FeedPromiseController {
     private ExportPromiseFragment exportPromiseFragment;
@@ -53,21 +38,9 @@ public class FeedPromiseController {
     }
 
 
-    private Gson gson = new GsonBuilder().create();
-    private OkHttpClient client = new OkHttpClient.Builder().
-            addInterceptor(new AddCookiesInterceptor()).
-            addInterceptor(new ReceivedCookiesInterceptor()).
-            build();
-
-    private ExportPromiseService service = new Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create(gson))
-            .client(client)
-            .build()
-            .create(ExportPromiseService.class);
+    private ApiService service = Api.getApiService();
 
     public void setExportFeedData() {
-//        ApiService apiService = Api.getApiService();
         Call<List<Promise>> call = service.getAllExportPromises();
         System.out.println("WE INB");
         call.enqueue(new Callback<List<Promise>>() {
