@@ -44,12 +44,15 @@ public class PromiseCreaterFragment extends Fragment {
 
         Button loginButton = rootView.findViewById(R.id.new_promise_send);
         loginButton.setOnClickListener(new View.OnClickListener() {
+
+            // ToDo: Check good enough place to date/time checket
             @Override
             public void onClick(View v) {
                 newPromiseController.onNewPromiseButtonClick();
                 ((HomeActivity) Objects.requireNonNull(getActivity())).clickFeedButton();
                 clearAfterCreateNewPromise();
             }
+
         });
 
         return rootView;
