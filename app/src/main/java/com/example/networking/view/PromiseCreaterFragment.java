@@ -17,23 +17,12 @@ import androidx.fragment.app.Fragment;
 
 import com.example.networking.R;
 import com.example.networking.controller.NewPromiseController;
-import com.example.networking.model.network.Retrofit.AutocompleteService;
-import com.example.networking.model.network.Retrofit.Interceptors.AddCookiesInterceptor;
-import com.example.networking.model.network.Retrofit.Interceptors.ReceivedCookiesInterceptor;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
-
-import okhttp3.OkHttpClient;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+import java.util.Objects;
 
 public class PromiseCreaterFragment extends Fragment {
     View rootView;
@@ -51,67 +40,19 @@ public class PromiseCreaterFragment extends Fragment {
             newPromiseController = new NewPromiseController(this);
         }
 
-        getUsersAutocompleteData();
+        newPromiseController.getUsersAutocompleteData();
 
         Button loginButton = rootView.findViewById(R.id.new_promise_send);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 newPromiseController.onNewPromiseButtonClick();
-                ((HomeActivity)getActivity()).clickFeedButton();
+                ((HomeActivity) Objects.requireNonNull(getActivity())).clickFeedButton();
                 clearAfterCreateNewPromise();
             }
         });
 
-//        EditText depositValue = rootView.findViewById(R.id.deposit_new_promise);
-//        depositValue
-
-
         return rootView;
-//        return super.onCreateView(inflater, containeer, savedInstanceState);
-    }
-
-    Gson gson = new GsonBuilder().create();
-    OkHttpClient client = new OkHttpClient.Builder().
-            addInterceptor(new AddCookiesInterceptor()).
-            addInterceptor(new ReceivedCookiesInterceptor()).
-            build();
-
-    // use retrofit to create an instance of BookService
-    AutocompleteService service = new Retrofit.Builder()
-//            .baseUrl("http://www.mocky.io/")
-            .baseUrl("http://35.228.98.103:9090/")
-//            .baseUrl("http://35.228.98.103:9090/")
-            .addConverterFactory(GsonConverterFactory.create(gson))
-            .client(client)
-            .build()
-            .create(AutocompleteService.class);
-
-    public void getUsersAutocompleteData() {
-
-        Call<List<String>> call = service.getUsersAutocomplete();
-        System.out.println("WE INB");
-        call.enqueue(new Callback<List<String>>() {
-            @Override
-            public void onResponse(Call<List<String>> call, Response<List<String>> response) {
-                if (response.code() == 200) {
-                    assert response.body() != null;
-                    List<String> usersForAutocompleteFromServer = response.body();
-                    String[] usersArray = usersForAutocompleteFromServer.toArray(new String[0]);
-                    ArrayAdapter<String> adapter = new ArrayAdapter<>(rootView.getContext(), android.R.layout.simple_dropdown_item_1line, usersArray);
-                    AutoCompleteTextView textView = rootView.findViewById(R.id.users_autocomplete);
-                    textView.setAdapter(adapter);
-                } else {
-                    System.out.println("Another handle way");
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<String>> call, Throwable t) {
-                System.out.println("FOCK");
-                System.out.println(t.toString());
-            }
-        });
     }
 
     public String getRecieverUsername() {
@@ -154,7 +95,7 @@ public class PromiseCreaterFragment extends Fragment {
         return calendar.getTimeInMillis();
     }
 
-    public void clearAfterCreateNewPromise() {
+    private void clearAfterCreateNewPromise() {
         ((AutoCompleteTextView)rootView.findViewById(R.id.users_autocomplete)).setText("");
         ((EditText)rootView.findViewById(R.id.deposit_new_promise)).setText("");
         ((EditText)rootView.findViewById(R.id.new_promise_description)).setText("");
