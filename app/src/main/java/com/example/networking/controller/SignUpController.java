@@ -2,6 +2,8 @@ package com.example.networking.controller;
 
 import android.util.Log;
 
+import com.example.networking.R;
+import com.example.networking.debugtools.AmbitinedToast;
 import com.example.networking.model.network.Retrofit.Api;
 import com.example.networking.model.network.Retrofit.ApiService;
 import com.example.networking.model.network.Retrofit.Response.RegistrationResponse;
@@ -36,11 +38,14 @@ public class SignUpController {
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if (response.code() == 201) {
+                int responseCode = response.code();
+                if (responseCode == 201) {
                     signUpActivity.SwitchActivityAfterSignUpSuccess();
-                } else {
-                    Log.d("hellomelloy", "smth get wrong!");
+                } else if (responseCode == 409) {
+                    String userConflictMessage = signUpActivity.getResources().getString(R.string.profile_data_error);
+                    AmbitinedToast.getInstance().debug(signUpActivity, userConflictMessage);
                 }
+
             }
 
             @Override

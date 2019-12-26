@@ -39,11 +39,8 @@ public class LoginController {
             @Override
             public void onResponse(@NotNull Call<ResponseBody> call, @NotNull Response<ResponseBody> response) {
                 int responseCode = response.code();
-                if (response.code() == 201) {
+                if (responseCode== 201) {
                     loginActivity.SwitchActivityAfterLoginSuccess();
-                } else if (responseCode == 409){
-                    String userConflictMessage = loginActivity.getResources().getString(R.string.profile_data_error);
-                    AmbitinedToast.getInstance().debug(loginActivity, userConflictMessage);
                 }
             }
             @Override
