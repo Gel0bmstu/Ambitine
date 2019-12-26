@@ -1,6 +1,9 @@
 package com.example.networking.controller;
 
 import android.widget.Toast;
+
+import com.example.networking.R;
+import com.example.networking.debugtools.AmbitinedToast;
 import com.example.networking.model.network.Retrofit.Api;
 import com.example.networking.model.network.Retrofit.ApiService;
 import com.example.networking.model.network.Retrofit.Response.LoginResponse;
@@ -39,12 +42,14 @@ public class LoginController {
                 if (response.code() == 201) {
                     loginActivity.SwitchActivityAfterLoginSuccess();
                 } else if (responseCode == 409){
-                    Toast.makeText(loginActivity.getApplicationContext(),"Username already exists",Toast.LENGTH_SHORT).show();
+                    String userConflictMessage = loginActivity.getResources().getString(R.string.profile_data_error);
+                    AmbitinedToast.getInstance().debug(loginActivity, userConflictMessage);
                 }
             }
             @Override
             public void onFailure(@NotNull Call<ResponseBody> call, @NotNull Throwable t) {
-                Toast.makeText(loginActivity.getApplicationContext(),"Login failure",Toast.LENGTH_SHORT).show();
+                String loginFailureMessage = loginActivity.getResources().getString(R.string.login_failure_case);
+                AmbitinedToast.getInstance().debug(loginActivity, loginFailureMessage);
             }
         });
     }

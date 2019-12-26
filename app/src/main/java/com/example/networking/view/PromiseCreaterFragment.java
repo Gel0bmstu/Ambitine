@@ -88,6 +88,7 @@ public class PromiseCreaterFragment extends Fragment {
             .create(AutocompleteService.class);
 
     public void getUsersAutocompleteData() {
+
         Call<List<String>> call = service.getUsersAutocomplete();
         System.out.println("WE INB");
         call.enqueue(new Callback<List<String>>() {

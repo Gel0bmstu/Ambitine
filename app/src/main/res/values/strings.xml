@@ -41,5 +41,10 @@
 
     <string name="no_promises">You have no promises so far.</string>
 
+    <!--    Failure messages-->
+    <string name="profile_data_error">Profile data receiving error</string>
+    <string name="login_user_conflict">This nickname already exists</string>
+    <string name="login_failure_case">Login failed</string>
+
 
 </resources>

@@ -38,9 +38,8 @@ public class FeedPromiseController {
     }
 
 
-    private ApiService service = Api.getApiService();
-
     public void setExportFeedData() {
+        ApiService service = Api.getApiService();
         Call<List<Promise>> call = service.getAllExportPromises();
         System.out.println("WE INB");
         call.enqueue(new Callback<List<Promise>>() {
@@ -98,9 +97,8 @@ public class FeedPromiseController {
 
 
     public void setImportFeedData() {
-        ApiService apiService = Api.getApiService();
+        ApiService service = Api.getApiService();
         Call<List<Promise>> call = service.getAllImportPromises();
-        System.out.println("WE INB");
         call.enqueue(new Callback<List<Promise>>() {
             @Override
             public void onResponse(@NotNull Call<List<Promise>> call, @NotNull Response<List<Promise>> response) {
@@ -115,12 +113,6 @@ public class FeedPromiseController {
                     }
                     // Tmp method to get data
                     RecyclerView recyclerView = importPromiseFragment.getView().findViewById(R.id.import_promise_feed);
-//                    recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
-//                        @Override
-//                        public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
-//                            PromiseSwipeController.onDraw(c);
-//                        }
-//                    });
 
                     recyclerView.setHasFixedSize(true);
                     recyclerView.setLayoutManager(new LinearLayoutManager(importPromiseFragment.getActivity()));
@@ -129,9 +121,6 @@ public class FeedPromiseController {
                     ItemTouchHelper itemTouchhelper = new ItemTouchHelper(swipeController);
                     itemTouchhelper.attachToRecyclerView(recyclerView);
 
-                    // feedController.setFeedData();
-//                    feedController.setFeedData();
-                    String[] myStringArray;
                     List<Promise> promises = response.body();
                     PromiseImportAdapter mAdapter = new PromiseImportAdapter(promises);
                     // 4. set adapter

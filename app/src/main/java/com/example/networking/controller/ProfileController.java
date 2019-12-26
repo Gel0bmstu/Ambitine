@@ -1,6 +1,10 @@
 package com.example.networking.controller;
 
+import com.example.networking.R;
+import com.example.networking.debugtools.AmbitinedToast;
 import com.example.networking.model.models.Profile;
+import com.example.networking.model.network.Retrofit.Api;
+import com.example.networking.model.network.Retrofit.ApiService;
 import com.example.networking.model.network.Retrofit.ProfileService;
 import com.example.networking.view.ProfileFragment;
 import com.google.gson.Gson;
@@ -16,6 +20,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import com.example.networking.model.network.Retrofit.Interceptors.AddCookiesInterceptor;
 import com.example.networking.model.network.Retrofit.Interceptors.ReceivedCookiesInterceptor;
 
+import org.jetbrains.annotations.NotNull;
+
 public class ProfileController {
     ProfileFragment profileFragment;
 
@@ -24,39 +30,24 @@ public class ProfileController {
     }
 
     public void getProfileData() {
+        ApiService service = Api.getApiService();
         Call<Profile> call = service.getAllFeedItems();
         call.enqueue(new Callback<Profile>() {
             @Override
-            public void onResponse(Call<Profile> call, Response<Profile> response) {
-                System.out.println("SHKET POMOYNOY GADZY111:" + String.valueOf(response.code()));
+            public void onResponse(@NotNull Call<Profile> call, @NotNull Response<Profile> response) {
                 if (response.code() == 200) {
-                    assert response.body() != null;
-                    System.out.println("WATA SHAKA LAKA");
                     Profile profile = response.body();
+                    assert profile != null;
                     profileFragment.setProfileData(profile);
                 }
             }
 
             @Override
-            public void onFailure(Call<Profile> call, Throwable t) {
-                System.out.println("FOCK");
-                System.out.println(t.toString());
+            public void onFailure(@NotNull Call<Profile> call, @NotNull Throwable t) {
+                String recievingError = profileFragment.getResources().getString(R.string.profile_data_error);
+                AmbitinedToast.getInstance().debug(profileFragment.getActivity(), recievingError);
             }
+
         });
     }
-
-    Gson gson = new GsonBuilder().create();
-    OkHttpClient client = new OkHttpClient.Builder().
-            addInterceptor(new AddCookiesInterceptor()).
-            addInterceptor(new ReceivedCookiesInterceptor()).
-            build();
-
-    ProfileService service = new Retrofit.Builder()
-//            .baseUrl("http://www.mocky.io/")
-//            .baseUrl("http://192.168.100.32:9090")
-            .baseUrl("http://35.228.98.103:9090/")
-            .addConverterFactory(GsonConverterFactory.create(gson))
-            .client(client)
-            .build()
-            .create(ProfileService.class);
 }
