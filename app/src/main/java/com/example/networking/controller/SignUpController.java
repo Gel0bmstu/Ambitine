@@ -9,6 +9,8 @@ import com.example.networking.model.network.Retrofit.ApiService;
 import com.example.networking.model.network.Retrofit.Response.RegistrationResponse;
 import com.example.networking.view.SignUpActivity;
 
+import org.jetbrains.annotations.NotNull;
+
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -37,7 +39,7 @@ public class SignUpController {
         Call<ResponseBody> call = apiService.signUpRequest(registrationResponse);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+            public void onResponse(@NotNull Call<ResponseBody> call, @NotNull Response<ResponseBody> response) {
                 int responseCode = response.code();
                 if (responseCode == 201) {
                     signUpActivity.SwitchActivityAfterSignUpSuccess();
@@ -49,8 +51,9 @@ public class SignUpController {
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-//                Log.d(logTag, t.getMessage());
+            public void onFailure(@NotNull Call<ResponseBody> call, @NotNull Throwable t) {
+                String userConflictMessage = signUpActivity.getResources().getString(R.string.signup_failure_case);
+                AmbitinedToast.getInstance().debug(signUpActivity, userConflictMessage);
             }
         });
     }
