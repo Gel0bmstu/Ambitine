@@ -39,7 +39,7 @@ public class NewPromiseController {
         System.out.println("WE INB");
         call.enqueue(new Callback<List<String>>() {
             @Override
-            public void onResponse(Call<List<String>> call, Response<List<String>> response) {
+            public void onResponse(@NotNull Call<List<String>> call, @NotNull Response<List<String>> response) {
                 if (response.code() == 200) {
                     assert response.body() != null;
                     List<String> usersForAutocompleteFromServer = response.body();
@@ -69,10 +69,9 @@ public class NewPromiseController {
         Integer deposit = newPromiseFragment.getDeposit();
         String description = newPromiseFragment.getPromiseDescription();
         Long pastdue = newPromiseFragment.getPastDue();
-        // Date checker
 
         int compared = pastdue.compareTo(getNowTimestamp());
-        if (compared > 0  || compared == 0) {
+        if (compared < 0  || compared == 0) {
             Toast.makeText(Objects.requireNonNull(newPromiseFragment.getActivity())
                     .getApplicationContext(),"Available only if you are timetraveller!",Toast.LENGTH_SHORT).show();
         } else {
