@@ -1,7 +1,10 @@
 package com.example.networking.controller;
 
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Toast;
 
+import com.example.networking.R;
 import com.example.networking.model.network.Retrofit.Api;
 import com.example.networking.model.network.Retrofit.ApiService;
 import com.example.networking.model.network.Retrofit.Response.NewPromiseResponce;
@@ -9,6 +12,7 @@ import com.example.networking.view.PromiseCreaterFragment;
 
 import org.jetbrains.annotations.NotNull;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 import okhttp3.ResponseBody;
@@ -29,6 +33,36 @@ public class NewPromiseController {
         return date.getTime();
     }
 
+    public void getUsersAutocompleteData() {
+        ApiService service = Api.getApiService();
+        Call<List<String>> call = service.getUsersAutocomplete();
+        System.out.println("WE INB");
+        call.enqueue(new Callback<List<String>>() {
+            @Override
+            public void onResponse(Call<List<String>> call, Response<List<String>> response) {
+                if (response.code() == 200) {
+                    assert response.body() != null;
+                    List<String> usersForAutocompleteFromServer = response.body();
+                    String[] usersArray = usersForAutocompleteFromServer.toArray(new String[0]);
+                    ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                            Objects.requireNonNull(newPromiseFragment.getView()).getContext(),
+                            android.R.layout.simple_dropdown_item_1line, usersArray);
+
+                    AutoCompleteTextView textView = Objects.requireNonNull(newPromiseFragment
+                                                    .getView()).findViewById(R.id.users_autocomplete);
+                    textView.setAdapter(adapter);
+                } else {
+                    System.out.println("Another handle way");
+                }
+            }
+
+            @Override
+            public void onFailure(@NotNull Call<List<String>> call, @NotNull Throwable t) {
+                System.out.println("FOCK");
+                System.out.println(t.toString());
+            }
+        });
+    }
 
     public void onNewPromiseButtonClick() {
         String username = newPromiseFragment.getRecieverUsername();
