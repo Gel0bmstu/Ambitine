@@ -1,5 +1,6 @@
 package com.example.networking.controller;
 
+import android.graphics.Canvas;
 import android.view.Gravity;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.networking.R;
 import com.example.networking.controller.swiper.PromiseSwipeController;
+import com.example.networking.controller.swiper.PromiseSwipeControllerActions;
 import com.example.networking.model.models.Promise;
 import com.example.networking.model.network.Retrofit.Api;
 import com.example.networking.model.network.Retrofit.ApiService;
@@ -27,6 +29,7 @@ import retrofit2.Response;
 public class FeedPromiseController {
     private ExportPromiseFragment exportPromiseFragment;
     private ImportPromiseFragment importPromiseFragment;
+    private PromiseSwipeController promiseSwipeController;
 
     public FeedPromiseController(ExportPromiseFragment feedFragment) {
         this.importPromiseFragment = null;
@@ -57,6 +60,8 @@ public class FeedPromiseController {
                     // Tmp method to get data
                     RecyclerView recyclerView = exportPromiseFragment.getView().findViewById(R.id.export_promise_feed);
                     recyclerView.setHasFixedSize(true);
+
+
 
                     recyclerView.setLayoutManager(new LinearLayoutManager(exportPromiseFragment.getActivity()));
                     List<Promise> promises = response.body();
@@ -117,9 +122,6 @@ public class FeedPromiseController {
                     recyclerView.setHasFixedSize(true);
                     recyclerView.setLayoutManager(new LinearLayoutManager(importPromiseFragment.getActivity()));
                     // Add swiper
-                    PromiseSwipeController swipeController = new PromiseSwipeController();
-                    ItemTouchHelper itemTouchhelper = new ItemTouchHelper(swipeController);
-                    itemTouchhelper.attachToRecyclerView(recyclerView);
 
                     List<Promise> promises = response.body();
                     PromiseImportAdapter mAdapter = new PromiseImportAdapter(promises);
@@ -127,6 +129,27 @@ public class FeedPromiseController {
                     recyclerView.setAdapter(mAdapter);
                     // 5. set item animator to DefaultAnimator
                     recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+                    // Add swiper
+                    promiseSwipeController = new PromiseSwipeController(new PromiseSwipeControllerActions() {
+                        @Override
+                        public void onRightClicked(int position) {
+                            System.out.println("RIGHT CLICKED");
+                        }
+                        @Override
+                        public void onLeftClicked(int position) {
+                            System.out.println("LEFT CLICKED");
+                        }
+                    });
+
+                    ItemTouchHelper itemTouchhelper = new ItemTouchHelper(promiseSwipeController);
+                    itemTouchhelper.attachToRecyclerView(recyclerView);
+                    recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
+                        @Override
+                        public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
+                            promiseSwipeController.onDraw(c);
+                        }
+                    });
 
                 } else if (response.code() == 404) {
                     TextView promisesNotFound = new TextView(Objects.requireNonNull(importPromiseFragment.getView()).getContext());
