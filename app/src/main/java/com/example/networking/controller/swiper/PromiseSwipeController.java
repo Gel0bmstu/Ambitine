@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 //import androidx.recyclerview.widget.ItemTouchHelper.Callback;
 import static androidx.recyclerview.widget.ItemTouchHelper.ACTION_STATE_SWIPE;
+import static androidx.recyclerview.widget.ItemTouchHelper.LEFT;
+import static androidx.recyclerview.widget.ItemTouchHelper.RIGHT;
 
 
 enum ButtonsState {
@@ -27,10 +29,16 @@ public class PromiseSwipeController extends ItemTouchHelper.Callback {
     private static final float buttonWidth = 300;
     private RectF buttonInstance = null;
     private RecyclerView.ViewHolder currentItemViewHolder = null;
+    private PromiseSwipeControllerActions buttonsActions = null;
+
+
+    public PromiseSwipeController(PromiseSwipeControllerActions buttonsActions) {
+        this.buttonsActions = buttonsActions;
+    }
 
     @Override
     public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
-        return makeMovementFlags(0, 4 | 8);
+        return makeMovementFlags(0, LEFT | RIGHT);
     }
 
     @Override
@@ -140,7 +148,17 @@ public class PromiseSwipeController extends ItemTouchHelper.Callback {
                     });
                     setItemsClickable(recyclerView, true);
                     swipeBack = false;
+
+                    if (buttonsActions != null && buttonInstance != null && buttonInstance.contains(event.getX(), event.getY())) {
+                        if (buttonShowedState == ButtonsState.LEFT_VISIBLE) {
+                            buttonsActions.onLeftClicked(viewHolder.getAdapterPosition());
+                        }
+                        else if (buttonShowedState == ButtonsState.RIGHT_VISIBLE) {
+                            buttonsActions.onRightClicked(viewHolder.getAdapterPosition());
+                        }
+                    }
                     buttonShowedState = ButtonsState.GONE;
+                    currentItemViewHolder = null;
                 }
                 return false;
             }
@@ -173,14 +191,16 @@ public class PromiseSwipeController extends ItemTouchHelper.Callback {
     @Override
     public int convertToAbsoluteDirection(int flags, int layoutDirection) {
         if (swipeBack) {
-            swipeBack = false;
+            swipeBack = buttonShowedState != ButtonsState.GONE;
             return 0;
         }
         return super.convertToAbsoluteDirection(flags, layoutDirection);
     }
 
     public void onDraw(Canvas c) {
+        System.out.println("IN ONDRAW");
         if (currentItemViewHolder != null) {
+            System.out.println("BUTTONS IN DRAW");
             drawButtons(c, currentItemViewHolder);
         }
     }
