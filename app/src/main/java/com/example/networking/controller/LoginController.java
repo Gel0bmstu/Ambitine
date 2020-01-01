@@ -39,14 +39,18 @@ public class LoginController {
             @Override
             public void onResponse(@NotNull Call<ResponseBody> call, @NotNull Response<ResponseBody> response) {
                 int responseCode = response.code();
-                if (responseCode== 201) {
+                if (responseCode == 201) {
                     loginActivity.SwitchActivityAfterLoginSuccess();
+                } else if (responseCode == 400) {
+                    String loginFailureMessage = loginActivity.getResources().getString(R.string.login_wrong_data);
+                    AmbitinedToast.getInstance().debugAboveTheKeyboard(loginActivity, loginFailureMessage);
                 }
             }
+
             @Override
             public void onFailure(@NotNull Call<ResponseBody> call, @NotNull Throwable t) {
                 String loginFailureMessage = loginActivity.getResources().getString(R.string.login_failure_case);
-                AmbitinedToast.getInstance().debug(loginActivity, loginFailureMessage);
+                AmbitinedToast.getInstance().debugAboveTheKeyboard(loginActivity, loginFailureMessage);
             }
         });
     }

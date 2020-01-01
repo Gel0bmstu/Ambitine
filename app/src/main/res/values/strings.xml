@@ -45,6 +45,7 @@
     <string name="profile_data_error">Profile data receiving error</string>
     <string name="login_user_conflict">This nickname already exists</string>
     <string name="login_failure_case">Login failed</string>
+    <string name="login_wrong_data">Username or password is incorrect</string>
     <string name="signup_failure_case">Signup failed</string>
 
 

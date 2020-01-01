@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.networking.R;
@@ -52,7 +53,7 @@ public class LoginActivity extends AppCompatActivity {
         return Objects.requireNonNull(usernameInput.getText()).toString();
     }
 
-    public String getToken(){
+    public String getToken() {
         // ToDo: Remove deprecated version
         String token = FirebaseInstanceId.getInstance().getToken();
         System.out.println("TOKEN OUT");
