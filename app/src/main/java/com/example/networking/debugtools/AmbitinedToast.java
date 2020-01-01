@@ -39,19 +39,21 @@ public class AmbitinedToast {
         View toastView = toast.getView(); // This'll return the default View of the Toast.
         toastView.setPadding(16, 10, 16, 10);
 
-
         TextView toastMessage = toastView.findViewById(android.R.id.message);
         toastMessage.setTextColor(Color.WHITE);
         toastView.setBackgroundColor(activity.getResources().getColor(R.color.ambitine_primary_color));
-        int toastHeight = toastMessage.getHeight();
 
         // determine position of visible view (without or with keyboard)
         Rect r = new Rect();
         activity.getWindow().getDecorView().getWindowVisibleDisplayFrame(r);
 
-        toast.setGravity(Gravity.TOP | Gravity.CENTER, 0, r.bottom - r.top - toastHeight);
+        final float scale = activity.getResources().getDisplayMetrics().density;
+        // check if keyboard activated
+        if (Math.abs(r.bottom - activity.getWindow().getDecorView().getHeight()) < 150) {
+            toast.setGravity(Gravity.TOP | Gravity.CENTER, 0, r.bottom - r.top - (int) (100 * scale - 0.5f));
+        } else {
+            toast.setGravity(Gravity.TOP | Gravity.CENTER, 0, r.bottom - r.top - (int) (50 * scale - 0.5f));
+        }
         toast.show();
-
-        System.out.println(toast.getView().findViewById(android.R.id.message).getHeight() + " : hui");
     }
 }
