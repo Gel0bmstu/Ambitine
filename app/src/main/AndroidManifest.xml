@@ -20,7 +20,8 @@
         android:screenOrientation="portrait"
         android:usesCleartextTraffic="true">
         <activity android:name="com.example.networking.view.FirstActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import com.example.networking.R;
 import com.example.networking.model.database.UserDB;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
@@ -13,8 +12,6 @@ public class FirstActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_first);
-
         Realm.init(getApplicationContext());
 
         RealmConfiguration realmConfiguration = new RealmConfiguration.Builder()
