@@ -13,7 +13,6 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.example.networking.R;
 import com.example.networking.controller.FeedPromiseController;
 
-
 public class ExportPromiseFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
     private FeedPromiseController exportPromiseController;
     private View rootView;
@@ -33,7 +32,7 @@ public class ExportPromiseFragment extends Fragment implements SwipeRefreshLayou
         swipeRefreshLayout = rootView.findViewById(R.id.export_swipe_container);
         swipeRefreshLayout.setOnRefreshListener(this);
 
-        // after fetching data you should turn it off
+        // after fetching data it will turn off
         setRefreshingStatus(true);
         exportPromiseController.setExportFeedData();
 
