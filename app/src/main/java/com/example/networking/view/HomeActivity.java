@@ -16,10 +16,10 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class HomeActivity extends AppCompatActivity {
 
-    final Fragment exportPromiseFragment  = new ExportPromiseFragment();
-    final Fragment importPromiseFragment  = new ImportPromiseFragment();
-    final Fragment newPromiseFragment  = new PromiseCreaterFragment();
-    final Fragment profileFragment= new ProfileFragment();
+    final Fragment exportPromiseFragment = new ExportPromiseFragment();
+    final Fragment importPromiseFragment = new ImportPromiseFragment();
+    final Fragment newPromiseFragment = new PromiseCreaterFragment();
+    final Fragment profileFragment = new ProfileFragment();
     final FragmentManager fm = getSupportFragmentManager();
     Fragment active = exportPromiseFragment;
 
@@ -53,22 +53,11 @@ public class HomeActivity extends AppCompatActivity {
         }
     };
 
-    public void clickFeedButton() {
-        BottomNavigationItemView feedButton = findViewById(R.id.bottom_nav_export_promises);
-        feedButton.performClick();
-        feedButton.setPressed(true);
-        feedButton.invalidate();
-        feedButton.setPressed(false);
-        feedButton.invalidate();
-    }
-
-    public void switchToImportPromises() {
-        BottomNavigationItemView feedButton = findViewById(R.id.bottom_nav_import_promises);
-        feedButton.performClick();
-        feedButton.setPressed(true);
-        feedButton.invalidate();
-        feedButton.setPressed(false);
-        feedButton.invalidate();
+    public void switchToFeed() {
+        ((BottomNavigationView) findViewById(R.id.bottom_navigation_menu)).
+                setSelectedItemId(R.id.bottom_nav_export_promises);
+        fm.beginTransaction().hide(active).show(exportPromiseFragment).commit();
+        active = exportPromiseFragment;
     }
 
     @Override
@@ -92,6 +81,7 @@ public class HomeActivity extends AppCompatActivity {
             fm.beginTransaction().add(R.id.content_fragment, newPromiseFragment, "new_promise_fragment").hide(newPromiseFragment).commit();
             fm.beginTransaction().add(R.id.content_fragment, exportPromiseFragment, "export_promise_feed").hide(exportPromiseFragment).commit();
             fm.beginTransaction().add(R.id.content_fragment, importPromiseFragment, "import_promise_feed").commit();
+            navigation.setSelectedItemId(R.id.bottom_nav_import_promises);
         }
     }
 }

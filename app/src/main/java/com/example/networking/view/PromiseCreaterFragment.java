@@ -49,7 +49,7 @@ public class PromiseCreaterFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 newPromiseController.onNewPromiseButtonClick();
-                ((HomeActivity) Objects.requireNonNull(getActivity())).clickFeedButton();
+                ((HomeActivity) Objects.requireNonNull(getActivity())).switchToFeed();
                 clearAfterCreateNewPromise();
             }
 
