@@ -19,13 +19,16 @@ public class FirstActivity extends AppCompatActivity {
                 .build();
         Realm.setDefaultConfiguration(realmConfiguration);
 
-        UserDB.deleteToken();
+//        UserDB.deleteToken();
 
         if (!UserDB.isAuthorized()) {
             Intent LoginIntent = new Intent(this, LoginActivity.class);
             startActivity(LoginIntent);
         } else {
             Intent HomeIntent = new Intent(this, HomeActivity.class);
+            if (getIntent().getExtras() != null) {
+                HomeIntent.putExtras(getIntent().getExtras());
+            }
             startActivity(HomeIntent);
         }
     }

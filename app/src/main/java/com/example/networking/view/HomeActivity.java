@@ -14,7 +14,6 @@ import com.example.networking.view.feeds.fragments.ImportPromiseFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-
 public class HomeActivity extends AppCompatActivity {
 
     final Fragment exportPromiseFragment  = new ExportPromiseFragment();
@@ -63,6 +62,15 @@ public class HomeActivity extends AppCompatActivity {
         feedButton.invalidate();
     }
 
+    public void switchToImportPromises() {
+        BottomNavigationItemView feedButton = findViewById(R.id.bottom_nav_import_promises);
+        feedButton.performClick();
+        feedButton.setPressed(true);
+        feedButton.invalidate();
+        feedButton.setPressed(false);
+        feedButton.invalidate();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,10 +79,19 @@ public class HomeActivity extends AppCompatActivity {
         BottomNavigationView navigation = findViewById(R.id.bottom_navigation_menu);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
+        System.out.println(getIntent().getExtras() + "taaaaa");
+        System.out.println("shaaa");
 
-        fm.beginTransaction().add(R.id.content_fragment, profileFragment, "profile_fragment").hide(profileFragment).commit();
-        fm.beginTransaction().add(R.id.content_fragment, newPromiseFragment, "new_promise_fragment").hide(newPromiseFragment).commit();
-        fm.beginTransaction().add(R.id.content_fragment, importPromiseFragment, "import_promise_feed").hide(importPromiseFragment).commit();
-        fm.beginTransaction().add(R.id.content_fragment, exportPromiseFragment, "export_promise_feed").commit();
+        if (getIntent().getExtras() == null) {
+            fm.beginTransaction().add(R.id.content_fragment, profileFragment, "profile_fragment").hide(profileFragment).commit();
+            fm.beginTransaction().add(R.id.content_fragment, newPromiseFragment, "new_promise_fragment").hide(newPromiseFragment).commit();
+            fm.beginTransaction().add(R.id.content_fragment, importPromiseFragment, "import_promise_feed").hide(importPromiseFragment).commit();
+            fm.beginTransaction().add(R.id.content_fragment, exportPromiseFragment, "export_promise_feed").commit();
+        } else {
+            fm.beginTransaction().add(R.id.content_fragment, profileFragment, "profile_fragment").hide(profileFragment).commit();
+            fm.beginTransaction().add(R.id.content_fragment, newPromiseFragment, "new_promise_fragment").hide(newPromiseFragment).commit();
+            fm.beginTransaction().add(R.id.content_fragment, exportPromiseFragment, "export_promise_feed").hide(exportPromiseFragment).commit();
+            fm.beginTransaction().add(R.id.content_fragment, importPromiseFragment, "import_promise_feed").commit();
+        }
     }
 }
