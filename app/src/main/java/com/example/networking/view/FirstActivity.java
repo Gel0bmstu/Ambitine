@@ -19,7 +19,7 @@ public class FirstActivity extends AppCompatActivity {
                 .build();
         Realm.setDefaultConfiguration(realmConfiguration);
 
-//        UserDB.deleteToken();
+        UserDB.deleteToken();
 
         if (!UserDB.isAuthorized()) {
             Intent LoginIntent = new Intent(this, LoginActivity.class);

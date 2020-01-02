@@ -90,12 +90,14 @@ public class FeedPromiseController {
                 } else {
                     System.out.println("Another handle way");
                 }
+                exportPromiseFragment.setRefreshingStatus(false);
             }
 
             @Override
             public void onFailure(@NotNull Call<List<Promise>> call, @NotNull Throwable t) {
                 System.out.println("FOCK");
                 System.out.println(t.toString());
+                exportPromiseFragment.setRefreshingStatus(false);
             }
         });
     }
