@@ -7,58 +7,33 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.networking.R;
 import com.example.networking.view.feeds.fragments.ExportPromiseFragment;
 import com.example.networking.view.feeds.fragments.ImportPromiseFragment;
-import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.HashMap;
+
 public class HomeActivity extends AppCompatActivity {
+    // map {Tag: Fragment}
+    private HashMap<String, Fragment> fragmentMap = null;
 
-    final Fragment exportPromiseFragment = new ExportPromiseFragment();
-    final Fragment importPromiseFragment = new ImportPromiseFragment();
-    final Fragment newPromiseFragment = new PromiseCreaterFragment();
-    final Fragment profileFragment = new ProfileFragment();
-    final FragmentManager fm = getSupportFragmentManager();
-    Fragment active = exportPromiseFragment;
+    private Fragment exportPromiseFragment = null;
+    private final String EXPORT_PROMISE_FRAGMENT_TAG = "export_promise_feed";
 
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+    private Fragment importPromiseFragment = null;
+    private final String IMPORT_PROMISE_FRAGMENT_TAG = "import_promise_feed";
 
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-            switch (menuItem.getItemId()) {
-                case R.id.bottom_nav_export_promises:
-                    fm.beginTransaction().hide(active).show(exportPromiseFragment).commit();
-                    active = exportPromiseFragment;
-                    return true;
+    private Fragment newPromiseFragment = null;
+    private final String NEW_PROMISE_FRAGMENT_TAG = "new_promise_fragment";
 
-                case R.id.bottom_nav_import_promises:
-                    fm.beginTransaction().hide(active).show(importPromiseFragment).commit();
-                    active = importPromiseFragment;
-                    return true;
+    private Fragment profileFragment = null;
+    private final String PROFILE_FRAGMENT_TAG = "profile_fragment";
 
-                case R.id.botton_nav_new_promise:
-                    fm.beginTransaction().hide(active).show(newPromiseFragment).commit();
-                    active = newPromiseFragment;
-                    return true;
+    private FragmentManager fm = getSupportFragmentManager();
 
-                case R.id.bottom_nav_profile:
-                    fm.beginTransaction().hide(active).show(profileFragment).commit();
-                    active = profileFragment;
-                    return true;
-            }
-            return false;
-        }
-    };
-
-    public void switchToFeed() {
-        ((BottomNavigationView) findViewById(R.id.bottom_navigation_menu)).
-                setSelectedItemId(R.id.bottom_nav_export_promises);
-        fm.beginTransaction().hide(active).show(exportPromiseFragment).commit();
-        active = exportPromiseFragment;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,20 +43,121 @@ public class HomeActivity extends AppCompatActivity {
         BottomNavigationView navigation = findViewById(R.id.bottom_navigation_menu);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        System.out.println(getIntent().getExtras() + "taaaaa");
-        System.out.println("shaaa");
-
-        if (getIntent().getExtras() == null) {
-            fm.beginTransaction().add(R.id.content_fragment, profileFragment, "profile_fragment").hide(profileFragment).commit();
-            fm.beginTransaction().add(R.id.content_fragment, newPromiseFragment, "new_promise_fragment").hide(newPromiseFragment).commit();
-            fm.beginTransaction().add(R.id.content_fragment, importPromiseFragment, "import_promise_feed").hide(importPromiseFragment).commit();
-            fm.beginTransaction().add(R.id.content_fragment, exportPromiseFragment, "export_promise_feed").commit();
+        fragmentMap = new HashMap<>();
+        if (savedInstanceState == null) {
+            fragmentMap.put(EXPORT_PROMISE_FRAGMENT_TAG, exportPromiseFragment);
+            fragmentMap.put(IMPORT_PROMISE_FRAGMENT_TAG, importPromiseFragment);
+            fragmentMap.put(NEW_PROMISE_FRAGMENT_TAG, newPromiseFragment);
+            fragmentMap.put(PROFILE_FRAGMENT_TAG, profileFragment);
+            if (getIntent().getExtras() == null) {
+                switchToAnotherFragment(EXPORT_PROMISE_FRAGMENT_TAG);
+            } else {
+                navigation.setSelectedItemId(R.id.bottom_nav_import_promises);
+                // Clear NECESSARILY, otherwise it will problems with screen rotation
+                getIntent().getExtras().clear();
+            }
         } else {
-            fm.beginTransaction().add(R.id.content_fragment, profileFragment, "profile_fragment").hide(profileFragment).commit();
-            fm.beginTransaction().add(R.id.content_fragment, newPromiseFragment, "new_promise_fragment").hide(newPromiseFragment).commit();
-            fm.beginTransaction().add(R.id.content_fragment, exportPromiseFragment, "export_promise_feed").hide(exportPromiseFragment).commit();
-            fm.beginTransaction().add(R.id.content_fragment, importPromiseFragment, "import_promise_feed").commit();
-            navigation.setSelectedItemId(R.id.bottom_nav_import_promises);
+            fragmentMap.put(EXPORT_PROMISE_FRAGMENT_TAG, getSupportFragmentManager().getFragment(savedInstanceState, EXPORT_PROMISE_FRAGMENT_TAG));
+            fragmentMap.put(IMPORT_PROMISE_FRAGMENT_TAG, getSupportFragmentManager().getFragment(savedInstanceState, IMPORT_PROMISE_FRAGMENT_TAG));
+            fragmentMap.put(NEW_PROMISE_FRAGMENT_TAG, getSupportFragmentManager().getFragment(savedInstanceState, NEW_PROMISE_FRAGMENT_TAG));
+            fragmentMap.put(PROFILE_FRAGMENT_TAG, getSupportFragmentManager().getFragment(savedInstanceState, PROFILE_FRAGMENT_TAG));
+            if (getIntent().getExtras() != null) {
+                navigation.setSelectedItemId(R.id.bottom_nav_import_promises);
+                // Clear NECESSARILY, otherwise it will problems with screen rotation
+                getIntent().getExtras().clear();
+            }
         }
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        for (HashMap.Entry<String, Fragment> entry : fragmentMap.entrySet() ) {
+            if (entry.getKey() != null && entry.getValue() != null) {
+                getSupportFragmentManager().putFragment(outState, entry.getKey(), entry.getValue());
+            }
+        }
+    }
+
+    public void switchToAnotherFragment(String fragmentTag) {
+        if (!fragmentMap.containsKey(fragmentTag)) {
+            System.out.println("WHY THIS FRAGMENT IS NOT ON MAP???");
+            return;
+        }
+        Fragment newFragment = fragmentMap.get(fragmentTag);
+        if (newFragment == null) {
+            System.out.println("NULL_FRAGMENT: " + fragmentTag);
+            switch (fragmentTag) {
+                case EXPORT_PROMISE_FRAGMENT_TAG:
+                    newFragment = new ExportPromiseFragment();
+                    break;
+                case IMPORT_PROMISE_FRAGMENT_TAG:
+                    newFragment = new ImportPromiseFragment();
+                    break;
+                case NEW_PROMISE_FRAGMENT_TAG:
+                    newFragment = new PromiseCreaterFragment();
+                    break;
+                case PROFILE_FRAGMENT_TAG:
+                    newFragment = new ProfileFragment();
+                    break;
+                default:
+                    System.out.println("WHY THERE IS NOT FRAGMENT CLASS FOR THIS TAG???");
+                    return;
+            }
+            fragmentMap.put(fragmentTag, newFragment);
+        } else {
+            System.out.println("FRAGMENT EXISTS");
+        }
+
+        FragmentTransaction fragmentTransaction = fm.beginTransaction();
+        if (fm.findFragmentByTag(fragmentTag) == null) {
+            System.out.println("ADDING FRAGMENT" + fragmentTag);
+            fragmentTransaction.add(R.id.content_fragment, newFragment, fragmentTag);
+        }
+
+        for (Fragment fragment : fm.getFragments()) {
+            if (fragment != null && fragment.isVisible()) {
+                fragmentTransaction.hide(fragment);
+                System.out.println("HIDING FRAGMENT:" + fragment.getTag());
+            }
+        }
+
+        fragmentTransaction.show(newFragment).commit();
+        System.out.println("REPLACE DONE, NEW FRAGMENT:" + fragmentTag);
+    }
+
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+            switch (menuItem.getItemId()) {
+                case R.id.bottom_nav_export_promises:
+                    switchToAnotherFragment(EXPORT_PROMISE_FRAGMENT_TAG);
+                    return true;
+
+                case R.id.bottom_nav_import_promises:
+                    switchToAnotherFragment(IMPORT_PROMISE_FRAGMENT_TAG);
+                    return true;
+
+                case R.id.botton_nav_new_promise:
+                    switchToAnotherFragment(NEW_PROMISE_FRAGMENT_TAG);
+                    return true;
+
+                case R.id.bottom_nav_profile:
+                    switchToAnotherFragment(PROFILE_FRAGMENT_TAG);
+                    return true;
+            }
+            return false;
+        }
+    };
+
+    public void switchToFeed() {
+        ((BottomNavigationView) findViewById(R.id.bottom_navigation_menu)).
+                setSelectedItemId(R.id.bottom_nav_export_promises);
+        if (exportPromiseFragment == null) {
+            exportPromiseFragment = new ExportPromiseFragment();
+        }
+        switchToAnotherFragment(EXPORT_PROMISE_FRAGMENT_TAG);
     }
 }

@@ -7,8 +7,7 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.CAMERA"
-        />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:name="com.example.networking.AmbitineApplication"
@@ -18,11 +17,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:screenOrientation="portrait"
         android:usesCleartextTraffic="true">
 
-        <activity android:name="com.example.networking.view.FirstActivity"
-            android:screenOrientation="portrait"
+        <activity
+            android:name="com.example.networking.view.FirstActivity"
             android:theme="@style/AppTheme.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,8 +28,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.networking.view.LoginActivity"
-            android:screenOrientation="portrait">
+        <activity
+            android:name="com.example.networking.view.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
@@ -39,19 +37,20 @@
                 android:name="preloaded_fonts"
                 android:resource="@array/preloaded_fonts" />
         </activity>
-        <activity android:name="com.example.networking.view.HomeActivity"
-                  android:screenOrientation="portrait">
+        <activity
+            android:name="com.example.networking.view.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.networking.view.SignUpActivity"
-            android:screenOrientation="portrait">
+        <activity
+            android:name="com.example.networking.view.SignUpActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
-        <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
-            android:theme="@style/Base.Theme.AppCompat"/>
+        <activity
+            android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat" />
     </application>
 </manifest>
