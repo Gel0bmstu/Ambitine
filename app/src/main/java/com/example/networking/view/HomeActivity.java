@@ -15,6 +15,7 @@ import com.example.networking.view.feeds.fragments.ImportPromiseFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.HashMap;
+import java.util.Set;
 
 public class HomeActivity extends AppCompatActivity {
     // map {Tag: Fragment}
@@ -53,8 +54,9 @@ public class HomeActivity extends AppCompatActivity {
                 switchToAnotherFragment(EXPORT_PROMISE_FRAGMENT_TAG);
             } else {
                 navigation.setSelectedItemId(R.id.bottom_nav_import_promises);
+                System.out.println("WHYYYYYYYYYYY");
                 // Clear NECESSARILY, otherwise it will problems with screen rotation
-                getIntent().getExtras().clear();
+                clearAllExtras();
             }
         } else {
             fragmentMap.put(EXPORT_PROMISE_FRAGMENT_TAG, getSupportFragmentManager().getFragment(savedInstanceState, EXPORT_PROMISE_FRAGMENT_TAG));
@@ -63,8 +65,9 @@ public class HomeActivity extends AppCompatActivity {
             fragmentMap.put(PROFILE_FRAGMENT_TAG, getSupportFragmentManager().getFragment(savedInstanceState, PROFILE_FRAGMENT_TAG));
             if (getIntent().getExtras() != null) {
                 navigation.setSelectedItemId(R.id.bottom_nav_import_promises);
+                System.out.println("WHYYYYYYYYYYY");
                 // Clear NECESSARILY, otherwise it will problems with screen rotation
-                getIntent().getExtras().clear();
+                clearAllExtras();
             }
         }
     }
@@ -159,5 +162,14 @@ public class HomeActivity extends AppCompatActivity {
             exportPromiseFragment = new ExportPromiseFragment();
         }
         switchToAnotherFragment(EXPORT_PROMISE_FRAGMENT_TAG);
+    }
+
+    public void clearAllExtras() {
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            for (String key : extras.keySet()) {
+                getIntent().removeExtra(key);
+            }
+        }
     }
 }
