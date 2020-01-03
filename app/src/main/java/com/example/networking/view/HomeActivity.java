@@ -46,7 +46,6 @@ public class HomeActivity extends AppCompatActivity {
                 switchToAnotherFragment(EXPORT_PROMISE_FRAGMENT_TAG);
             } else {
                 navigation.setSelectedItemId(R.id.bottom_nav_import_promises);
-                System.out.println("WHYYYYYYYYYYY");
                 // Clear NECESSARILY, otherwise it will problems with screen rotation
                 clearAllExtras();
             }
@@ -57,7 +56,6 @@ public class HomeActivity extends AppCompatActivity {
             fragmentMap.put(PROFILE_FRAGMENT_TAG, getSupportFragmentManager().getFragment(savedInstanceState, PROFILE_FRAGMENT_TAG));
             if (getIntent().getExtras() != null) {
                 navigation.setSelectedItemId(R.id.bottom_nav_import_promises);
-                System.out.println("WHYYYYYYYYYYY");
                 // Clear NECESSARILY, otherwise it will problems with screen rotation
                 clearAllExtras();
             }
