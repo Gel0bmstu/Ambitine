@@ -15,22 +15,14 @@ import com.example.networking.view.feeds.fragments.ImportPromiseFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.HashMap;
-import java.util.Set;
 
 public class HomeActivity extends AppCompatActivity {
     // map {Tag: Fragment}
     private HashMap<String, Fragment> fragmentMap = null;
 
-    private Fragment exportPromiseFragment = null;
     private final String EXPORT_PROMISE_FRAGMENT_TAG = "export_promise_feed";
-
-    private Fragment importPromiseFragment = null;
     private final String IMPORT_PROMISE_FRAGMENT_TAG = "import_promise_feed";
-
-    private Fragment newPromiseFragment = null;
     private final String NEW_PROMISE_FRAGMENT_TAG = "new_promise_fragment";
-
-    private Fragment profileFragment = null;
     private final String PROFILE_FRAGMENT_TAG = "profile_fragment";
 
     private FragmentManager fm = getSupportFragmentManager();
@@ -46,10 +38,10 @@ public class HomeActivity extends AppCompatActivity {
 
         fragmentMap = new HashMap<>();
         if (savedInstanceState == null) {
-            fragmentMap.put(EXPORT_PROMISE_FRAGMENT_TAG, exportPromiseFragment);
-            fragmentMap.put(IMPORT_PROMISE_FRAGMENT_TAG, importPromiseFragment);
-            fragmentMap.put(NEW_PROMISE_FRAGMENT_TAG, newPromiseFragment);
-            fragmentMap.put(PROFILE_FRAGMENT_TAG, profileFragment);
+            fragmentMap.put(EXPORT_PROMISE_FRAGMENT_TAG, null);
+            fragmentMap.put(IMPORT_PROMISE_FRAGMENT_TAG, null);
+            fragmentMap.put(NEW_PROMISE_FRAGMENT_TAG, null);
+            fragmentMap.put(PROFILE_FRAGMENT_TAG, null);
             if (getIntent().getExtras() == null) {
                 switchToAnotherFragment(EXPORT_PROMISE_FRAGMENT_TAG);
             } else {
@@ -158,9 +150,6 @@ public class HomeActivity extends AppCompatActivity {
     public void switchToFeed() {
         ((BottomNavigationView) findViewById(R.id.bottom_navigation_menu)).
                 setSelectedItemId(R.id.bottom_nav_export_promises);
-        if (exportPromiseFragment == null) {
-            exportPromiseFragment = new ExportPromiseFragment();
-        }
         switchToAnotherFragment(EXPORT_PROMISE_FRAGMENT_TAG);
     }
 
