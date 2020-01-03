@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.networking.R;
+import com.example.networking.debugtools.AmbitinedToast;
 import com.example.networking.view.feeds.fragments.ExportPromiseFragment;
 import com.example.networking.view.feeds.fragments.ImportPromiseFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -42,22 +43,22 @@ public class HomeActivity extends AppCompatActivity {
             fragmentMap.put(IMPORT_PROMISE_FRAGMENT_TAG, null);
             fragmentMap.put(NEW_PROMISE_FRAGMENT_TAG, null);
             fragmentMap.put(PROFILE_FRAGMENT_TAG, null);
-            if (getIntent().getExtras() == null) {
-                switchToAnotherFragment(EXPORT_PROMISE_FRAGMENT_TAG);
-            } else {
+            Bundle extras = getIntent().getExtras();
+            if (extras != null && extras.get("collapse_key") != null) {
                 navigation.setSelectedItemId(R.id.bottom_nav_import_promises);
-                // Clear NECESSARILY, otherwise it will problems with screen rotation
-                clearAllExtras();
+                getIntent().removeExtra("collapse_key");
+            } else {
+                switchToAnotherFragment(EXPORT_PROMISE_FRAGMENT_TAG);
             }
         } else {
             fragmentMap.put(EXPORT_PROMISE_FRAGMENT_TAG, getSupportFragmentManager().getFragment(savedInstanceState, EXPORT_PROMISE_FRAGMENT_TAG));
             fragmentMap.put(IMPORT_PROMISE_FRAGMENT_TAG, getSupportFragmentManager().getFragment(savedInstanceState, IMPORT_PROMISE_FRAGMENT_TAG));
             fragmentMap.put(NEW_PROMISE_FRAGMENT_TAG, getSupportFragmentManager().getFragment(savedInstanceState, NEW_PROMISE_FRAGMENT_TAG));
             fragmentMap.put(PROFILE_FRAGMENT_TAG, getSupportFragmentManager().getFragment(savedInstanceState, PROFILE_FRAGMENT_TAG));
-            if (getIntent().getExtras() != null) {
+            Bundle extras = getIntent().getExtras();
+            if (extras != null && extras.get("collapse_key") != null) {
                 navigation.setSelectedItemId(R.id.bottom_nav_import_promises);
-                // Clear NECESSARILY, otherwise it will problems with screen rotation
-                clearAllExtras();
+                getIntent().removeExtra("collapse_key");
             }
         }
     }
@@ -149,14 +150,5 @@ public class HomeActivity extends AppCompatActivity {
         ((BottomNavigationView) findViewById(R.id.bottom_navigation_menu)).
                 setSelectedItemId(R.id.bottom_nav_export_promises);
         switchToAnotherFragment(EXPORT_PROMISE_FRAGMENT_TAG);
-    }
-
-    public void clearAllExtras() {
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            for (String key : extras.keySet()) {
-                getIntent().removeExtra(key);
-            }
-        }
     }
 }
