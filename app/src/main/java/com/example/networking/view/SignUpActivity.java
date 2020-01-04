@@ -143,37 +143,5 @@ public class SignUpActivity extends AppCompatActivity {
     public void SwitchActivityAfterSignUpSuccess() {
         Intent HomeIntent = new Intent(this, HomeActivity.class);
         startActivity(HomeIntent);
-
-        File imageFile = new File(fileUri.getPath());
-        progressDialog = new ProgressDialog(signUpActivity);
-        progressDialog.setMessage("Uploading image. Please, Wait");
-        progressDialog.setCancelable(false);
-        progressDialog.setMax(100);
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        AndroidNetworking.upload(BASE_URL + "api/img_upload")
-                .addMultipartFile("avatar", imageFile)
-                .addHeaders("Cookie", UserRepository.getToken())
-                .setPriority(Priority.HIGH)
-                .build()
-                .setUploadProgressListener(new UploadProgressListener() {
-                    @Override
-                    public void onProgress(long bytesUploaded, long totalBytes) {
-                        float progress = (float) bytesUploaded / totalBytes * 100;
-                        progressDialog.setProgress((int)progress);
-                    }
-                })
-                .getAsString(new StringRequestListener() {
-                    @Override
-                    public void onResponse(String response) {
-                        progressDialog.dismiss();
-                        Log.d("waakaa code", response);
-                    }
-
-                    @Override
-                    public void onError(ANError anError) {
-                        progressDialog.dismiss();
-                        Log.d("wakaaa shaakaa", anError.getErrorDetail());
-                    }
-                });
     }
 }
