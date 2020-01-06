@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.networking.R;
+import com.example.networking.debugtools.AmbitinedToast;
 import com.example.networking.model.models.Promise;
 import com.example.networking.model.network.Retrofit.Api;
 import com.example.networking.model.network.Retrofit.ApiService;
@@ -25,9 +26,42 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class PromiseImportAdapter extends RecyclerView.Adapter<PromiseImportAdapter.PromiseHolder> {
+
+public class PromiseImportAdapter extends RecyclerView.Adapter<PromiseImportAdapter.PromiseHolder>  implements ItemTouchHelperAdapter{
 
     private List<Promise> promises;
+
+    @Override
+    public void onItemDismiss(int position, int inAccepted) {
+        Promise promise = promises.get(position);
+        System.out.println("Get promises");
+
+//        System.out.println("IN");
+        System.out.println(inAccepted);
+        System.out.println("Ready to go");
+        promise.setAccepted(inAccepted);
+        System.out.println("To Changed");
+        this.notifyDataSetChanged();
+        System.out.println("Out changed");
+//        AcceptResponse newAcceptPromise = new AcceptResponse(promise.getId(), accepted);
+//        ApiService apiService = Api.getApiService();
+//        Call<ResponseBody> call = apiService.sendAcceptPromise(newAcceptPromise);
+//        call.enqueue(new Callback<ResponseBody>() {
+//            @Override
+//            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+//                if (response.code() == 200) {
+//                    System.out.println("Promise accepted");
+//                } else {
+//                    System.out.println("Promice declined");
+//                }
+//            }
+//            @Override
+//            public void onFailure(Call<ResponseBody> call, Throwable t) {
+//                System.out.println("Send new promise failure");
+//                System.out.println(t.toString());
+//            }
+//        });
+    }
 
     public static class PromiseHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
@@ -42,6 +76,8 @@ public class PromiseImportAdapter extends RecyclerView.Adapter<PromiseImportAdap
         promises = myPromises;
     }
 
+
+
     // Create new views (invoked by the layout manager)
     @Override
     public PromiseImportAdapter.PromiseHolder onCreateViewHolder(ViewGroup parent,
@@ -55,6 +91,15 @@ public class PromiseImportAdapter extends RecyclerView.Adapter<PromiseImportAdap
         return vh;
     }
 
+    public void clear() {
+        promises.clear();
+    }
+
+    public void addAll(List<Promise> newPromises) {
+        clear();
+        promises.addAll(newPromises);
+        notifyDataSetChanged();
+    }
 
 
 
@@ -101,72 +146,13 @@ public class PromiseImportAdapter extends RecyclerView.Adapter<PromiseImportAdap
             holder.matView.setCardBackgroundColor(holder.matView.getResources().getColor(R.color.ambitine_primary_color));
         } else if (accepted == 0) {
             holder.matView.setCardBackgroundColor(holder.matView.getResources().getColor(R.color.empty_promise));
-            final Integer promiseId = promise.getId();
-            acceptedButton.show();
-            declinedButton.show();
-            acceptedButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Integer newAcceptedValue = 1;
-                    AcceptResponse newAcceptPromise = new AcceptResponse(promiseId, newAcceptedValue);
-                    ApiService apiService = Api.getApiService();
-                    Call<ResponseBody> call = apiService.sendAcceptPromise(newAcceptPromise);
-                    call.enqueue(new Callback<ResponseBody>() {
-                        @Override
-                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                            if (response.code() == 200) {
-                                holder.matView.setCardBackgroundColor(holder.matView.getResources().getColor(R.color.ambitine_primary_color));
-                                holder.matView.findViewById(R.id.accepted_fab_button).setVisibility(View.INVISIBLE);
-                                holder.matView.findViewById(R.id.declined_fab_button).setVisibility(View.INVISIBLE);
-                            } else {
-                                Toast.makeText(holder.matView.getContext(), "Something gonna wronh", Toast.LENGTH_LONG).show();
-                            }
-                        }
-                        @Override
-                        public void onFailure(Call<ResponseBody> call, Throwable t) {
-                            System.out.println("Send new promise failure");
-                            System.out.println(t.toString());
-                        }
-                    });
-                }
-            });
-
-            declinedButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Integer newDeclineddValue = -1;
-                    AcceptResponse newAcceptPromise = new AcceptResponse(promiseId, newDeclineddValue);
-                    ApiService apiService = Api.getApiService();
-                    Call<ResponseBody> call = apiService.sendAcceptPromise(newAcceptPromise);
-                    call.enqueue(new Callback<ResponseBody>() {
-                        @Override
-                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                            if (response.code() == 200) {
-                                holder.matView.setCardBackgroundColor(holder.matView.getResources().getColor(R.color.declined_promises));
-                                holder.matView.findViewById(R.id.accepted_fab_button).setVisibility(View.INVISIBLE);
-                                holder.matView.findViewById(R.id.declined_fab_button).setVisibility(View.INVISIBLE);
-                            } else {
-                                Toast.makeText(holder.matView.getContext(), "Something gonna wronh", Toast.LENGTH_LONG).show();
-                            }
-                        }
-                        @Override
-                        public void onFailure(Call<ResponseBody> call, Throwable t) {
-                            System.out.println("Send new promise failure");
-                            System.out.println(t.toString());
-                        }
-                    });
-                }
-            });
         }
-
-
-        // Get ID
-
     }
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
         return promises.size();
     }
+
 
 }
