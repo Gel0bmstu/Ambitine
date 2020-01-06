@@ -16,6 +16,7 @@ import com.example.networking.model.models.Promise;
 import com.example.networking.model.network.Retrofit.Api;
 import com.example.networking.model.network.Retrofit.ApiService;
 import com.example.networking.view.feeds.controllers.ExportPromiseAdapter;
+import com.example.networking.view.feeds.controllers.ItemTouchHelperAdapter;
 import com.example.networking.view.feeds.fragments.ExportPromiseFragment;
 import com.example.networking.view.feeds.fragments.ImportPromiseFragment;
 import com.example.networking.view.feeds.controllers.PromiseImportAdapter;
@@ -30,6 +31,12 @@ public class FeedPromiseController {
     private ExportPromiseFragment exportPromiseFragment;
     private ImportPromiseFragment importPromiseFragment;
     private PromiseSwipeController promiseSwipeController;
+
+    // Export promise recycler view
+    RecyclerView importRecyclerView = null;
+    PromiseImportAdapter mAdapter = null;
+
+
 
     public FeedPromiseController(ExportPromiseFragment feedFragment) {
         this.importPromiseFragment = null;
@@ -57,7 +64,6 @@ public class FeedPromiseController {
                     assert response.body() != null;
 
 
-                    // Tmp method to get data
                     RecyclerView recyclerView = exportPromiseFragment.getView().findViewById(R.id.export_promise_feed);
                     recyclerView.setHasFixedSize(true);
 
@@ -119,39 +125,24 @@ public class FeedPromiseController {
                         feedLayout.removeView(promisesNotFound);
                     }
                     // Tmp method to get data
-                    RecyclerView recyclerView = importPromiseFragment.getView().findViewById(R.id.import_promise_feed);
 
-                    recyclerView.setHasFixedSize(true);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(importPromiseFragment.getActivity()));
-                    // Add swiper
 
                     List<Promise> promises = response.body();
-                    PromiseImportAdapter mAdapter = new PromiseImportAdapter(promises);
-                    // 4. set adapter
-                    recyclerView.setAdapter(mAdapter);
-                    // 5. set item animator to DefaultAnimator
-                    recyclerView.setItemAnimator(new DefaultItemAnimator());
+                    if (mAdapter == null) {
+                        importRecyclerView = importPromiseFragment.getView().findViewById(R.id.import_promise_feed);
+                        importRecyclerView.setHasFixedSize(true);
+                        importRecyclerView.setLayoutManager(new LinearLayoutManager(importPromiseFragment.getActivity()));
+                        mAdapter = new PromiseImportAdapter(promises);
+                        importRecyclerView.setAdapter(mAdapter);
+                        importRecyclerView.setItemAnimator(new DefaultItemAnimator());
+                        ItemTouchHelper.Callback callback = new PromiseSwipeController(mAdapter);
+                        ItemTouchHelper mItemTouchHelper = new ItemTouchHelper(callback);
+                        mItemTouchHelper.attachToRecyclerView(importRecyclerView);
+                    } else {
+                        System.out.println("Not null");
+                        mAdapter.addAll(promises);
+                    }
 
-                    // Add swiper
-                    promiseSwipeController = new PromiseSwipeController(new PromiseSwipeControllerActions() {
-                        @Override
-                        public void onRightClicked(int position) {
-                            System.out.println("RIGHT CLICKED");
-                        }
-                        @Override
-                        public void onLeftClicked(int position) {
-                            System.out.println("LEFT CLICKED");
-                        }
-                    });
-
-                    ItemTouchHelper itemTouchhelper = new ItemTouchHelper(promiseSwipeController);
-                    itemTouchhelper.attachToRecyclerView(recyclerView);
-                    recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
-                        @Override
-                        public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
-                            promiseSwipeController.onDraw(c);
-                        }
-                    });
 
                 } else if (response.code() == 404) {
                     TextView promisesNotFound = new TextView(Objects.requireNonNull(importPromiseFragment.getView()).getContext());
