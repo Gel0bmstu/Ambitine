@@ -82,18 +82,6 @@ public class FeedPromiseController {
                         System.out.println("Not null");
                         mExpAdapter.addAll(promises);
                     }
-//                    RecyclerView recyclerView = exportPromiseFragment.getView().findViewById(R.id.export_promise_feed);
-//                    recyclerView.setHasFixedSize(true);
-//
-//
-//
-//                    recyclerView.setLayoutManager(new LinearLayoutManager(exportPromiseFragment.getActivity()));
-//                    List<Promise> promises = response.body();
-//                    ExportPromiseAdapter mAdapter = new ExportPromiseAdapter(promises);
-//                    // 4. set adapter
-//                    recyclerView.setAdapter(mAdapter);
-//                    // 5. set item animator to DefaultAnimator
-//                    recyclerView.setItemAnimator(new DefaultItemAnimator());
 
                 } else if (response.code() == 404) {
                     LinearLayout noExportPromises = Objects.requireNonNull(exportPromiseFragment.getView()).findViewById(R.id.no_export_promises_layout);
@@ -143,6 +131,7 @@ public class FeedPromiseController {
                         mAdapter = new PromiseImportAdapter(promises);
                         importRecyclerView.setAdapter(mAdapter);
                         importRecyclerView.setItemAnimator(new DefaultItemAnimator());
+                        // Add swipe callback
                         ItemTouchHelper.Callback callback = new PromiseSwipeController(mAdapter);
                         ItemTouchHelper mItemTouchHelper = new ItemTouchHelper(callback);
                         mItemTouchHelper.attachToRecyclerView(importRecyclerView);
