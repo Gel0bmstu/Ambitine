@@ -4,7 +4,10 @@ import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
@@ -18,6 +21,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 
 import com.androidnetworking.AndroidNetworking;
@@ -32,6 +36,7 @@ import com.example.networking.model.database.UserDB;
 import com.example.networking.model.models.Profile;
 import com.github.mikephil.charting.charts.PieChart;
 
+import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
@@ -48,6 +53,7 @@ import com.theartofdev.edmodo.cropper.CropImage;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static android.app.Activity.RESULT_OK;
 import static com.example.networking.model.network.Retrofit.Api.BASE_URL;
@@ -132,27 +138,6 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-
-
-        PieChart pieChart = (PieChart) rootView.findViewById(R.id.chart1);
-
-        List<PieEntry> entries = new ArrayList<>();
-        entries.add(new PieEntry(2, "Accepted"));
-        entries.add(new PieEntry(1, "Declined"));
-        entries.add(new PieEntry(0, "Processed"));
-
-
-        PieDataSet dataset = new PieDataSet(entries, "# of Calls");
-
-        PieData data = new PieData(dataset);
-        dataset.setColors(ColorTemplate.MATERIAL_COLORS); //
-//        pieChart.setDescription("Description");
-        pieChart.setData(data);
-
-        pieChart.animateY(3000);
-
-//        anyChartView.draw();
-
         return rootView;
     }
 
@@ -211,6 +196,14 @@ public class ProfileFragment extends Fragment {
         }
     }
 
+    public static int rgb(String hex) {
+        int color = (int) Long.parseLong(hex.replace("#", ""), 16);
+        int r = (color >> 16) & 0xFF;
+        int g = (color >> 8) & 0xFF;
+        int b = (color) & 0xFF;
+        return Color.rgb(r, g, b);
+    }
+
     public void setProfileData(Profile profile) {
         ImageView profileAvatarView = rootView.findViewById(R.id.profile_avatar);
         TextView profileUsernameView = rootView.findViewById(R.id.profile_username);
@@ -235,6 +228,61 @@ public class ProfileFragment extends Fragment {
                 profile.getAccepted_count() + "/" +
                 profile.getDeclined_count() + "/" +
                 profile.getProcessing_count();
+
+        PieChart pieChart = rootView.findViewById(R.id.chart1);
+
+        Integer acceptedCounter = profile.getAccepted_count();
+        Integer declineCounter = profile.getDeclined_count();
+        Integer processingCounter = profile.getProcessing_count();
+
+        List<PieEntry> entries = new ArrayList<>();
+        // ToDo: So fucking disgusting
+        if (acceptedCounter != 0) {
+            entries.add(new PieEntry(acceptedCounter, "Accepted"));
+        }
+        if (declineCounter != 0) {
+            entries.add(new PieEntry(profile.getDeclined_count(), "Declined"));
+        }
+        if (processingCounter != 0) {
+            entries.add(new PieEntry(profile.getProcessing_count(), "Processed"));
+        }
+
+
+        PieDataSet dataset = new PieDataSet(entries, "number of promises");
+
+        PieData data = new PieData(dataset);
+
+        // Some color
+
+        final int[] MATERIAL_COLORS = {
+                rgb("#00A997"), rgb("#D64141"), rgb("#e74c3c")
+        };
+        dataset.setColors(ColorTemplate.MATERIAL_COLORS); //
+        pieChart.setData(data);
+
+        // Set center text
+//        Typeface typeface = ResourcesCompat.getFont(Objects.requireNonNull(this.getContext()), R.font.fugaz_one);
+
+        pieChart.setCenterText("Promises count");
+        pieChart.setCenterTextSize(15f);
+//        pieChart.setCenterTextTypeface(typeface);
+        // Legend
+        pieChart.setTransparentCircleRadius(0);
+        pieChart.getLegend().setEnabled(false);
+
+
+        // Title settings
+        data.setValueTextColor(Color.BLACK);
+        dataset.setValueLinePart1OffsetPercentage(10.f);
+        dataset.setValueLinePart1Length(0.43f);
+        dataset.setValueLinePart2Length(.1f);
+        dataset.setValueTextColor(Color.BLACK);
+        dataset.setXValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
+        pieChart.setEntryLabelColor(Color.BLACK);
+
+        // Piechart animation
+        pieChart.animateX(500);
+
         profilePromisesView.setText(promisesText);
     }
 }

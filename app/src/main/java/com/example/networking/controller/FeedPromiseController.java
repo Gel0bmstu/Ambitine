@@ -31,9 +31,13 @@ public class FeedPromiseController {
     private ImportPromiseFragment importPromiseFragment;
     private PromiseSwipeController promiseSwipeController;
 
-    // Export promise recycler view
+    // Import promise
     RecyclerView importRecyclerView = null;
     PromiseImportAdapter mAdapter = null;
+
+    // Export promise
+    ExportPromiseAdapter mExpAdapter = null;
+    RecyclerView exportRecyclerView = null;
 
 
 
@@ -66,18 +70,30 @@ public class FeedPromiseController {
                     assert response.body() != null;
 
 
-                    RecyclerView recyclerView = exportPromiseFragment.getView().findViewById(R.id.export_promise_feed);
-                    recyclerView.setHasFixedSize(true);
-
-
-
-                    recyclerView.setLayoutManager(new LinearLayoutManager(exportPromiseFragment.getActivity()));
                     List<Promise> promises = response.body();
-                    ExportPromiseAdapter mAdapter = new ExportPromiseAdapter(promises);
-                    // 4. set adapter
-                    recyclerView.setAdapter(mAdapter);
-                    // 5. set item animator to DefaultAnimator
-                    recyclerView.setItemAnimator(new DefaultItemAnimator());
+                    if (mAdapter == null) {
+                        exportRecyclerView = exportPromiseFragment.getView().findViewById(R.id.export_promise_feed);
+                        exportRecyclerView.setHasFixedSize(true);
+                        exportRecyclerView.setLayoutManager(new LinearLayoutManager(exportPromiseFragment.getActivity()));
+                        mExpAdapter = new ExportPromiseAdapter(promises);
+                        exportRecyclerView.setAdapter(mExpAdapter);
+                        exportRecyclerView.setItemAnimator(new DefaultItemAnimator());
+                    } else {
+                        System.out.println("Not null");
+                        mExpAdapter.addAll(promises);
+                    }
+//                    RecyclerView recyclerView = exportPromiseFragment.getView().findViewById(R.id.export_promise_feed);
+//                    recyclerView.setHasFixedSize(true);
+//
+//
+//
+//                    recyclerView.setLayoutManager(new LinearLayoutManager(exportPromiseFragment.getActivity()));
+//                    List<Promise> promises = response.body();
+//                    ExportPromiseAdapter mAdapter = new ExportPromiseAdapter(promises);
+//                    // 4. set adapter
+//                    recyclerView.setAdapter(mAdapter);
+//                    // 5. set item animator to DefaultAnimator
+//                    recyclerView.setItemAnimator(new DefaultItemAnimator());
 
                 } else if (response.code() == 404) {
                     LinearLayout noExportPromises = Objects.requireNonNull(exportPromiseFragment.getView()).findViewById(R.id.no_export_promises_layout);

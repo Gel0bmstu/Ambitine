@@ -28,6 +28,16 @@ public class ExportPromiseAdapter extends RecyclerView.Adapter<ExportPromiseAdap
         }
     }
 
+    private void clear() {
+        promises.clear();
+    }
+
+    public void addAll(List<Promise> newPromises) {
+        clear();
+        promises.addAll(newPromises);
+        notifyDataSetChanged();
+    }
+
     public ExportPromiseAdapter(List<Promise> myPromises) {
         promises = myPromises;
     }
