@@ -21,6 +21,8 @@ import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.squareup.picasso.Picasso;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 import okhttp3.ResponseBody;
@@ -38,9 +40,9 @@ public class PromiseImportAdapter extends RecyclerView.Adapter<PromiseImportAdap
     public void onItemDismiss(int position, int inAccepted) {
         Promise promise = promises.get(position);
         if (promise.getAccepted() != 0) {
-            String loginFailureMessage = context.getResources().getString(R.string.already_resolved);
+            String promisesResolved = context.getResources().getString(R.string.already_resolved);
             Activity activity = (Activity) context;
-            AmbitinedToast.getInstance().debugAboveTheKeyboard(activity, loginFailureMessage);
+            AmbitinedToast.getInstance().debugAboveTheKeyboard(activity, promisesResolved);
             this.notifyDataSetChanged();
         } else {
             this.notifyDataSetChanged();
@@ -82,6 +84,7 @@ public class PromiseImportAdapter extends RecyclerView.Adapter<PromiseImportAdap
 
 
     // Create new views (invoked by the layout manager)
+    @NotNull
     @Override
     public PromiseImportAdapter.PromiseHolder onCreateViewHolder(ViewGroup parent,
                                                                  int viewType) {
