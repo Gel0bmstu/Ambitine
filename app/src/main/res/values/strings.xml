@@ -37,6 +37,7 @@
 
     <!--    Profile activity -->
     <string name="upload_button">Photo upload button</string>
+    <string name="logout_button">Log out</string>
     <!--    Profile activity -->
 
     <string name="no_promises">You have no promises so far.</string>

@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+
 import com.example.networking.model.database.UserDB;
+
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 
@@ -19,7 +21,7 @@ public class FirstActivity extends AppCompatActivity {
                 .build();
         Realm.setDefaultConfiguration(realmConfiguration);
 
-        UserDB.deleteToken();
+//        UserDB.deleteToken();
 
         if (!UserDB.isAuthorized()) {
             Intent LoginIntent = new Intent(this, LoginActivity.class);
