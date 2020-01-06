@@ -48,6 +48,8 @@
     <string name="login_failure_case">Login failed</string>
     <string name="login_wrong_data">Username or password is incorrect</string>
     <string name="signup_failure_case">Signup failed</string>
+    <!-- Failed promise handle-->
+    <string name="already_resolved">This promise already resolved</string>
 
 
 </resources>

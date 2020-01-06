@@ -34,9 +34,9 @@ public class PromiseSwipeController extends ItemTouchHelper.Callback {
 
     @Override
     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-        if(direction == LEFT) {
+        if(direction == RIGHT) {
             mAdapter.onItemDismiss(viewHolder.getAdapterPosition(), 1);
-        } else if(direction == RIGHT) {
+        } else if(direction == LEFT) {
             mAdapter.onItemDismiss(viewHolder.getAdapterPosition(), -1);
         }
     }

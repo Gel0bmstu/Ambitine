@@ -1,5 +1,7 @@
 package com.example.networking.view.feeds.controllers;
 
+import android.app.Activity;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,30 +32,38 @@ import retrofit2.Response;
 public class PromiseImportAdapter extends RecyclerView.Adapter<PromiseImportAdapter.PromiseHolder>  implements ItemTouchHelperAdapter{
 
     private List<Promise> promises;
+    private Context context;
 
     @Override
     public void onItemDismiss(int position, int inAccepted) {
         Promise promise = promises.get(position);
-        promise.setAccepted(inAccepted);
-        this.notifyDataSetChanged();
-        AcceptResponse newAcceptPromise = new AcceptResponse(promise.getId(), inAccepted);
-        ApiService apiService = Api.getApiService();
-        Call<ResponseBody> call = apiService.sendAcceptPromise(newAcceptPromise);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if (response.code() == 200) {
-                    System.out.println("Promise accepted");
-                } else {
-                    System.out.println("Promice declined");
+        if (promise.getAccepted() != 0) {
+            String loginFailureMessage = context.getResources().getString(R.string.already_resolved);
+            Activity activity = (Activity) context;
+            AmbitinedToast.getInstance().debugAboveTheKeyboard(activity, loginFailureMessage);
+            this.notifyDataSetChanged();
+        } else {
+            this.notifyDataSetChanged();
+            promise.setAccepted(inAccepted);
+            AcceptResponse newAcceptPromise = new AcceptResponse(promise.getId(), inAccepted);
+            ApiService apiService = Api.getApiService();
+            Call<ResponseBody> call = apiService.sendAcceptPromise(newAcceptPromise);
+            call.enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    if (response.code() == 200) {
+                        System.out.println("Promise accepted");
+                    } else {
+                        System.out.println("Promice declined");
+                    }
                 }
-            }
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                System.out.println("Send new promise failure");
-                System.out.println(t.toString());
-            }
-        });
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    System.out.println("Send new promise failure");
+                    System.out.println(t.toString());
+                }
+            });
+        }
     }
 
     public static class PromiseHolder extends RecyclerView.ViewHolder {
@@ -75,10 +85,9 @@ public class PromiseImportAdapter extends RecyclerView.Adapter<PromiseImportAdap
     @Override
     public PromiseImportAdapter.PromiseHolder onCreateViewHolder(ViewGroup parent,
                                                                  int viewType) {
-        // create a new view
         MaterialCardView v = (MaterialCardView) LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.promise_import_item, parent, false);
-//        ...
+        context = parent.getContext();
         PromiseHolder vh = new PromiseHolder(v);
 
         return vh;
