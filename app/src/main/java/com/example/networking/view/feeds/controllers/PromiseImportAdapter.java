@@ -34,33 +34,26 @@ public class PromiseImportAdapter extends RecyclerView.Adapter<PromiseImportAdap
     @Override
     public void onItemDismiss(int position, int inAccepted) {
         Promise promise = promises.get(position);
-        System.out.println("Get promises");
-
-//        System.out.println("IN");
-        System.out.println(inAccepted);
-        System.out.println("Ready to go");
         promise.setAccepted(inAccepted);
-        System.out.println("To Changed");
         this.notifyDataSetChanged();
-        System.out.println("Out changed");
-//        AcceptResponse newAcceptPromise = new AcceptResponse(promise.getId(), accepted);
-//        ApiService apiService = Api.getApiService();
-//        Call<ResponseBody> call = apiService.sendAcceptPromise(newAcceptPromise);
-//        call.enqueue(new Callback<ResponseBody>() {
-//            @Override
-//            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-//                if (response.code() == 200) {
-//                    System.out.println("Promise accepted");
-//                } else {
-//                    System.out.println("Promice declined");
-//                }
-//            }
-//            @Override
-//            public void onFailure(Call<ResponseBody> call, Throwable t) {
-//                System.out.println("Send new promise failure");
-//                System.out.println(t.toString());
-//            }
-//        });
+        AcceptResponse newAcceptPromise = new AcceptResponse(promise.getId(), inAccepted);
+        ApiService apiService = Api.getApiService();
+        Call<ResponseBody> call = apiService.sendAcceptPromise(newAcceptPromise);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.code() == 200) {
+                    System.out.println("Promise accepted");
+                } else {
+                    System.out.println("Promice declined");
+                }
+            }
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                System.out.println("Send new promise failure");
+                System.out.println(t.toString());
+            }
+        });
     }
 
     public static class PromiseHolder extends RecyclerView.ViewHolder {
