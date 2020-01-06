@@ -32,12 +32,12 @@ public class FeedPromiseController {
     private PromiseSwipeController promiseSwipeController;
 
     // Import promise
-    RecyclerView importRecyclerView = null;
-    PromiseImportAdapter mAdapter = null;
+    private RecyclerView importRecyclerView = null;
+    private PromiseImportAdapter mAdapter = null;
 
     // Export promise
-    ExportPromiseAdapter mExpAdapter = null;
-    RecyclerView exportRecyclerView = null;
+    private ExportPromiseAdapter mExpAdapter = null;
+    private RecyclerView exportRecyclerView = null;
 
 
 
@@ -108,13 +108,10 @@ public class FeedPromiseController {
         call.enqueue(new Callback<List<Promise>>() {
             @Override
             public void onResponse(@NotNull Call<List<Promise>> call, @NotNull Response<List<Promise>> response) {
-                System.out.println("WATA SHAKA LAKA");
                 if (response.code() == 200) {
                     LinearLayout noImportPromises = Objects.requireNonNull(importPromiseFragment.getView()).findViewById(R.id.no_import_promises_layout);
                     noImportPromises.setVisibility(View.GONE);
-
                     assert response.body() != null;
-                    System.out.println("WATA SHAKA LAKA");
                     RelativeLayout feedLayout = Objects.requireNonNull(importPromiseFragment.getView()).findViewById(R.id.import_promise_layout);
                     TextView promisesNotFound = importPromiseFragment.getView().findViewById(R.id.not_promises);
                     if (promisesNotFound != null) {
@@ -136,7 +133,6 @@ public class FeedPromiseController {
                         ItemTouchHelper mItemTouchHelper = new ItemTouchHelper(callback);
                         mItemTouchHelper.attachToRecyclerView(importRecyclerView);
                     } else {
-                        System.out.println("Not null");
                         mAdapter.addAll(promises);
                     }
 
@@ -152,8 +148,6 @@ public class FeedPromiseController {
 
             @Override
             public void onFailure(@NotNull Call<List<Promise>> call, @NotNull Throwable t) {
-                System.out.println("FOCK");
-                System.out.println(t.toString());
                 importPromiseFragment.setRefreshingStatus(false);
             }
         });
