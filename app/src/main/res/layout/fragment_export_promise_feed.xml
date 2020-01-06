@@ -9,10 +9,42 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/export_promise_feed"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="?attr/actionBarSize" />
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/export_promise_feed"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="?attr/actionBarSize" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:id="@+id/no_export_promises_layout">
+
+                <ImageView
+                    android:layout_width="400dp"
+                    android:layout_height="400dp"
+                    android:src="@drawable/pinky_promise"
+                    android:tint="@color/ambitine_primary_color"
+                    android:layout_marginBottom="-70dp"
+                    android:layout_marginTop="-200dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="No export promises"
+                    android:textSize="24sp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Seems like no one sent a promise to you"
+                    android:textSize="15sp"/>
+            </LinearLayout>
+        </RelativeLayout>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </RelativeLayout>

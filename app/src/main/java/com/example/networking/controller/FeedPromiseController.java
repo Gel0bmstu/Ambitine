@@ -2,6 +2,7 @@ package com.example.networking.controller;
 
 import android.graphics.Canvas;
 import android.view.Gravity;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -54,6 +55,9 @@ public class FeedPromiseController {
             @Override
             public void onResponse(@NotNull Call<List<Promise>> call, @NotNull Response<List<Promise>> response) {
                 if (response.code() == 200) {
+                    LinearLayout noExportPromises = Objects.requireNonNull(exportPromiseFragment.getView()).findViewById(R.id.no_export_promises_layout);
+                    noExportPromises.setVisibility(View.GONE);
+
                     RelativeLayout feedLayout = Objects.requireNonNull(exportPromiseFragment.getView()).findViewById(R.id.export_feed_layout);
                     TextView promisesNotFound = exportPromiseFragment.getView().findViewById(R.id.not_promises);
                     if (promisesNotFound != null) {
@@ -76,21 +80,8 @@ public class FeedPromiseController {
                     recyclerView.setItemAnimator(new DefaultItemAnimator());
 
                 } else if (response.code() == 404) {
-                    TextView promisesNotFound = new TextView(exportPromiseFragment.getContext());
-                    promisesNotFound.setText(R.string.no_promises);
-                    promisesNotFound.setId(R.id.not_promises);
-                    // Dont work (
-                    promisesNotFound.setGravity(Gravity.CENTER_HORIZONTAL);
-                    promisesNotFound.setTextSize(25);
-                    promisesNotFound.setTextColor(exportPromiseFragment.getResources().getColor(R.color.ambitine_primary_color));
-                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-                    params.setMargins(0,350,0,0);
-                    promisesNotFound.setLayoutParams(params);
-                    RelativeLayout feedLayout = Objects.requireNonNull(exportPromiseFragment.getView()).findViewById(R.id.export_feed_layout);
-                    // ToDo: Maybe add image
-                    if (exportPromiseFragment.getView().findViewById(R.id.not_promises) == null) {
-                        feedLayout.addView(promisesNotFound);
-                    }
+                    LinearLayout noExportPromises = Objects.requireNonNull(exportPromiseFragment.getView()).findViewById(R.id.no_export_promises_layout);
+                    noExportPromises.setVisibility(View.VISIBLE);
                 } else {
                     System.out.println("Another handle way");
                 }
