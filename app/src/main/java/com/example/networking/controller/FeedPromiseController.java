@@ -106,6 +106,9 @@ public class FeedPromiseController {
             public void onResponse(@NotNull Call<List<Promise>> call, @NotNull Response<List<Promise>> response) {
                 System.out.println("WATA SHAKA LAKA");
                 if (response.code() == 200) {
+                    LinearLayout noImportPromises = Objects.requireNonNull(importPromiseFragment.getView()).findViewById(R.id.no_import_promises_layout);
+                    noImportPromises.setVisibility(View.GONE);
+
                     assert response.body() != null;
                     System.out.println("WATA SHAKA LAKA");
                     RelativeLayout feedLayout = Objects.requireNonNull(importPromiseFragment.getView()).findViewById(R.id.import_promise_layout);
@@ -134,21 +137,8 @@ public class FeedPromiseController {
 
 
                 } else if (response.code() == 404) {
-                    TextView promisesNotFound = new TextView(Objects.requireNonNull(importPromiseFragment.getView()).getContext());
-                    promisesNotFound.setText(R.string.no_promises);
-                    promisesNotFound.setId(R.id.not_promises);
-                    // Dont work (
-                    promisesNotFound.setGravity(Gravity.CENTER_HORIZONTAL);
-                    promisesNotFound.setTextSize(25);
-                    promisesNotFound.setTextColor(importPromiseFragment.getView().getResources().getColor(R.color.ambitine_primary_color));
-                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-                    params.setMargins(0,350,0,0);
-                    promisesNotFound.setLayoutParams(params);
-                    RelativeLayout feedLayout = importPromiseFragment.getView().findViewById(R.id.import_promise_layout);
-                    // ToDo: Maybe add image
-                    if (importPromiseFragment.getView().findViewById(R.id.not_promises) == null) {
-                        feedLayout.addView(promisesNotFound);
-                    }
+                    LinearLayout noImportPromises = Objects.requireNonNull(importPromiseFragment.getView()).findViewById(R.id.no_import_promises_layout);
+                    noImportPromises.setVisibility(View.VISIBLE);
                 } else {
                     System.out.println("Another handle way");
                 }

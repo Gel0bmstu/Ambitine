@@ -9,10 +9,44 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/import_promise_feed"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="?attr/actionBarSize" />
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/import_promise_feed"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="?attr/actionBarSize" />
+
+            <LinearLayout
+                android:id="@+id/no_import_promises_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="400dp"
+                    android:layout_height="400dp"
+                    android:layout_marginTop="-200dp"
+                    android:layout_marginBottom="-70dp"
+                    android:src="@drawable/pinky_promise"
+                    android:tint="@color/ambitine_primary_color" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="No import promises"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Seems like you have never promised to anyone"
+                    android:textSize="15sp" />
+            </LinearLayout>
+        </RelativeLayout>
+
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </RelativeLayout>
