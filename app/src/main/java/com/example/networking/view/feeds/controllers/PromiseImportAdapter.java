@@ -89,8 +89,9 @@ public class PromiseImportAdapter extends RecyclerView.Adapter<PromiseImportAdap
         MaterialCardView v = (MaterialCardView) LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.promise_import_item, parent, false);
         context = parent.getContext();
+        PromiseHolder vh = new PromiseHolder(v);
 
-        return new PromiseHolder(v);
+        return vh;
     }
 
     private void clear() {
