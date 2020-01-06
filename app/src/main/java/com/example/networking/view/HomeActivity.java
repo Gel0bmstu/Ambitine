@@ -162,6 +162,17 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void switchToLoginActivity() {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        FragmentManager fm = getSupportFragmentManager();
+        for (HashMap.Entry<String, Fragment> entry : fragmentMap.entrySet()) {
+            if (entry.getKey() != null && entry.getValue() != null) {
+                transaction.remove(entry.getValue());
+            }
+        }
+
+        fragmentMap.clear();
+        transaction.commit();
+
         Intent LoginIntent = new Intent(this, LoginActivity.class);
         startActivity(LoginIntent);
     }
