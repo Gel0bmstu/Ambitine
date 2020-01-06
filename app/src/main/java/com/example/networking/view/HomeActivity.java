@@ -42,7 +42,15 @@ public class HomeActivity extends AppCompatActivity {
             fragmentMap.put(EXPORT_PROMISE_FRAGMENT_TAG, null);
             fragmentMap.put(IMPORT_PROMISE_FRAGMENT_TAG, null);
             fragmentMap.put(NEW_PROMISE_FRAGMENT_TAG, null);
-            fragmentMap.put(PROFILE_FRAGMENT_TAG, null);
+            fragmentMap.put(PROFILE_FRAGMENT_TAG, new ProfileFragment());
+            Fragment profileFragment = fragmentMap.get(PROFILE_FRAGMENT_TAG);
+            if (profileFragment != null) {
+                FragmentTransaction fragmentTransaction = fm.beginTransaction();
+                fragmentTransaction.add(R.id.content_fragment, profileFragment, PROFILE_FRAGMENT_TAG);
+                fragmentTransaction.hide(profileFragment);
+                fragmentTransaction.commit();
+            }
+
             Bundle extras = getIntent().getExtras();
             if (extras != null && extras.get("collapse_key") != null) {
                 navigation.setSelectedItemId(R.id.bottom_nav_import_promises);
@@ -67,7 +75,7 @@ public class HomeActivity extends AppCompatActivity {
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
 
-        for (HashMap.Entry<String, Fragment> entry : fragmentMap.entrySet() ) {
+        for (HashMap.Entry<String, Fragment> entry : fragmentMap.entrySet()) {
             if (entry.getKey() != null && entry.getValue() != null) {
                 getSupportFragmentManager().putFragment(outState, entry.getKey(), entry.getValue());
             }
