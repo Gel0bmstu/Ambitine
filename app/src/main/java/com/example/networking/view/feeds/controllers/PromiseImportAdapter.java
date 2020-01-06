@@ -3,11 +3,9 @@ package com.example.networking.view.feeds.controllers;
 import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -52,7 +50,7 @@ public class PromiseImportAdapter extends RecyclerView.Adapter<PromiseImportAdap
             Call<ResponseBody> call = apiService.sendAcceptPromise(newAcceptPromise);
             call.enqueue(new Callback<ResponseBody>() {
                 @Override
-                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                public void onResponse(@NotNull Call<ResponseBody> call, @NotNull Response<ResponseBody> response) {
                     if (response.code() == 200) {
                         System.out.println("Promise accepted");
                     } else {
@@ -60,7 +58,7 @@ public class PromiseImportAdapter extends RecyclerView.Adapter<PromiseImportAdap
                     }
                 }
                 @Override
-                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                public void onFailure(@NotNull Call<ResponseBody> call, @NotNull Throwable t) {
                     System.out.println("Send new promise failure");
                     System.out.println(t.toString());
                 }
@@ -68,10 +66,10 @@ public class PromiseImportAdapter extends RecyclerView.Adapter<PromiseImportAdap
         }
     }
 
-    public static class PromiseHolder extends RecyclerView.ViewHolder {
+    static class PromiseHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
-        public MaterialCardView matView;
-        public PromiseHolder(MaterialCardView v) {
+        MaterialCardView matView;
+        PromiseHolder(MaterialCardView v) {
             super(v);
             matView = v;
         }
@@ -91,12 +89,11 @@ public class PromiseImportAdapter extends RecyclerView.Adapter<PromiseImportAdap
         MaterialCardView v = (MaterialCardView) LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.promise_import_item, parent, false);
         context = parent.getContext();
-        PromiseHolder vh = new PromiseHolder(v);
 
-        return vh;
+        return new PromiseHolder(v);
     }
 
-    public void clear() {
+    private void clear() {
         promises.clear();
     }
 
