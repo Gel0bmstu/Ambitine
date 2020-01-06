@@ -1,7 +1,5 @@
 package com.example.networking.controller;
 
-import android.graphics.Canvas;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -29,7 +27,6 @@ import retrofit2.Response;
 public class FeedPromiseController {
     private ExportPromiseFragment exportPromiseFragment;
     private ImportPromiseFragment importPromiseFragment;
-    private PromiseSwipeController promiseSwipeController;
 
     // Import promise
     private RecyclerView importRecyclerView = null;

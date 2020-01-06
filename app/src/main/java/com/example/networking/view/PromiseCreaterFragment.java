@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -18,16 +17,13 @@ import androidx.fragment.app.Fragment;
 import com.example.networking.R;
 import com.example.networking.controller.NewPromiseController;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.List;
 import java.util.Objects;
 
 public class PromiseCreaterFragment extends Fragment {
-    View rootView;
+    private View rootView;
     // ToDo: Tmp solution for test, self implemented adapter for users ( with image ) coming soon, i PROMISE
-    private List<String> usersAutocomplete = new ArrayList<>();
     private NewPromiseController newPromiseController;
 
     @Nullable

@@ -5,25 +5,17 @@ import com.example.networking.debugtools.AmbitinedToast;
 import com.example.networking.model.models.Profile;
 import com.example.networking.model.network.Retrofit.Api;
 import com.example.networking.model.network.Retrofit.ApiService;
-import com.example.networking.model.network.Retrofit.ProfileService;
 import com.example.networking.view.ProfileFragment;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
-import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
-import com.example.networking.model.network.Retrofit.Interceptors.AddCookiesInterceptor;
-import com.example.networking.model.network.Retrofit.Interceptors.ReceivedCookiesInterceptor;
 
 import org.jetbrains.annotations.NotNull;
 
 public class ProfileController {
-    ProfileFragment profileFragment;
+    private ProfileFragment profileFragment;
 
     public ProfileController(ProfileFragment profileFragment) {
         this.profileFragment = profileFragment;
