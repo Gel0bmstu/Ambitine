@@ -1,5 +1,6 @@
 package com.example.networking.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -158,5 +159,10 @@ public class HomeActivity extends AppCompatActivity {
         ((BottomNavigationView) findViewById(R.id.bottom_navigation_menu)).
                 setSelectedItemId(R.id.bottom_nav_export_promises);
         switchToAnotherFragment(EXPORT_PROMISE_FRAGMENT_TAG);
+    }
+
+    public void switchToLoginActivity() {
+        Intent LoginIntent = new Intent(this, LoginActivity.class);
+        startActivity(LoginIntent);
     }
 }

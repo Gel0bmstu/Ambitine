@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -27,6 +28,7 @@ import com.androidnetworking.interfaces.UploadProgressListener;
 import com.example.networking.R;
 import com.example.networking.controller.ProfileController;
 import com.example.networking.model.UserRepository;
+import com.example.networking.model.database.UserDB;
 import com.example.networking.model.models.Profile;
 import com.github.mikephil.charting.charts.PieChart;
 
@@ -115,10 +117,21 @@ public class ProfileFragment extends Fragment {
                             }
                         })
                         .check();
-//                System.out.println("govnyaka");
-//                showFileChooser();
             }
         });
+
+        Button logoutBtn = rootView.findViewById(R.id.logout_button);
+        logoutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UserDB.deleteToken();
+                HomeActivity homeActivity = (HomeActivity) getActivity();
+                if (homeActivity != null) {
+                    homeActivity.switchToLoginActivity();
+                }
+            }
+        });
+
 
 
         PieChart pieChart = (PieChart) rootView.findViewById(R.id.chart1);
