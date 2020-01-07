@@ -41,6 +41,9 @@ public interface ApiService {
     @GET("api/user_info/")
     Call<Profile> getAllFeedItems();
 
+    @GET("api/logout/")
+    Call<Body> logout();
+
 //    Нужно тестить
     @POST("api/user/{id}")
     Call<User> userRequest();

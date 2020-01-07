@@ -31,9 +31,13 @@ import com.androidnetworking.interfaces.StringRequestListener;
 import com.androidnetworking.interfaces.UploadProgressListener;
 import com.example.networking.R;
 import com.example.networking.controller.ProfileController;
+import com.example.networking.debugtools.AmbitinedToast;
 import com.example.networking.model.UserRepository;
 import com.example.networking.model.database.UserDB;
 import com.example.networking.model.models.Profile;
+import com.example.networking.model.models.Promise;
+import com.example.networking.model.network.Retrofit.Api;
+import com.example.networking.model.network.Retrofit.ApiService;
 import com.github.mikephil.charting.charts.PieChart;
 
 import com.github.mikephil.charting.components.Description;
@@ -54,6 +58,12 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.http.Body;
+import retrofit2.internal.EverythingIsNonNull;
 
 import static android.app.Activity.RESULT_OK;
 import static com.example.networking.model.network.Retrofit.Api.BASE_URL;
@@ -135,6 +145,22 @@ public class ProfileFragment extends Fragment {
                 if (homeActivity != null) {
                     homeActivity.switchToLoginActivity();
                 }
+
+                ApiService service = Api.getApiService();
+                Call<Body> call = service.logout();
+                call.enqueue(new Callback<Body>() {
+                    @EverythingIsNonNull
+                    @Override
+                    public void onResponse(Call<Body> call, Response<Body> response) {
+                        System.out.println("logout done");
+                    }
+
+                    @EverythingIsNonNull
+                    @Override
+                    public void onFailure(Call<Body> call, Throwable t) {
+                        System.out.println("Logout network error");
+                    }
+                });
             }
         });
 
