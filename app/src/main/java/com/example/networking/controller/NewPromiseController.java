@@ -108,7 +108,7 @@ public class NewPromiseController {
                     String balanceTrouble = Objects.requireNonNull(newPromiseFragment.getActivity()).getResources().getString(R.string.wrong_balance_newpromise);
                     AmbitinedToast.getInstance().debugAboveTheKeyboard(newPromiseFragment.getActivity(), balanceTrouble);
                 } else {
-                    String promiseTrouble = Objects.requireNonNull(newPromiseFragment.getActivity()).getResources().getString(R.string.wrond_new_promise_failed) + "(" + responceCode + ")";
+                    String promiseTrouble = Objects.requireNonNull(newPromiseFragment.getActivity()).getResources().getString(R.string.wrong_reciever_newpromise);
                     AmbitinedToast.getInstance().debugAboveTheKeyboard(newPromiseFragment.getActivity(), promiseTrouble);
                 }
             }
