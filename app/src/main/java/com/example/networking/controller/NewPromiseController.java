@@ -66,14 +66,11 @@ public class NewPromiseController {
     }
 
     public void onNewPromiseButtonClick() {
-        Integer depositValue = 0;
+        Integer depositValue;
         String username = newPromiseFragment.getRecieverUsername();
         //Deposit handle
         String deposit = newPromiseFragment.getDeposit();
 //        assert deposit != null;
-        if (deposit != null ) {
-            depositValue = Integer.valueOf(deposit);
-        }
         String description = newPromiseFragment.getPromiseDescription();
         Long pastdue = newPromiseFragment.getPastDue();
 
@@ -84,6 +81,9 @@ public class NewPromiseController {
         } else if (deposit == null || deposit.isEmpty()) {
             String depositWrong = Objects.requireNonNull(newPromiseFragment.getActivity()).getResources().getString(R.string.wrong_deposit_value);
             AmbitinedToast.getInstance().debugAboveTheKeyboard(newPromiseFragment.getActivity(), depositWrong);
+        } else if (description == null || description.isEmpty()) {
+            String descriptionValue = Objects.requireNonNull(newPromiseFragment.getActivity()).getResources().getString(R.string.wrong_description_value);
+            AmbitinedToast.getInstance().debugAboveTheKeyboard(newPromiseFragment.getActivity(), descriptionValue);
         } else {
             depositValue = Integer.valueOf(deposit);
             NewPromiseResponce newPromiseReponce = new NewPromiseResponce(username, description, pastdue, depositValue);
