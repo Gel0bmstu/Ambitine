@@ -73,6 +73,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void printError(String error) {
-        AmbitinedToast.getInstance().debugAboveTheKeyboard(this, error);
+        AmbitinedToast.getInstance().debugErrorColor(this, error);
     }
 }

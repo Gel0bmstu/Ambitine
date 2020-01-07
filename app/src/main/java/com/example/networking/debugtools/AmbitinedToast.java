@@ -55,4 +55,28 @@ public class AmbitinedToast {
         }
         toast.show();
     }
+
+    public void debugErrorColor(Activity activity, String text) {
+        Toast toast = Toast.makeText(activity, text, Toast.LENGTH_SHORT);
+
+        View toastView = toast.getView(); // This'll return the default View of the Toast.
+        toastView.setPadding(16, 10, 16, 10);
+
+        TextView toastMessage = toastView.findViewById(android.R.id.message);
+        toastMessage.setTextColor(Color.WHITE);
+        toastView.setBackgroundColor(activity.getResources().getColor(R.color.colorPrimaryDark));
+
+        // determine position of visible view (without or with keyboard)
+        Rect r = new Rect();
+        activity.getWindow().getDecorView().getWindowVisibleDisplayFrame(r);
+
+        final float scale = activity.getResources().getDisplayMetrics().density;
+        // check if keyboard activated
+        if (Math.abs(r.bottom - activity.getWindow().getDecorView().getHeight()) < 150) {
+            toast.setGravity(Gravity.TOP | Gravity.CENTER, 0, r.bottom - r.top - (int) (100 * scale - 0.5f));
+        } else {
+            toast.setGravity(Gravity.TOP | Gravity.CENTER, 0, r.bottom - r.top - (int) (50 * scale - 0.5f));
+        }
+        toast.show();
+    }
 }

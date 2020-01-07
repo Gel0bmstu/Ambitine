@@ -37,7 +37,7 @@ public class ProfileController {
             @Override
             public void onFailure(@NotNull Call<Profile> call, @NotNull Throwable t) {
                 String recievingError = profileFragment.getResources().getString(R.string.profile_data_error);
-                AmbitinedToast.getInstance().debug(profileFragment.getActivity(), recievingError);
+                AmbitinedToast.getInstance().debugAboveTheKeyboard(profileFragment.getActivity(), recievingError);
             }
 
         });
