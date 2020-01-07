@@ -102,7 +102,7 @@ public class SignUpController {
             return "Please, remove space from password";
         }
         if (workLine.length() < 6) {
-            return "Username is too short";
+            return "password is too short";
         }
         return VALIDATED_OK;
     }
