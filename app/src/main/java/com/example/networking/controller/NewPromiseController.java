@@ -5,6 +5,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Toast;
 
 import com.example.networking.R;
+import com.example.networking.debugtools.AmbitinedToast;
 import com.example.networking.model.network.Retrofit.Api;
 import com.example.networking.model.network.Retrofit.ApiService;
 import com.example.networking.model.network.Retrofit.Response.NewPromiseResponce;
@@ -87,16 +88,24 @@ public class NewPromiseController {
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(@NotNull Call<ResponseBody> call, @NotNull Response<ResponseBody> response) {
-                if (response.code() == 201) {
+                int responceCode = response.code();
+                if (responceCode== 201) {
                     System.out.println("New promise send");
+                } else if (responceCode == 409){
+                    String recieverTrouble = Objects.requireNonNull(newPromiseFragment.getActivity()).getResources().getString(R.string.wrong_reciever_newpromise);
+                    AmbitinedToast.getInstance().debugAboveTheKeyboard(newPromiseFragment.getActivity(), recieverTrouble);
+                } else if (responceCode == 401){
+                    String balanceTrouble = Objects.requireNonNull(newPromiseFragment.getActivity()).getResources().getString(R.string.wrong_balance_newpromise);
+                    AmbitinedToast.getInstance().debugAboveTheKeyboard(newPromiseFragment.getActivity(), balanceTrouble);
                 } else {
-                    System.out.println("Another code");
-                    System.out.println(response.code());
+                    String promiseTrouble = Objects.requireNonNull(newPromiseFragment.getActivity()).getResources().getString(R.string.wrond_new_promise_failed) + "(" + responceCode + ")";
+                    AmbitinedToast.getInstance().debugAboveTheKeyboard(newPromiseFragment.getActivity(), promiseTrouble);
                 }
             }
             @Override
             public void onFailure(@NotNull Call<ResponseBody> call, @NotNull Throwable t) {
-                Toast.makeText(Objects.requireNonNull(newPromiseFragment.getActivity()).getApplicationContext(),"New promise create failed",Toast.LENGTH_SHORT).show();
+                String promiseTrouble = Objects.requireNonNull(newPromiseFragment.getActivity()).getResources().getString(R.string.wrond_new_promise_failed);
+                AmbitinedToast.getInstance().debugAboveTheKeyboard(newPromiseFragment.getActivity(), promiseTrouble);
             }
         });
     }

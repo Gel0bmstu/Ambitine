@@ -53,5 +53,10 @@
     <string name="piechart_center">Promises count</string>
     <string name="wallet_title">Your wallet address</string>
 
+<!--    Handle new promise failure-->
+    <string name="wrong_balance_newpromise">Need more gold</string>
+    <string name="wrong_reciever_newpromise">Wrong promice receiver username</string>
+    <string name="wrond_new_promise_failed">Something gonna wrong, we already fixing</string>
+
 
 </resources>
