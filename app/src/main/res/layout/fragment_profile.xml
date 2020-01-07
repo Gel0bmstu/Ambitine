@@ -74,23 +74,61 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal">
+                android:gravity="center_vertical">
 
-                <TextView
-                    android:id="@+id/profile_balance"
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:drawableEnd="@drawable/balanceic"
-                    android:textSize="20sp" />
+                    android:gravity="start|top"
+                    android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/profile_debt"
+
+                    <TextView
+                        android:id="@+id/profile_balance_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/balance"
+                        android:layout_marginTop="20dp"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/profile_balance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:drawableEnd="@drawable/balanceic"
+                        android:textSize="20sp" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:drawableEnd="@drawable/balanceic"
-                    android:textSize="20sp" />
+                    android:gravity="end|top"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/profile_debt_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginStart="50dp"
+                        android:text="@string/promised"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/profile_debt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:textColor="@color/processed_promise"
+                        android:drawableEnd="@drawable/balanceic"
+                        android:textSize="20sp" />
+
+                </LinearLayout>
+
             </LinearLayout>
 
             <TextView

@@ -59,6 +59,8 @@
     <string name="wrond_new_promise_failed">Something gonna wrong, we already fixing</string>
     <string name="wrong_deposit_value">Please set deposit value</string>
     <string name="wrong_description_value">Please fill description field</string>
+    <string name="promised">Promised</string>
+    <string name="balance">Balance</string>
 
 
 </resources>
