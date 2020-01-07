@@ -47,24 +47,30 @@
             android:text="@string/username_feed_mock"
             android:textSize="24sp" />
 
+
+
+        <TextView
+            android:id="@+id/profile_wallet_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textSize="20sp" />
+
         <TextView
             android:id="@+id/profile_wallet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="8dp"
+            android:singleLine="true"
+            android:ellipsize="end"
             android:textIsSelectable="true"
-            android:textSize="20sp" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/logout_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/logout_button" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/profile_balance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:drawableEnd="@drawable/balanceic"
             android:layout_marginTop="4dp"
             android:textSize="20sp" />
 
@@ -79,6 +85,12 @@
             android:id="@+id/chart1"
             android:layout_width="300dp"
             android:layout_height="300dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/logout_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/logout_button" />
 
     </LinearLayout>
 </ScrollView>

@@ -210,6 +210,7 @@ public class ProfileFragment extends Fragment {
         TextView profileWalletView = rootView.findViewById(R.id.profile_wallet);
         TextView profileBalanceView = rootView.findViewById(R.id.profile_balance);
         TextView profilePromisesView = rootView.findViewById(R.id.profile_promises);
+        TextView profileWalletTitle = rootView.findViewById(R.id.profile_wallet_title);
 
         Picasso.get().load(profile.getImg_url())
                 .resize(500, 700)
@@ -218,18 +219,19 @@ public class ProfileFragment extends Fragment {
 
         profileUsernameView.setText(profile.getUsername());
 
-        String walletText = "Wallet: " + profile.getWallet();
+
+        profileWalletTitle.setText(R.string.wallet_title);
+        String walletText = profile.getWallet();
         profileWalletView.setText(walletText);
 
-        String balanceText = "Balance: " + profile.getBalance();
+        String balanceText = String.format("%.2f", profile.getBalance());
         profileBalanceView.setText(balanceText);
 
-        String promisesText = "ACC / DEC / PROC: " +
-                profile.getAccepted_count() + "/" +
-                profile.getDeclined_count() + "/" +
-                profile.getProcessing_count();
+
 
         PieChart pieChart = rootView.findViewById(R.id.chart1);
+
+
 
         Integer acceptedCounter = profile.getAccepted_count();
         Integer declineCounter = profile.getDeclined_count();
@@ -249,40 +251,30 @@ public class ProfileFragment extends Fragment {
 
 
         PieDataSet dataset = new PieDataSet(entries, "number of promises");
-
         PieData data = new PieData(dataset);
 
-        // Some color
-
-        final int[] MATERIAL_COLORS = {
-                rgb("#00A997"), rgb("#D64141"), rgb("#e74c3c")
+        final int[] AMBITINE_COLORS = {
+                rgb("#00A997"), rgb("#D64141"), rgb("#4D62DF")
         };
-        dataset.setColors(ColorTemplate.MATERIAL_COLORS); //
+        dataset.setColors(AMBITINE_COLORS); //
         pieChart.setData(data);
 
-        // Set center text
-//        Typeface typeface = ResourcesCompat.getFont(Objects.requireNonNull(this.getContext()), R.font.fugaz_one);
-
-        pieChart.setCenterText("Promises count");
+        pieChart.setCenterText(getResources().getString(R.string.piechart_center));
         pieChart.setCenterTextSize(15f);
-//        pieChart.setCenterTextTypeface(typeface);
         // Legend
         pieChart.setTransparentCircleRadius(0);
         pieChart.getLegend().setEnabled(false);
+        pieChart.getDescription().setEnabled(false);
 
 
         // Title settings
-        data.setValueTextColor(Color.BLACK);
-        dataset.setValueLinePart1OffsetPercentage(10.f);
-        dataset.setValueLinePart1Length(0.43f);
-        dataset.setValueLinePart2Length(.1f);
-        dataset.setValueTextColor(Color.BLACK);
-        dataset.setXValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
-        pieChart.setEntryLabelColor(Color.BLACK);
+        data.setValueTextColor(Color.WHITE);
+        dataset.setValueTextSize(10f);
+        dataset.setValueTextColor(Color.WHITE);
+        pieChart.setEntryLabelColor(Color.WHITE);
 
         // Piechart animation
         pieChart.animateX(500);
 
-        profilePromisesView.setText(promisesText);
     }
 }

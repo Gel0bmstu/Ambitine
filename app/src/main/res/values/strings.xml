@@ -50,6 +50,8 @@
     <string name="signup_failure_case">Signup failed</string>
     <!-- Failed promise handle-->
     <string name="already_resolved">This promise already resolved</string>
+    <string name="piechart_center">Promises count</string>
+    <string name="wallet_title">Your wallet address</string>
 
 
 </resources>
