@@ -58,7 +58,7 @@ public class SignUpController {
                     signUpActivity.SwitchActivityAfterSignUpSuccess();
                 } else if (responseCode == 409) {
                     String userConflictMessage = signUpActivity.getResources().getString(R.string.profile_data_error);
-                    AmbitinedToast.getInstance().debugAboveTheKeyboard(signUpActivity, userConflictMessage);
+                    AmbitinedToast.getInstance().debugDarkColor(signUpActivity, userConflictMessage);
                 }
 
             }
@@ -66,7 +66,7 @@ public class SignUpController {
             @Override
             public void onFailure(@NotNull Call<ResponseBody> call, @NotNull Throwable t) {
                 String userConflictMessage = signUpActivity.getResources().getString(R.string.signup_failure_case);
-                AmbitinedToast.getInstance().debugAboveTheKeyboard(signUpActivity, userConflictMessage);
+                AmbitinedToast.getInstance().debugRedColor(signUpActivity, userConflictMessage);
             }
         });
     }

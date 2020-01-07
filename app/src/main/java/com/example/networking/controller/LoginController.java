@@ -56,14 +56,14 @@ public class LoginController {
                     loginActivity.SwitchActivityAfterLoginSuccess();
                 } else if (responseCode == 400) {
                     String loginFailureMessage = loginActivity.getResources().getString(R.string.login_wrong_data);
-                    AmbitinedToast.getInstance().debugAboveTheKeyboard(loginActivity, loginFailureMessage);
+                    AmbitinedToast.getInstance().debugDarkColor(loginActivity, loginFailureMessage);
                 }
             }
 
             @Override
             public void onFailure(@NotNull Call<ResponseBody> call, @NotNull Throwable t) {
                 String loginFailureMessage = loginActivity.getResources().getString(R.string.login_failure_case);
-                AmbitinedToast.getInstance().debugAboveTheKeyboard(loginActivity, loginFailureMessage);
+                AmbitinedToast.getInstance().debugRedColor(loginActivity, loginFailureMessage);
             }
         });
     }
