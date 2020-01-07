@@ -152,7 +152,12 @@ public class ProfileFragment extends Fragment {
                     @EverythingIsNonNull
                     @Override
                     public void onResponse(Call<Body> call, Response<Body> response) {
-                        System.out.println("logout done");
+                        if (response.code() == 200) {
+                            System.out.println("logout done");
+
+                        } else {
+                            System.out.println("logout error: (code) " + response.code());
+                        }
                     }
 
                     @EverythingIsNonNull
