@@ -59,9 +59,10 @@ public class PromiseCreaterFragment extends Fragment {
         return recieverUsername.getText().toString();
     }
 
-    public Integer getDeposit() {
+    public String getDeposit() {
         EditText depositValue = rootView.findViewById(R.id.deposit_new_promise);
-        return Integer.valueOf(depositValue.getText().toString());
+        String depositTextViewValue = depositValue.getText().toString();
+        return depositTextViewValue;
     }
 
     public String getPromiseDescription() {

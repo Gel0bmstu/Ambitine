@@ -209,6 +209,7 @@ public class ProfileFragment extends Fragment {
         TextView profileUsernameView = rootView.findViewById(R.id.profile_username);
         TextView profileWalletView = rootView.findViewById(R.id.profile_wallet);
         TextView profileBalanceView = rootView.findViewById(R.id.profile_balance);
+        TextView profileDebtView = rootView.findViewById(R.id.profile_debt);
         TextView profilePromisesView = rootView.findViewById(R.id.profile_promises);
         TextView profileWalletTitle = rootView.findViewById(R.id.profile_wallet_title);
 
@@ -225,7 +226,11 @@ public class ProfileFragment extends Fragment {
         profileWalletView.setText(walletText);
 
         String balanceText = String.format("%.2f", profile.getBalance());
+        String debtText = String.format("%.2f", profile.getDebt());
+
+
         profileBalanceView.setText(balanceText);
+        profileDebtView.setText(debtText);
 
 
 

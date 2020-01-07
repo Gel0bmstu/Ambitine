@@ -10,6 +10,7 @@ public class Profile {
     private Integer declined_count;
     private Integer processing_count;
     private Float balance;
+    private Float debt;
     private String wallet;
 
     public String getUsername() {
@@ -38,5 +39,9 @@ public class Profile {
 
     public String getWallet() {
         return wallet;
+    }
+
+    public Float getDebt() {
+        return debt;
     }
 }
