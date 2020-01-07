@@ -13,9 +13,11 @@ import android.widget.ImageView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.networking.R;
 
 import com.example.networking.controller.SignUpController;
+import com.example.networking.debugtools.AmbitinedToast;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.karumi.dexter.Dexter;
@@ -117,7 +119,7 @@ public class SignUpActivity extends AppCompatActivity {
         return Objects.requireNonNull(usernameInput.getText()).toString();
     }
 
-    public String getToken(){
+    public String getToken() {
         String token = FirebaseInstanceId.getInstance().getToken();
         System.out.println("TOKEN OUT");
         System.out.println(token);
@@ -132,5 +134,9 @@ public class SignUpActivity extends AppCompatActivity {
     public void SwitchActivityAfterSignUpSuccess() {
         Intent HomeIntent = new Intent(this, HomeActivity.class);
         startActivity(HomeIntent);
+    }
+
+    public void printError(String error) {
+        AmbitinedToast.getInstance().debugAboveTheKeyboard(this, error);
     }
 }

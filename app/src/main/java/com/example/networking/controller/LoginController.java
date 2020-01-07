@@ -16,6 +16,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginController {
+    private String VALIDATED_OK = "OK";
+
     private LoginActivity loginActivity;
 
     public LoginController(LoginActivity loginActivity) {
@@ -27,6 +29,18 @@ public class LoginController {
         String username = loginActivity.getUsername();
         String password = loginActivity.getPassword();
         String token = loginActivity.getToken();
+
+        String error = validateUsername(username);
+        if (!error.equals(VALIDATED_OK)) {
+            loginActivity.printError(error);
+            return;
+        }
+        error = validatePassword(password);
+        if (!error.equals(VALIDATED_OK)) {
+            loginActivity.printError(error);
+            return;
+        }
+
         LoginResponse loginResponse = new LoginResponse(username, password, token);
         login(loginResponse);
     }
@@ -54,4 +68,17 @@ public class LoginController {
         });
     }
 
+    private String validateUsername(String username) {
+        if (username == null || username.isEmpty()) {
+            return "Please, fill in the username field";
+        }
+        return VALIDATED_OK;
+    }
+
+    private String validatePassword(String password) {
+        if (password == null || password.isEmpty()) {
+            return "Please, fill in the password field";
+        }
+        return VALIDATED_OK;
+    }
 }

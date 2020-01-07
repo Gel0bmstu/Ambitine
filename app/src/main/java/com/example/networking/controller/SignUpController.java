@@ -11,12 +11,16 @@ import com.example.networking.view.SignUpActivity;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.concurrent.TransferQueue;
+
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class SignUpController {
+    private String VALIDATED_OK = "OK";
+
     private SignUpActivity signUpActivity;
 
     public SignUpController(SignUpActivity signUpActivity) {
@@ -28,11 +32,20 @@ public class SignUpController {
         String password = signUpActivity.getPassword();
         String token = signUpActivity.getToken();
 
+        String error = validateUsername(username);
+        if (!error.equals(VALIDATED_OK)) {
+            signUpActivity.printError(error);
+            return;
+        }
+        error = validatePassword(password);
+        if (!error.equals(VALIDATED_OK)) {
+            signUpActivity.printError(error);
+            return;
+        }
+
         RegistrationResponse registrationResponse = new RegistrationResponse(username, password, token);
         signUp(registrationResponse);
     }
-
-
 
     private void signUp(final RegistrationResponse registrationResponse) {
         ApiService apiService = Api.getApiService();
@@ -56,5 +69,41 @@ public class SignUpController {
                 AmbitinedToast.getInstance().debug(signUpActivity, userConflictMessage);
             }
         });
+    }
+
+    private String validateUsername(String username) {
+        if (username == null || username.isEmpty()) {
+            return "Please, fill in the username field";
+        }
+        String workLine = username.trim();
+        if (workLine.indexOf(' ') > 0) {
+            return "Please, remove spaces from username";
+        }
+        if (workLine.length() < 4) {
+            return "Username is too short";
+        }
+
+        for (int i = 0; i < workLine.length(); i++) {
+            char ch = workLine.charAt(i);
+            if (!((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z'))) {
+                return  "Please, use only latin alphabet for username";
+            }
+        }
+
+        return VALIDATED_OK;
+    }
+
+    private String validatePassword(String password) {
+        if (password == null || password.isEmpty()) {
+            return "Please, fill in the password field";
+        }
+        String workLine = password.trim();
+        if (workLine.indexOf(' ') > 0) {
+            return "Please, remove space from password";
+        }
+        if (workLine.length() < 6) {
+            return "Username is too short";
+        }
+        return VALIDATED_OK;
     }
 }

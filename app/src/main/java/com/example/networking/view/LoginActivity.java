@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.networking.R;
 import com.example.networking.controller.LoginController;
+import com.example.networking.debugtools.AmbitinedToast;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.iid.FirebaseInstanceId;
 
@@ -69,5 +70,9 @@ public class LoginActivity extends AppCompatActivity {
     public void SwitchActivityAfterLoginSuccess() {
         Intent HomeIntent = new Intent(this, HomeActivity.class);
         startActivity(HomeIntent);
+    }
+
+    public void printError(String error) {
+        AmbitinedToast.getInstance().debugAboveTheKeyboard(this, error);
     }
 }
