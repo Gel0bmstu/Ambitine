@@ -1,154 +1,142 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/profile_swipe_container"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/scrollView"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_marginBottom="?attr/actionBarSize"
+    android:fillViewport="true">
 
-    <androidx.core.widget.NestedScrollView
-        xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/scrollView"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="?attr/actionBarSize"
-        android:fillViewport="true">
+        android:layout_height="wrap_content"
+        android:gravity="center|top"
+        android:orientation="vertical">
+
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profile_avatar"
+                android:layout_width="108dp"
+                android:layout_height="108dp"
+                android:src="@drawable/conference"
+                card_view:civ_border_color="#FF000000"
+                card_view:civ_border_width="2dp" />
+
+            <ImageView
+                android:id="@+id/upload_button"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="100dp"
+                android:clickable="true"
+                android:contentDescription="@string/upload_button"
+                android:focusable="true"
+                android:tint="@color/ambitine_primary_color"
+                card_view:srcCompat="@drawable/plus_icon" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/profile_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/username_feed_mock"
+            android:textSize="24sp" />
+
+
+        <TextView
+            android:id="@+id/profile_wallet_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/profile_wallet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textIsSelectable="true"
+            android:textSize="14sp" />
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center|top"
-            android:orientation="vertical">
+            android:gravity="center_vertical">
 
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/profile_avatar"
-                    android:layout_width="108dp"
-                    android:layout_height="108dp"
-                    android:layout_marginTop="40dp"
-                    android:src="@drawable/conference"
-                    card_view:civ_border_color="#FF000000"
-                    card_view:civ_border_width="2dp" />
-
-                <ImageView
-                    android:id="@+id/upload_button"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="140dp"
-                    android:clickable="true"
-                    android:contentDescription="@string/upload_button"
-                    android:focusable="true"
-                    android:tint="@color/ambitine_primary_color"
-                    card_view:srcCompat="@drawable/plus_icon" />
-            </RelativeLayout>
-
-            <TextView
-                android:id="@+id/profile_username"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="@string/username_feed_mock"
-                android:textSize="24sp" />
-
-
-            <TextView
-                android:id="@+id/profile_wallet_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/profile_wallet"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:ellipsize="end"
-                android:singleLine="true"
-                android:textIsSelectable="true"
-                android:textSize="14sp" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical">
+                android:gravity="start|top"
+                android:orientation="vertical">
 
 
-                <LinearLayout
+                <TextView
+                    android:id="@+id/profile_balance_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="start|top"
-                    android:orientation="vertical">
+                    android:layout_marginTop="20dp"
+                    android:text="@string/balance"
+                    android:textSize="20sp" />
 
-
-                    <TextView
-                        android:id="@+id/profile_balance_title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/balance"
-                        android:layout_marginTop="20dp"
-                        android:textSize="20sp" />
-
-                    <TextView
-                        android:id="@+id/profile_balance"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:drawableEnd="@drawable/balanceic"
-                        android:textSize="20sp" />
-
-                </LinearLayout>
-
-
-                <LinearLayout
+                <TextView
+                    android:id="@+id/profile_balance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="end|top"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/profile_debt_title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginStart="50dp"
-                        android:text="@string/promised"
-                        android:textSize="20sp" />
-
-                    <TextView
-                        android:id="@+id/profile_debt"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:textColor="@color/processed_promise"
-                        android:drawableEnd="@drawable/balanceic"
-                        android:textSize="20sp" />
-
-                </LinearLayout>
+                    android:layout_marginTop="4dp"
+                    android:drawableEnd="@drawable/balanceic"
+                    android:textSize="20sp" />
 
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/profile_promises"
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:textSize="20sp" />
+                android:gravity="end|top"
+                android:orientation="vertical">
 
-            <com.github.mikephil.charting.charts.PieChart
-                android:id="@+id/chart1"
-                android:layout_width="300dp"
-                android:layout_height="300dp" />
+                <TextView
+                    android:id="@+id/profile_debt_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/promised"
+                    android:textSize="20sp" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/logout_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/logout_button" />
+                <TextView
+                    android:id="@+id/profile_debt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:drawableEnd="@drawable/balanceic"
+                    android:textColor="@color/processed_promise"
+                    android:textSize="20sp" />
+
+            </LinearLayout>
 
         </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
-</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/chart1"
+            android:layout_width="300dp"
+            android:layout_height="300dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/logout_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/logout_button"
+            android:textSize="15sp"/>
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

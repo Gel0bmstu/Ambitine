@@ -69,13 +69,12 @@ import retrofit2.internal.EverythingIsNonNull;
 import static android.app.Activity.RESULT_OK;
 import static com.example.networking.model.network.Retrofit.Api.BASE_URL;
 
-public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener  {
+public class ProfileFragment extends Fragment  {
     private int PICK_IMAGE_REQUEST = 1;
     public static final int PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 123;
     private String UPLOAD_URL = BASE_URL + "api/img_upload";
 
     private Uri fileUri;
-    private SwipeRefreshLayout swipeRefreshLayout;
     ProfileFragment profileFragment = this;
     ProgressDialog progressDialog;
 
@@ -88,8 +87,6 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
         System.out.println("SHKET POMOYNOY GADZY");
 
         rootView = inflater.inflate(R.layout.fragment_profile, container, false);
-        swipeRefreshLayout = rootView.findViewById(R.id.profile_swipe_container);
-        swipeRefreshLayout.setOnRefreshListener(this);
 
         if (profileController == null) {
             profileController = new ProfileController(this);
@@ -243,7 +240,6 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
         TextView profileWalletView = rootView.findViewById(R.id.profile_wallet);
         TextView profileBalanceView = rootView.findViewById(R.id.profile_balance);
         TextView profileDebtView = rootView.findViewById(R.id.profile_debt);
-        TextView profilePromisesView = rootView.findViewById(R.id.profile_promises);
         TextView profileWalletTitle = rootView.findViewById(R.id.profile_wallet_title);
 
         Picasso.get().load(profile.getImg_url())
@@ -314,16 +310,5 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
         // Piechart animation
         pieChart.animateX(500);
 
-    }
-
-    @Override
-    public void onRefresh() {
-        System.out.println("HHHHHHHUIII");
-        profileController.getProfileData();
-        System.out.println("HHHHHHHUIII");
-    }
-
-    public void setRefreshingStatus(boolean refreshStatus) {
-        swipeRefreshLayout.setRefreshing(refreshStatus);
     }
 }
