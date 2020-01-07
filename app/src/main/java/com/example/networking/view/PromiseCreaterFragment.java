@@ -45,8 +45,6 @@ public class PromiseCreaterFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 newPromiseController.onNewPromiseButtonClick();
-                ((HomeActivity) Objects.requireNonNull(getActivity())).switchToFeed();
-                clearAfterCreateNewPromise();
             }
 
         });
@@ -83,9 +81,9 @@ public class PromiseCreaterFragment extends Fragment {
     }
 
     private void clearAfterCreateNewPromise() {
-        ((AutoCompleteTextView)rootView.findViewById(R.id.users_autocomplete)).setText("");
-        ((EditText)rootView.findViewById(R.id.deposit_new_promise)).setText("");
-        ((EditText)rootView.findViewById(R.id.new_promise_description)).setText("");
+        ((AutoCompleteTextView) rootView.findViewById(R.id.users_autocomplete)).setText("");
+        ((EditText) rootView.findViewById(R.id.deposit_new_promise)).setText("");
+        ((EditText) rootView.findViewById(R.id.new_promise_description)).setText("");
         // TODO: set default time and date
     }
 
@@ -93,5 +91,10 @@ public class PromiseCreaterFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+    }
+
+    public void switchToFeed() {
+        ((HomeActivity) Objects.requireNonNull(getActivity())).switchToFeed();
+        clearAfterCreateNewPromise();
     }
 }

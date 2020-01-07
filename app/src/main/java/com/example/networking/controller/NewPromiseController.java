@@ -12,6 +12,7 @@ import com.example.networking.model.network.Retrofit.Response.NewPromiseResponce
 import com.example.networking.view.PromiseCreaterFragment;
 
 import org.jetbrains.annotations.NotNull;
+
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -30,7 +31,7 @@ public class NewPromiseController {
     }
 
     private Long getNowTimestamp() {
-        Date date= new Date();
+        Date date = new Date();
         return date.getTime();
     }
 
@@ -50,7 +51,7 @@ public class NewPromiseController {
                             android.R.layout.simple_dropdown_item_1line, usersArray);
 
                     AutoCompleteTextView textView = Objects.requireNonNull(newPromiseFragment
-                                                    .getView()).findViewById(R.id.users_autocomplete);
+                            .getView()).findViewById(R.id.users_autocomplete);
                     textView.setAdapter(adapter);
                 } else {
                     System.out.println("Another handle way");
@@ -75,9 +76,9 @@ public class NewPromiseController {
         Long pastdue = newPromiseFragment.getPastDue();
 
         int compared = pastdue.compareTo(getNowTimestamp());
-        if (compared < 0  || compared == 0) {
+        if (compared < 0 || compared == 0) {
             Toast.makeText(Objects.requireNonNull(newPromiseFragment.getActivity())
-                    .getApplicationContext(),"Available only if you are timetraveller!",Toast.LENGTH_SHORT).show();
+                    .getApplicationContext(), "Available only if you are timetraveller!", Toast.LENGTH_SHORT).show();
         } else if (deposit == null || deposit.isEmpty()) {
             String depositWrong = Objects.requireNonNull(newPromiseFragment.getActivity()).getResources().getString(R.string.wrong_deposit_value);
             AmbitinedToast.getInstance().debugAboveTheKeyboard(newPromiseFragment.getActivity(), depositWrong);
@@ -89,7 +90,6 @@ public class NewPromiseController {
             NewPromiseResponce newPromiseReponce = new NewPromiseResponce(username, description, pastdue, depositValue);
             sendNewPromise(newPromiseReponce);
         }
-
     }
 
     private void sendNewPromise(final NewPromiseResponce newPromiseResponce) {
@@ -99,12 +99,13 @@ public class NewPromiseController {
             @Override
             public void onResponse(@NotNull Call<ResponseBody> call, @NotNull Response<ResponseBody> response) {
                 int responceCode = response.code();
-                if (responceCode== 201) {
+                if (responceCode == 201) {
                     System.out.println("New promise send");
-                } else if (responceCode == 409){
+                    newPromiseFragment.switchToFeed();
+                } else if (responceCode == 409) {
                     String recieverTrouble = Objects.requireNonNull(newPromiseFragment.getActivity()).getResources().getString(R.string.wrong_reciever_newpromise);
                     AmbitinedToast.getInstance().debugAboveTheKeyboard(newPromiseFragment.getActivity(), recieverTrouble);
-                } else if (responceCode == 401){
+                } else if (responceCode == 401) {
                     String balanceTrouble = Objects.requireNonNull(newPromiseFragment.getActivity()).getResources().getString(R.string.wrong_balance_newpromise);
                     AmbitinedToast.getInstance().debugAboveTheKeyboard(newPromiseFragment.getActivity(), balanceTrouble);
                 } else {
@@ -112,6 +113,7 @@ public class NewPromiseController {
                     AmbitinedToast.getInstance().debugAboveTheKeyboard(newPromiseFragment.getActivity(), promiseTrouble);
                 }
             }
+
             @Override
             public void onFailure(@NotNull Call<ResponseBody> call, @NotNull Throwable t) {
                 String promiseTrouble = Objects.requireNonNull(newPromiseFragment.getActivity()).getResources().getString(R.string.wrond_new_promise_failed);
