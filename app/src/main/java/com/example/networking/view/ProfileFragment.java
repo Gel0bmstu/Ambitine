@@ -23,6 +23,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
@@ -68,12 +69,13 @@ import retrofit2.internal.EverythingIsNonNull;
 import static android.app.Activity.RESULT_OK;
 import static com.example.networking.model.network.Retrofit.Api.BASE_URL;
 
-public class ProfileFragment extends Fragment {
+public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener  {
     private int PICK_IMAGE_REQUEST = 1;
     public static final int PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 123;
     private String UPLOAD_URL = BASE_URL + "api/img_upload";
 
     private Uri fileUri;
+    private SwipeRefreshLayout swipeRefreshLayout;
     ProfileFragment profileFragment = this;
     ProgressDialog progressDialog;
 
@@ -86,6 +88,8 @@ public class ProfileFragment extends Fragment {
         System.out.println("SHKET POMOYNOY GADZY");
 
         rootView = inflater.inflate(R.layout.fragment_profile, container, false);
+        swipeRefreshLayout = rootView.findViewById(R.id.profile_swipe_container);
+        swipeRefreshLayout.setOnRefreshListener(this);
 
         if (profileController == null) {
             profileController = new ProfileController(this);
@@ -149,7 +153,6 @@ public class ProfileFragment extends Fragment {
                 ApiService service = Api.getApiService();
                 Call<Body> call = service.logout();
                 call.enqueue(new Callback<Body>() {
-                    @EverythingIsNonNull
                     @Override
                     public void onResponse(Call<Body> call, Response<Body> response) {
                         if (response.code() == 200) {
@@ -160,7 +163,6 @@ public class ProfileFragment extends Fragment {
                         }
                     }
 
-                    @EverythingIsNonNull
                     @Override
                     public void onFailure(Call<Body> call, Throwable t) {
                         System.out.println("Logout network error");
@@ -312,5 +314,16 @@ public class ProfileFragment extends Fragment {
         // Piechart animation
         pieChart.animateX(500);
 
+    }
+
+    @Override
+    public void onRefresh() {
+        System.out.println("HHHHHHHUIII");
+        profileController.getProfileData();
+        System.out.println("HHHHHHHUIII");
+    }
+
+    public void setRefreshingStatus(boolean refreshStatus) {
+        swipeRefreshLayout.setRefreshing(refreshStatus);
     }
 }

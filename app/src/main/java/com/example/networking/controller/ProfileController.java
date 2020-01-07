@@ -32,12 +32,14 @@ public class ProfileController {
                     assert profile != null;
                     profileFragment.setProfileData(profile);
                 }
+                profileFragment.setRefreshingStatus(false);
             }
 
             @Override
             public void onFailure(@NotNull Call<Profile> call, @NotNull Throwable t) {
                 String recievingError = profileFragment.getResources().getString(R.string.profile_data_error);
                 AmbitinedToast.getInstance().debugAboveTheKeyboard(profileFragment.getActivity(), recievingError);
+                profileFragment.setRefreshingStatus(false);
             }
 
         });
