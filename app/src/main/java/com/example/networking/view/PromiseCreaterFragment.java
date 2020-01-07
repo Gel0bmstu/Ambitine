@@ -56,26 +56,17 @@ public class PromiseCreaterFragment extends Fragment {
 
     public String getRecieverUsername() {
         AutoCompleteTextView recieverUsername = rootView.findViewById(R.id.users_autocomplete);
-        String recieverUsernameString = recieverUsername.getText().toString();
-        System.out.println("Reciever username from autocomplete");
-        System.out.println(recieverUsernameString);
-        return recieverUsernameString;
+        return recieverUsername.getText().toString();
     }
 
     public Integer getDeposit() {
         EditText depositValue = rootView.findViewById(R.id.deposit_new_promise);
-        Integer depositValueForNewPromise = Integer.valueOf(depositValue.getText().toString());
-        System.out.println("Deposit value for new promise");
-        System.out.println(depositValueForNewPromise);
-        return  depositValueForNewPromise;
+        return Integer.valueOf(depositValue.getText().toString());
     }
 
     public String getPromiseDescription() {
         EditText newPromiseDescription = rootView.findViewById(R.id.new_promise_description);
-        String promiseDescription = newPromiseDescription.getText().toString();
-        System.out.println("Promise description");
-        System.out.println(promiseDescription);
-        return promiseDescription;
+        return newPromiseDescription.getText().toString();
     }
 
     public Long getPastDue() {
@@ -87,10 +78,6 @@ public class PromiseCreaterFragment extends Fragment {
                 datePicker.getDayOfMonth(),
                 timePicker.getCurrentHour(),
                 timePicker.getCurrentMinute());
-        System.out.println("Calendar time");
-        System.out.println(calendar.getTime());
-        System.out.println("Calendar time im milis");
-        System.out.println(calendar.getTimeInMillis());
         return calendar.getTimeInMillis();
     }
 
