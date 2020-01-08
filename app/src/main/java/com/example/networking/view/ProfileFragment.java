@@ -5,9 +5,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
@@ -21,9 +19,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
@@ -32,20 +28,16 @@ import com.androidnetworking.interfaces.StringRequestListener;
 import com.androidnetworking.interfaces.UploadProgressListener;
 import com.example.networking.R;
 import com.example.networking.controller.ProfileController;
-import com.example.networking.debugtools.AmbitinedToast;
 import com.example.networking.model.UserRepository;
 import com.example.networking.model.database.UserDB;
 import com.example.networking.model.models.Profile;
-import com.example.networking.model.models.Promise;
 import com.example.networking.model.network.Retrofit.Api;
 import com.example.networking.model.network.Retrofit.ApiService;
 import com.github.mikephil.charting.charts.PieChart;
-
-import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
-import com.github.mikephil.charting.utils.ColorTemplate;
+import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionDeniedResponse;
@@ -58,13 +50,11 @@ import com.theartofdev.edmodo.cropper.CropImage;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.http.Body;
-import retrofit2.internal.EverythingIsNonNull;
 
 import static android.app.Activity.RESULT_OK;
 import static com.example.networking.model.network.Retrofit.Api.BASE_URL;
@@ -272,7 +262,7 @@ public class ProfileFragment extends Fragment  {
         Integer processingCounter = profile.getProcessing_count();
 
         List<PieEntry> entries = new ArrayList<>();
-        // ToDo: So fucking disgusting
+        // ToDo: Soooo disgusting
         if (acceptedCounter != 0) {
             entries.add(new PieEntry(acceptedCounter, "Accepted"));
         }
@@ -306,6 +296,16 @@ public class ProfileFragment extends Fragment  {
         dataset.setValueTextSize(10f);
         dataset.setValueTextColor(Color.WHITE);
         pieChart.setEntryLabelColor(Color.WHITE);
+
+        ValueFormatter formatter = new ValueFormatter() {
+            @Override
+            public String getFormattedValue(float value) {
+                return "" + ((int) value);
+            }
+        };
+
+
+        dataset.setValueFormatter(formatter);
 
         // Piechart animation
         pieChart.animateX(500);
