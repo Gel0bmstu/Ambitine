@@ -263,24 +263,25 @@ public class ProfileFragment extends Fragment  {
 
         List<PieEntry> entries = new ArrayList<>();
         // ToDo: Soooo disgusting
+        List<Integer> customColors = new ArrayList<>();
         if (acceptedCounter != 0) {
             entries.add(new PieEntry(acceptedCounter, "Accepted"));
+            customColors.add(rgb("#00A997"));
         }
         if (declineCounter != 0) {
             entries.add(new PieEntry(profile.getDeclined_count(), "Declined"));
+            customColors.add(rgb("#D64141"));
         }
         if (processingCounter != 0) {
             entries.add(new PieEntry(profile.getProcessing_count(), "Processed"));
+            customColors.add(rgb("#4D62DF"));
         }
 
 
         PieDataSet dataset = new PieDataSet(entries, "number of promises");
         PieData data = new PieData(dataset);
 
-        final int[] AMBITINE_COLORS = {
-                rgb("#00A997"), rgb("#D64141"), rgb("#4D62DF")
-        };
-        dataset.setColors(AMBITINE_COLORS); //
+        dataset.setColors(customColors); //
         pieChart.setData(data);
 
         pieChart.setCenterText(getResources().getString(R.string.piechart_center));
