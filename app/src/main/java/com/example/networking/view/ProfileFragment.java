@@ -28,6 +28,7 @@ import com.androidnetworking.interfaces.StringRequestListener;
 import com.androidnetworking.interfaces.UploadProgressListener;
 import com.example.networking.R;
 import com.example.networking.controller.ProfileController;
+import com.example.networking.debugtools.AmbitinedToast;
 import com.example.networking.model.UserRepository;
 import com.example.networking.model.database.UserDB;
 import com.example.networking.model.models.Profile;
@@ -131,30 +132,31 @@ public class ProfileFragment extends Fragment  {
         logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UserDB.deleteToken();
-                HomeActivity homeActivity = (HomeActivity) getActivity();
-                if (homeActivity != null) {
-                    homeActivity.switchToLoginActivity();
-                }
-
-                ApiService service = Api.getApiService();
-                Call<Body> call = service.logout();
-                call.enqueue(new Callback<Body>() {
-                    @Override
-                    public void onResponse(Call<Body> call, Response<Body> response) {
-                        if (response.code() == 200) {
-                            System.out.println("logout done");
-
-                        } else {
-                            System.out.println("logout error: (code) " + response.code());
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<Body> call, Throwable t) {
-                        System.out.println("Logout network error");
-                    }
-                });
+                AmbitinedToast.getInstance().debugAboveTheKeyboard(getActivity(), "Not available in demo mode");
+//                UserDB.deleteToken();
+//                HomeActivity homeActivity = (HomeActivity) getActivity();
+//                if (homeActivity != null) {
+//                    homeActivity.switchToLoginActivity();
+//                }
+//
+//                ApiService service = Api.getApiService();
+//                Call<Body> call = service.logout();
+//                call.enqueue(new Callback<Body>() {
+//                    @Override
+//                    public void onResponse(Call<Body> call, Response<Body> response) {
+//                        if (response.code() == 200) {
+//                            System.out.println("logout done");
+//
+//                        } else {
+//                            System.out.println("logout error: (code) " + response.code());
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<Body> call, Throwable t) {
+//                        System.out.println("Logout network error");
+//                    }
+//                });
             }
         });
 
